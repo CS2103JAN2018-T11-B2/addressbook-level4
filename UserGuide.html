@@ -5,14 +5,14 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.6.1">
-<title>AddressBook Level 4 - User Guide</title>
+<title>PrisonBook - User Guide</title>
 <link rel="stylesheet" href="stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 <link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css">
 </head>
 <body class="article">
 <div id="header">
-<h1>AddressBook Level 4 - User Guide</h1>
+<h1>PrisonBook - User Guide</h1>
 </div>
 <div id="content">
 <div id="preamble">
@@ -30,21 +30,22 @@
 <ul class="sectlevel2">
 <li><a href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></li>
 <li><a href="#adding-a-person-code-add-or-a-code">3.2. Adding a person: <code>add or a</code></a></li>
-<li><a href="#adding-a-prisoner-to-a-cell-code-addcell-or-ac-code-incomplete">3.3. Adding a prisoner to a cell: <code>addcell or ac</code> (incomplete)</a></li>
+<li><a href="#adding-a-prisoner-to-a-cell-code-addcell-or-ac-code-upcoming">3.3. Adding a prisoner to a cell: <code>addcell or ac</code> (upcoming)</a></li>
 <li><a href="#listing-all-persons-code-list-or-l-code">3.4. Listing all persons : <code>list or l</code></a></li>
-<li><a href="#listing-prisoners-in-a-cell-code-listcell-or-lc-code-incomplete">3.5. Listing prisoners in a cell : <code>listcell or lc</code> (incomplete)</a></li>
-<li><a href="#editing-a-person-code-edit-or-e-code">3.6. Editing a person : <code>edit or e</code></a></li>
-<li><a href="#locating-persons-by-name-code-find-or-f-code">3.7. Locating persons by name: <code>find or f</code></a></li>
-<li><a href="#deleting-a-person-code-delete-or-d-code">3.8. Deleting a person : <code>delete or d</code></a></li>
-<li><a href="#deleting-a-person-from-a-cell-code-deletecell-or-dc-code-incomplete">3.9. Deleting a person from a cell : <code>deletecell or dc</code> (incomplete)</a></li>
-<li><a href="#selecting-a-person-code-select-or-s-code">3.10. Selecting a person : <code>select or s</code></a></li>
-<li><a href="#listing-entered-commands-code-history-or-h-code">3.11. Listing entered commands : <code>history or h</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-or-u-code">3.12. Undoing previous command : <code>undo or u</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-or-r-code">3.13. Redoing the previously undone command : <code>redo or r</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-or-c-code">3.14. Clearing all entries : <code>clear or c</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.15. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.16. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.17. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#listing-prisoners-in-a-cell-code-listcell-or-lc-code-upcoming">3.5. Listing prisoners in a cell : <code>listcell or lc</code> (upcoming)</a></li>
+<li><a href="#showing-cells-in-the-map-code-map-or-m-code-v1-1">3.6. Showing cells in the map: <code>map or m</code> (v1.1)</a></li>
+<li><a href="#editing-a-person-code-edit-or-e-code">3.7. Editing a person : <code>edit or e</code></a></li>
+<li><a href="#locating-persons-by-name-or-tags-code-find-or-f-code">3.8. Locating persons by name or tags: <code>find or f</code></a></li>
+<li><a href="#deleting-a-person-code-delete-or-d-code">3.9. Deleting a person : <code>delete or d</code></a></li>
+<li><a href="#deleting-a-person-from-a-cell-code-deletecell-or-dc-code-upcoming">3.10. Deleting a person from a cell : <code>deletecell or dc</code> (upcoming)</a></li>
+<li><a href="#selecting-a-person-code-select-or-s-code">3.11. Selecting a person : <code>select or s</code></a></li>
+<li><a href="#listing-entered-commands-code-history-or-h-code">3.12. Listing entered commands : <code>history or h</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-or-u-code">3.13. Undoing previous command : <code>undo or u</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-or-r-code">3.14. Redoing the previously undone command : <code>redo or r</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-or-c-code">3.15. Clearing all entries : <code>clear or c</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.16. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.17. Saving the data</a></li>
+<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.18. Encrypting data files <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -82,10 +83,10 @@ This app will not work with earlier versions of Java 8.
 </div>
 </li>
 <li>
-<p>Download the latest <code>addressbook.jar</code> <a href="https://github.com/CS2103JAN2018-T11-B2/main//releases">here</a>.</p>
+<p>Download the latest <code>prisonbook.jar</code> <a href="https://github.com/CS2103JAN2018-T11-B2/main//releases">here</a>.</p>
 </li>
 <li>
-<p>Copy the file to the folder you want to use as the home folder for your Address Book.</p>
+<p>Copy the file to the folder you want to use as the home folder for your PrisonBook.</p>
 </li>
 <li>
 <p>Double-click the file to start the app. The GUI should appear in a few seconds.</p>
@@ -160,7 +161,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="sect2">
 <h3 id="adding-a-person-code-add-or-a-code"><a class="link" href="#adding-a-person-code-add-or-a-code">3.2. Adding a person: <code>add or a</code></a></h3>
 <div class="paragraph">
-<p>Adds a person to the address book<br>
+<p>Adds a person to the prison book<br>
 Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="admonitionblock tip">
@@ -190,7 +191,7 @@ A person can have any number of tags (including 0)
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-prisoner-to-a-cell-code-addcell-or-ac-code-incomplete"><a class="link" href="#adding-a-prisoner-to-a-cell-code-addcell-or-ac-code-incomplete">3.3. Adding a prisoner to a cell: <code>addcell or ac</code> (incomplete)</a></h3>
+<h3 id="adding-a-prisoner-to-a-cell-code-addcell-or-ac-code-upcoming"><a class="link" href="#adding-a-prisoner-to-a-cell-code-addcell-or-ac-code-upcoming">3.3. Adding a prisoner to a cell: <code>addcell or ac</code> (upcoming)</a></h3>
 <div class="paragraph">
 <p>Adds a person to one of the cells in the prison<br>
 Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code></p>
@@ -224,14 +225,14 @@ A person must have at least a prisoner tag
 <div class="sect2">
 <h3 id="listing-all-persons-code-list-or-l-code"><a class="link" href="#listing-all-persons-code-list-or-l-code">3.4. Listing all persons : <code>list or l</code></a></h3>
 <div class="paragraph">
-<p>Shows a list of all persons in the address book.<br>
+<p>Shows a list of all persons in the prison book.<br>
 Format: <code>list</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-prisoners-in-a-cell-code-listcell-or-lc-code-incomplete"><a class="link" href="#listing-prisoners-in-a-cell-code-listcell-or-lc-code-incomplete">3.5. Listing prisoners in a cell : <code>listcell or lc</code> (incomplete)</a></h3>
+<h3 id="listing-prisoners-in-a-cell-code-listcell-or-lc-code-upcoming"><a class="link" href="#listing-prisoners-in-a-cell-code-listcell-or-lc-code-upcoming">3.5. Listing prisoners in a cell : <code>listcell or lc</code> (upcoming)</a></h3>
 <div class="paragraph">
-<p>Shows a list of all persons in a prison cell in the address book.<br>
+<p>Shows a list of all persons in a prison cell in the prison book.<br>
 Format: <code>list CELL</code></p>
 </div>
 <div class="paragraph">
@@ -241,9 +242,16 @@ Format: <code>list CELL</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-a-person-code-edit-or-e-code"><a class="link" href="#editing-a-person-code-edit-or-e-code">3.6. Editing a person : <code>edit or e</code></a></h3>
+<h3 id="showing-cells-in-the-map-code-map-or-m-code-v1-1"><a class="link" href="#showing-cells-in-the-map-code-map-or-m-code-v1-1">3.6. Showing cells in the map: <code>map or m</code> (v1.1)</a></h3>
 <div class="paragraph">
-<p>Edits an existing person in the address book.<br>
+<p>Shows a table of prison cells like a map.<br>
+Format: <code>map</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editing-a-person-code-edit-or-e-code"><a class="link" href="#editing-a-person-code-edit-or-e-code">3.7. Editing a person : <code>edit or e</code></a></h3>
+<div class="paragraph">
+<p>Edits an existing person in the prison book.<br>
 Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="sidebarblock">
@@ -286,10 +294,10 @@ Edits the name of the 2nd person to be <code>Betsy Crower</code> and clears all 
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-persons-by-name-code-find-or-f-code"><a class="link" href="#locating-persons-by-name-code-find-or-f-code">3.7. Locating persons by name: <code>find or f</code></a></h3>
+<h3 id="locating-persons-by-name-or-tags-code-find-or-f-code"><a class="link" href="#locating-persons-by-name-or-tags-code-find-or-f-code">3.8. Locating persons by name or tags: <code>find or f</code></a></h3>
 <div class="paragraph">
-<p>Finds persons whose names contain any of the given keywords.<br>
-Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
+<p>Finds persons whose names/tags contain any of the given keywords.<br>
+Format: <code>find n/NAME_KEYWORD [MORE_KEYWORDS] t/TAG_KEYWORD [MORE_KEYWORDS]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -302,7 +310,7 @@ Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
 <p>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></p>
 </li>
 <li>
-<p>Only the name is searched.</p>
+<p>Only the name and tags are searched.</p>
 </li>
 <li>
 <p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
@@ -320,20 +328,24 @@ Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>find John</code><br>
+<p><code>find n/John</code><br>
 Returns <code>john</code> and <code>John Doe</code></p>
 </li>
 <li>
-<p><code>find Betsy Tim John</code><br>
+<p><code>find n/Betsy Tim John</code><br>
 Returns any person having names <code>Betsy</code>, <code>Tim</code>, or <code>John</code></p>
+</li>
+<li>
+<p><code>find n/Betsy t/Friends</code><br>
+Returns any person having names <code>Betsy</code> or are tagged <code>Friends</code></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person-code-delete-or-d-code"><a class="link" href="#deleting-a-person-code-delete-or-d-code">3.8. Deleting a person : <code>delete or d</code></a></h3>
+<h3 id="deleting-a-person-code-delete-or-d-code"><a class="link" href="#deleting-a-person-code-delete-or-d-code">3.9. Deleting a person : <code>delete or d</code></a></h3>
 <div class="paragraph">
-<p>Deletes the specified person from the address book.<br>
+<p>Deletes the specified person from the prison book.<br>
 Format: <code>delete INDEX</code></p>
 </div>
 <div class="sidebarblock">
@@ -361,7 +373,7 @@ Format: <code>delete INDEX</code></p>
 <li>
 <p><code>list</code><br>
 <code>delete 2</code><br>
-Deletes the 2nd person in the address book.</p>
+Deletes the 2nd person in the prison book.</p>
 </li>
 <li>
 <p><code>find Betsy</code><br>
@@ -372,7 +384,7 @@ Deletes the 1st person in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person-from-a-cell-code-deletecell-or-dc-code-incomplete"><a class="link" href="#deleting-a-person-from-a-cell-code-deletecell-or-dc-code-incomplete">3.9. Deleting a person from a cell : <code>deletecell or dc</code> (incomplete)</a></h3>
+<h3 id="deleting-a-person-from-a-cell-code-deletecell-or-dc-code-upcoming"><a class="link" href="#deleting-a-person-from-a-cell-code-deletecell-or-dc-code-upcoming">3.10. Deleting a person from a cell : <code>deletecell or dc</code> (upcoming)</a></h3>
 <div class="paragraph">
 <p>Deletes the specified person from the cell in the PrisonBook.<br>
 Format: <code>deletecell INDEX</code></p>
@@ -413,7 +425,7 @@ Deletes the 1st person in the cell in the PrisonBook.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="selecting-a-person-code-select-or-s-code"><a class="link" href="#selecting-a-person-code-select-or-s-code">3.10. Selecting a person : <code>select or s</code></a></h3>
+<h3 id="selecting-a-person-code-select-or-s-code"><a class="link" href="#selecting-a-person-code-select-or-s-code">3.11. Selecting a person : <code>select or s</code></a></h3>
 <div class="paragraph">
 <p>Selects the person identified by the index number used in the last person listing.<br>
 Format: <code>select INDEX</code></p>
@@ -443,7 +455,7 @@ Format: <code>select INDEX</code></p>
 <li>
 <p><code>list</code><br>
 <code>select 2</code><br>
-Selects the 2nd person in the address book.</p>
+Selects the 2nd person in the prison book.</p>
 </li>
 <li>
 <p><code>find Betsy</code><br>
@@ -454,7 +466,7 @@ Selects the 1st person in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-or-h-code"><a class="link" href="#listing-entered-commands-code-history-or-h-code">3.11. Listing entered commands : <code>history or h</code></a></h3>
+<h3 id="listing-entered-commands-code-history-or-h-code"><a class="link" href="#listing-entered-commands-code-history-or-h-code">3.12. Listing entered commands : <code>history or h</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
 Format: <code>history</code></p>
@@ -475,9 +487,9 @@ Format: <code>history</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-or-u-code"><a class="link" href="#undoing-previous-command-code-undo-or-u-code">3.12. Undoing previous command : <code>undo or u</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-or-u-code"><a class="link" href="#undoing-previous-command-code-undo-or-u-code">3.13. Undoing previous command : <code>undo or u</code></a></h3>
 <div class="paragraph">
-<p>Restores the address book to the state before the previous <em>undoable</em> command was executed.<br>
+<p>Restores the prison book to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
 </div>
 <div class="admonitionblock note">
@@ -488,7 +500,7 @@ Format: <code>undo</code></p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Undoable commands: those commands that modify the address book&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>).</p>
+<p>Undoable commands: those commands that modify the prison book&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>).</p>
 </div>
 </td>
 </tr>
@@ -520,7 +532,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-or-r-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-or-r-code">3.13. Redoing the previously undone command : <code>redo or r</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-or-r-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-or-r-code">3.14. Redoing the previously undone command : <code>redo or r</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
 Format: <code>redo</code></p>
@@ -552,28 +564,28 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-or-c-code"><a class="link" href="#clearing-all-entries-code-clear-or-c-code">3.14. Clearing all entries : <code>clear or c</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-or-c-code"><a class="link" href="#clearing-all-entries-code-clear-or-c-code">3.15. Clearing all entries : <code>clear or c</code></a></h3>
 <div class="paragraph">
-<p>Clears all entries from the address book. Clears all prison cells.<br>
+<p>Clears all entries from the prison book. Clears all prison cells.<br>
 Format: <code>clear</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.15. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.16. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.16. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.17. Saving the data</a></h3>
 <div class="paragraph">
 <p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.17. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.18. Encrypting data files <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
@@ -617,6 +629,9 @@ e.g. <code>find James Jake</code></p>
 <p><strong>List</strong> : <code>list</code></p>
 </li>
 <li>
+<p><strong>Map</strong> : <code>map</code></p>
+</li>
+<li>
 <p><strong>Help</strong> : <code>help</code></p>
 </li>
 <li>
@@ -639,7 +654,7 @@ e.g.<code>select 2</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-17 05:45:15 UTC
+Last updated 2018-03-19 14:38:02 UTC
 </div>
 </div>
 </body>
