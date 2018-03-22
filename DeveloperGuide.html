@@ -908,6 +908,233 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.2.2. Current Implementation</a></h4>
+<div class="paragraph">
+<p>In a prison, it is necessary to have cells, where prisoners stay in. It is important to keep track of the prisoners in the cell
+and whether the cell is full.</p>
+</div>
+<div class="paragraph">
+<p>This cell system is most clearly represented using a 2-D array. Hence, this was used as the basis of the map system of the prison.
+When implemented, it will take up the right side area of the application (but this has not yet been implemented). Below is
+an idea of what the UI may look like by the end of the project. The current implementation is still shown in the box below the user input.
+This basic map shows the basic implementation of the cell system and helps keep track of what is happening in the cells.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/currentMap.PNG" alt="currentMap" width="400">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/futureMap.PNG" alt="futureMap" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>With this map system of cells, the cells can be viewed. Not only that, prisoners can also be added into them and removed from them.
+These changes can be viewed in the bigger map which displays the number of people in them (also shown in the UI mockup above,
+represented by the square brackets) or in individual cells.</p>
+</div>
+<div class="paragraph">
+<p>To ensure that the number of prisoners in each cell does not exceed its limits, exceptions will be put in place to prevent such occurences.
+Also, exceptions that prevent users from adding prisoners into cells that do not exist (ie. there is no such cell in the prison).
+For future implementations, we can also allow only the prison wardens/owners to redefine the maximum size of the prison as their prisons
+may grow or shrink in the future. In this scenario, we will strive only to hit our non-functional requirements.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">//in CellMap.java</span>
+<span class="directive">private</span> <span class="type">void</span> addPrisonerToCell(Person prisoner, <span class="type">int</span> row, <span class="type">int</span> col) {
+        cellMap[row - <span class="integer">1</span>][col - <span class="integer">1</span>].addPrisoner(prisoner);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This then adds a prisoner into the specified cell.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">//in Cell.java</span>
+<span class="directive">protected</span> <span class="type">void</span> addPrisoner(Person prisoner) {
+        prisoners.add(prisoner);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Suppose that the user has access to the functions to add prisoners into prison cells.</p>
+</div>
+<div class="paragraph">
+<p>The cell map will have all the cells and its current occupants.</p>
+</div>
+<div class="paragraph">
+<p>The user executes a new <code>addCommand</code>. If the command is parsed successfully, and if the person added is a prisoner,
+the display result will prompt the user with a question to continue to add the prisoner to a cell with a map shown below it.</p>
+</div>
+<div class="paragraph">
+<p>Once the user uses the addcell command for the new prisoner, the prisoner is then added into the cell and the cell map system is updated.</p>
+</div>
+<div class="paragraph">
+<p>Besides the cell map system being updated, we will also update the addresses of these prisoners added to the prison, since they now live in the prison, rather than in their own homes.</p>
+</div>
+<div class="paragraph">
+<p>For future implementations, there will also be a command to remove prisoners, when they are being transferred to another cell,
+or if they can leave prison and go back home to their loved ones. This will be done in a similar manner to addcell.</p>
+</div>
+<div class="paragraph">
+<p>In much further implementations, guards/prison workers can also be assigned to cells, not as prisoners but as according to their job descriptions.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.3. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-data-structure-of-cells-in-cellmap"><a class="link" href="#aspect-data-structure-of-cells-in-cellmap">Aspect: Data Structure of Cells in CellMap</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use a 2-D array`</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to visualise the system.</p>
+</li>
+<li>
+<p>Cons: Harder to do more functions that the Java API has provided. Does not fit in with the other models of Person and Tag with their UniquePersonList and UniqueTagList</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use a 2-level ArrayList`</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Can use Java functions meant for Lists, can have different number of units for each block</p>
+</li>
+<li>
+<p>Cons: Not uniform number of units for each block will be harder to take into consideration when using the individual cells.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-implementation-of-showcellscommand-map"><a class="link" href="#aspect-implementation-of-showcellscommand-map">Aspect: Implementation of ShowCellsCommand (map)</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Create a new Command to show the map.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement, similar to listing. Extending the current list of commands. Only when function is called can the map be seen.</p>
+</li>
+<li>
+<p>Cons: Easy to forget which cell in the map can add prisoners but the map is not permanently there.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Keep the map always on display.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to see when adding prisoners to cells.</p>
+</li>
+<li>
+<p>Cons: Risk security as access to map is not limited. Even if it is, anyone walking by can see the information easily.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-implementation-of-addcellcommand-addcell"><a class="link" href="#aspect-implementation-of-addcellcommand-addcell">Aspect: Implementation of AddCellCommand (addcell)</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Prisoners are added into cells in a cellMap.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Cells are always there and can hold prisoners. Since these groups are still Persons with a guard role or prisoner role, not all persons may have a cell.</p>
+</li>
+<li>
+<p>Cons: More difficult to see the individual&#8217;s cell. (have not implemented updating addresses)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Not have a cell map but to add cells to prisoners.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Might be more intuitive for the user, to check a prisoner&#8217;s cell location.</p>
+</li>
+<li>
+<p>Cons: Harder to manage a system of cells. Easy to accidentally overcrowd a cell.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> Automatically assigning cells to prisoners</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Removes the burden of choosing a cell for user. Fewer commands required as prisoners are automatically added.</p>
+</li>
+<li>
+<p>Cons: More complex in automatically choosing cells for prisoners. User might want to have control on which prisoners should be in which cell.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-implementation-of-removecellcommand-removecell"><a class="link" href="#aspect-implementation-of-removecellcommand-removecell">Aspect: Implementation of RemoveCellCommand (removecell)</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Can choose to remove prisoner from a cell and will automatically remove from prison when prisoner is deleted.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Allows users to transfer prisoners to other cells (with addcell as well). Less administration required of user.</p>
+</li>
+<li>
+<p>Cons: Events-driven system to call RemoveCellCommand will be more complicated to coordinate</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Choose to empty a prison cell.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More efficient in removing prisoners, instead of 1 by 1.</p>
+</li>
+<li>
+<p>Cons: Need to handle more than one prisoner that has been released or broken out.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><em>[more to come]</em></p>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.3. [Proposed] Data Encryption</a></h3>
@@ -2591,7 +2818,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-22 00:07:05 UTC
+Last updated 2018-03-22 00:25:28 UTC
 </div>
 </div>
 </body>
