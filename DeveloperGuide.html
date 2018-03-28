@@ -918,7 +918,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>In a prison, it is necessary to have cells, where prisoners stay in. It is important to keep track of the prisoners in the cell
-and whether the cell is full.</p>
+and whether the <code>Cell</code> is full.</p>
 </div>
 <div class="paragraph">
 <p>This cell system is most clearly represented using a 2-D array. Hence, this was used as the basis of the map system of the prison.
@@ -937,47 +937,25 @@ This basic map shows the basic implementation of the cell system and helps keep 
 </div>
 </div>
 <div class="paragraph">
-<p>With this map system of cells, the cells can be viewed. Not only that, prisoners can also be added into them and removed from them.
+<p>With this map system of cells, the cells can be viewed. Not only that, prisoners can also be added and removed from them.
 These changes can be viewed in the bigger map which displays the number of people in them (also shown in the UI mockup above,
 represented by the square brackets) or in individual cells.</p>
 </div>
 <div class="paragraph">
-<p>To ensure that the number of prisoners in each cell does not exceed its limits, exceptions will be put in place to prevent such occurences.
-Also, exceptions that prevent users from adding prisoners into cells that do not exist (ie. there is no such cell in the prison).
-For future implementations, we can also allow only the prison wardens/owners to redefine the maximum size of the prison as their prisons
+<p>For future implementations, we can also allow only the prison wardens/owners to redefine the maximum size of the prison as their prisons
 may grow or shrink in the future. In this scenario, we will strive only to hit our non-functional requirements.</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">//in CellMap.java</span>
-<span class="directive">private</span> <span class="type">void</span> addPrisonerToCell(Person prisoner, <span class="type">int</span> row, <span class="type">int</span> col) {
-        cellMap[row - <span class="integer">1</span>][col - <span class="integer">1</span>].addPrisoner(prisoner);
-}</code></pre>
-</div>
-</div>
 <div class="paragraph">
-<p>This then adds a prisoner into the specified cell.</p>
+<p>Assuming the user has access to the functions to add prisoners into prison cells, they can use the <code>addcell</code> command to do so.
+Below is the sequence diagram.</p>
 </div>
-<div class="listingblock">
+<div class="imageblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">//in Cell.java</span>
-<span class="directive">protected</span> <span class="type">void</span> addPrisoner(Person prisoner) {
-        prisoners.add(prisoner);
-}</code></pre>
+<img src="images/AddCellSequenceDiagram.PNG" alt="AddCellSequenceDiagram" width="500">
 </div>
-</div>
-<div class="paragraph">
-<p>Suppose that the user has access to the functions to add prisoners into prison cells.</p>
 </div>
 <div class="paragraph">
 <p>The cell map will have all the cells and its current occupants.</p>
-</div>
-<div class="paragraph">
-<p>The user executes a new <code>addCommand</code>. If the command is parsed successfully, and if the person added is a prisoner,
-the display result will prompt the user with a question to continue to add the prisoner to a cell with a map shown below it.</p>
-</div>
-<div class="paragraph">
-<p>Once the user uses the addcell command for the new prisoner, the prisoner is then added into the cell and the cell map system is updated.</p>
 </div>
 <div class="paragraph">
 <p>Besides the cell map system being updated, we will also update the addresses of these prisoners added to the prison, since they now live in the prison, rather than in their own homes.</p>
@@ -1102,42 +1080,6 @@ or if they can leave prison and go back home to their loved ones. This will be d
 </div>
 </li>
 </ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-implementation-of-removecellcommand-removecell"><a class="link" href="#aspect-implementation-of-removecellcommand-removecell">Aspect: Implementation of RemoveCellCommand (removecell)</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Can choose to remove prisoner from a cell and will automatically remove from prison when prisoner is deleted.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Allows users to transfer prisoners to other cells (with addcell as well). Less administration required of user.</p>
-</li>
-<li>
-<p>Cons: Events-driven system to call RemoveCellCommand will be more complicated to coordinate</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Choose to empty a prison cell.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: More efficient in removing prisoners, instead of 1 by 1.</p>
-</li>
-<li>
-<p>Cons: Need to handle more than one prisoner that has been released or broken out.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><em>[more to come]</em></p>
 </div>
 </div>
 </div>
@@ -2409,105 +2351,105 @@ At the same time, it also has a bright theme that helps users use the app more e
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">administrator</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">group police officers together</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">group guards together</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">form teams to carry out various tasks: patrol rotations, perimeter control, cell guards</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">police officer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">have a track record of each prisoner’s past offences
-                          Type 1 – Injuring officer
+                          Type 1 – Injuring guard
                           Type 2 – Infighting with other inmates
                           Type 3 – Vandalism</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">use the appropriate level of precaution when dealing with unruly individuals</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">police officer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">keep track of each prisoner’s holding cells</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">ensure that there are two prisoners per cell and that certain bad prisoner combinations are avoided</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">administrator</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">assign ranks to each police officer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">prison warden</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">assign ranks to each guard</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">enforce access rights to view/edit prisoner and officer data</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">police officer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">check the length of imprisonment of prisoners I am in charge of</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">know when they are leaving</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">police officer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">add prisoners to prison cells</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">the prisoners have a prison cell to stay in</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">police officer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">check number of prison cells available</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">decide whether to take more prisoners in</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">police officer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">delete a prisoner</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">add more prisoners to prison</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">police officer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">check when I am on duty</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">see when I have to come to work</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">police officer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">check who are in my team</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">coordinate with my team</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">administrator</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">prison warden</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">add police officers</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">give access to new police officers</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">police officer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">assign prisoners to different recess blocks</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">separate those that start fights or cause trouble when together</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">administrator</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">prison warden</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">shuffle patrol guards around teams every day</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">each team is made up of different members every day, prisoners will acquaint themselves with specific guards</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">administrator</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">prison warden</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">divide cells into sections (A, B, C, D) and name each cell numerically (A1, A2, etc…)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">refer to each cell easily when assigning prisoners to them</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">police officer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">check whether there are visitor appointments</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">inform prisoners and bring them to see their visitors</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">police officer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">edit details of prisoners</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">update information of prisoners</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">police officer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">transfer people to other prisons</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">have more empty cells for more prisoners</p></td>
 </tr>
@@ -2519,13 +2461,13 @@ At the same time, it also has a bright theme that helps users use the app more e
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">police officer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">see my assigned prisoners’ social networks: friends, enemies, family, etc…</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">use this as reference when dealing with inmates</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">police officer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">assign prisoners to solitary confinement</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">punish those that have continuously committed serious offences</p></td>
 </tr>
@@ -2550,7 +2492,7 @@ At the same time, it also has a bright theme that helps users use the app more e
 <div class="sectionbody">
 <h3 id="use-case-add-a-prisoner" class="discrete">Use case: Add a prisoner</h3>
 <div class="paragraph">
-<p>Actor: police officer (PO)</p>
+<p>Actor: Guard (Guard)</p>
 </div>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
@@ -2558,28 +2500,28 @@ At the same time, it also has a bright theme that helps users use the app more e
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>PO requests to add prisoner</p>
+<p>Guard requests to add prisoner</p>
 </li>
 <li>
-<p>AB adds prisoner</p>
+<p>PrisonBook adds prisoner</p>
 </li>
 <li>
-<p>PO requests to list cells that are empty/not filled</p>
+<p>Guard requests to list cells that are empty/not filled</p>
 </li>
 <li>
-<p>AB shows a list of empty/not filled cells</p>
+<p>PrisonBook shows a list of empty/not filled cells</p>
 </li>
 <li>
-<p>PO requests to view a specific cell’s prisoner’s details</p>
+<p>Guard requests to view a specific cell’s prisoner’s details</p>
 </li>
 <li>
-<p>AB shows details of prisoner in cell</p>
+<p>PrisonBook shows details of prisoner in cell</p>
 </li>
 <li>
-<p>PO requests to add a prisoner to a specific cell</p>
+<p>Guard requests to add a prisoner to a specific cell</p>
 </li>
 <li>
-<p>AB adds prisoner to cell</p>
+<p>PrisonBook adds prisoner to cell</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2596,7 +2538,7 @@ At the same time, it also has a bright theme that helps users use the app more e
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>2a1. AB shows an error message.</p>
+<p>2a1. PrisonBook shows an error message.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2609,7 +2551,7 @@ At the same time, it also has a bright theme that helps users use the app more e
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>5a1. AddressBook shows an error message.</p>
+<p>5a1. PrisonBook shows an error message.</p>
 <div class="paragraph">
 <p>Use case resumes at step 4.</p>
 </div>
@@ -2622,7 +2564,7 @@ At the same time, it also has a bright theme that helps users use the app more e
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>5b1. AddressBook shows an error message.</p>
+<p>5b1. PrisonBook shows an error message.</p>
 <div class="paragraph">
 <p>Use case resumes at step 4.</p>
 </div>
@@ -2635,7 +2577,7 @@ At the same time, it also has a bright theme that helps users use the app more e
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>7a1. AddressBook shows an error message.</p>
+<p>7a1. PrisonBook shows an error message.</p>
 <div class="paragraph">
 <p>Use case resumes at step 6.</p>
 </div>
@@ -2647,7 +2589,7 @@ At the same time, it also has a bright theme that helps users use the app more e
 </div>
 <h3 id="use-case-assign-prisoner-to-a-cell" class="discrete">Use case: Assign prisoner to a cell</h3>
 <div class="paragraph">
-<p>Actor: police officer (PO)</p>
+<p>Actor: Guard</p>
 </div>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
@@ -2655,19 +2597,19 @@ At the same time, it also has a bright theme that helps users use the app more e
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>PO selects a prisoner</p>
+<p>Guard selects a prisoner</p>
 </li>
 <li>
-<p>PO requests a list of available cells with room available</p>
+<p>Guard requests a list of available cells with room available</p>
 </li>
 <li>
-<p>AB shows a list of available cells</p>
+<p>PrisonBook shows a list of available cells</p>
 </li>
 <li>
-<p>PO requests to add prisoner to vacant cell</p>
+<p>Guard requests to add prisoner to vacant cell</p>
 </li>
 <li>
-<p>AB updates prisoner status and cell status</p>
+<p>PrisonBook updates prisoner status and cell status</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2690,7 +2632,7 @@ At the same time, it also has a bright theme that helps users use the app more e
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a1. AB removes cell tag from prisoner status and removes prisoner from cell status</p>
+<p>3a1. PrisonBook removes cell tag from prisoner status and removes prisoner from cell status</p>
 <div class="paragraph">
 <p>Use case resumes at step 2.</p>
 </div>
@@ -2702,7 +2644,7 @@ At the same time, it also has a bright theme that helps users use the app more e
 </div>
 <h3 id="use-case-get-the-list-of-prisoners-in-a-certain-cell" class="discrete">Use case: Get the list of prisoners in a certain cell</h3>
 <div class="paragraph">
-<p>Actor: police officer (PO)</p>
+<p>Actor: Guard</p>
 </div>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
@@ -2710,16 +2652,16 @@ At the same time, it also has a bright theme that helps users use the app more e
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>PO requests a list of cells</p>
+<p>Guard requests a list of cells</p>
 </li>
 <li>
-<p>AB shows the list of cells</p>
+<p>PrisonBook shows the list of cells</p>
 </li>
 <li>
-<p>PO requests to view the list of prisoners assigned to a specific cell</p>
+<p>Guard requests to view the list of prisoners assigned to a specific cell</p>
 </li>
 <li>
-<p>AB shows a list of of prisoners assigned to the cell</p>
+<p>PrisonBook shows a list of of prisoners assigned to the cell</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2732,7 +2674,7 @@ At the same time, it also has a bright theme that helps users use the app more e
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a. PO does not have access rights to view the details of the requested cell</p>
+<p>3a. Guard does not have access rights to view the details of the requested cell</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2945,7 +2887,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-22 13:06:49 UTC
+Last updated 2018-03-28 13:39:29 UTC
 </div>
 </div>
 </body>

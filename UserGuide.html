@@ -30,10 +30,10 @@
 <ul class="sectlevel2">
 <li><a href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></li>
 <li><a href="#adding-a-person-code-add-or-a-code">3.2. Adding a person: <code>add or a</code></a></li>
-<li><a href="#adding-a-prisoner-to-a-cell-code-addcell-or-ac-code-partially-here-in-v1-2">3.3. Adding a prisoner to a cell: <code>addcell or ac</code> (Partially here in v1.2)</a></li>
+<li><a href="#adding-a-prisoner-to-a-cell-code-addcell-or-ac-code-v1-3">3.3. Adding a prisoner to a cell: <code>addcell or ac</code> (v1.3)</a></li>
 <li><a href="#listing-all-persons-code-list-or-l-code">3.4. Listing all persons : <code>list or l</code></a></li>
 <li><a href="#listing-prisoners-in-a-cell-code-listcell-or-lc-code-coming-in-v2-0">3.5. Listing prisoners in a cell : <code>listcell or lc</code> (coming in V2.0)</a></li>
-<li><a href="#showing-cells-in-the-map-code-map-or-m-code-here-in-v1-1">3.6. Showing cells in the map: <code>map or m</code> (Here in v1.1)</a></li>
+<li><a href="#showing-cells-in-the-map-code-map-or-m-code-v1-1">3.6. Showing cells in the map: <code>map or m</code> (v1.1)</a></li>
 <li><a href="#editing-a-person-code-edit-or-e-code">3.7. Editing a person : <code>edit or e</code></a></li>
 <li><a href="#locating-persons-by-name-or-tags-code-find-or-f-code">3.8. Locating persons by name or tags: <code>find or f</code></a></li>
 <li><a href="#deleting-a-person-code-delete-or-d-code">3.9. Deleting a person : <code>delete or d</code></a></li>
@@ -191,7 +191,7 @@ A person can have any number of tags (including 0)
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-prisoner-to-a-cell-code-addcell-or-ac-code-partially-here-in-v1-2"><a class="link" href="#adding-a-prisoner-to-a-cell-code-addcell-or-ac-code-partially-here-in-v1-2">3.3. Adding a prisoner to a cell: <code>addcell or ac</code> (Partially here in v1.2)</a></h3>
+<h3 id="adding-a-prisoner-to-a-cell-code-addcell-or-ac-code-v1-3"><a class="link" href="#adding-a-prisoner-to-a-cell-code-addcell-or-ac-code-v1-3">3.3. Adding a prisoner to a cell: <code>addcell or ac</code> (v1.3)</a></h3>
 <div class="paragraph">
 <p>Adds a person to one of the cells in the prison<br>
 Format: <code>ac INDEX CELLADDRESS</code></p>
@@ -203,7 +203,8 @@ Format: <code>ac INDEX CELLADDRESS</code></p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-A person must have at least a prisoner tag
+Person added must be a prisoner and not already in a cell within the prison.
+The cell must be in the map and not full.
 </td>
 </tr>
 </table>
@@ -242,7 +243,7 @@ Format: <code>list CELL</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="showing-cells-in-the-map-code-map-or-m-code-here-in-v1-1"><a class="link" href="#showing-cells-in-the-map-code-map-or-m-code-here-in-v1-1">3.6. Showing cells in the map: <code>map or m</code> (Here in v1.1)</a></h3>
+<h3 id="showing-cells-in-the-map-code-map-or-m-code-v1-1"><a class="link" href="#showing-cells-in-the-map-code-map-or-m-code-v1-1">3.6. Showing cells in the map: <code>map or m</code> (v1.1)</a></h3>
 <div class="paragraph">
 <p>Shows a table of prison cells like a map.<br>
 Format: <code>map</code></p>
@@ -612,7 +613,7 @@ e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1
 </li>
 <li>
 <p><strong>AddCell</strong> <code>addcell INDEX CELLADDRESS</code>
-e.g. <code>1 1-1</code></p>
+e.g. <code>addcell 1 1-1</code></p>
 </li>
 <li>
 <p><strong>Clear</strong> : <code>clear</code></p>
@@ -658,7 +659,7 @@ e.g.<code>select 2</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-22 13:06:49 UTC
+Last updated 2018-03-28 13:39:29 UTC
 </div>
 </div>
 </body>

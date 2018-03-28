@@ -5,14 +5,14 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.6.1">
-<title>Chung-Yen (Philos) Tsai - Project Portfolio</title>
+<title>Sarah Goh Shi Ning- Project Portfolio</title>
 <link rel="stylesheet" href="../stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 <link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
 </head>
 <body class="article">
 <div id="header">
-<h1>Chung-Yen (Philos) Tsai - Project Portfolio</h1>
+<h1>Sarah Goh Shi Ning- Project Portfolio</h1>
 </div>
 <div id="content">
 <div class="sect1">
@@ -35,26 +35,21 @@
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: TBD</p>
+<p><strong>Major enhancement</strong>: Allowing guards and prison wardens to manage the prison cells.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: TBD</p>
+<p>What it does: There is a cell map that has a fixed size and certain number of cells.
+Allows guards and prison wardens to add prisoners to cells (and in future to remove them and view them in cells)</p>
 </li>
 <li>
-<p>Justification: TBD</p>
-</li>
-<li>
-<p>Highlights: TBD</p>
-</li>
-<li>
-<p>Credits: <em>{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}</em></p>
+<p>Justification: This helps to keep track of prisoners.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: Enhanced the find command to be able to search by Tags in addition to Name-search</p>
+<p><strong>Minor enhancement</strong>: changing theme of prisonBook (not done)</p>
 </li>
 <li>
 <p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
@@ -68,7 +63,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (3 releases) on GitHub</p>
+<p>Managed release <code>v1.3</code> on GitHub</p>
 </li>
 </ul>
 </div>
@@ -78,10 +73,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
-</li>
-<li>
-<p>Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
+<p>Status bar shows number of people in th PrisonBook</p>
 </li>
 </ul>
 </div>
@@ -91,39 +83,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Did cosmetic tweaks to existing contents of the User Guide: <a href="https://github.com">#14</a></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Community:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>PRs reviewed (with non-trivial review comments): <a href="https://github.com">#12</a>, <a href="https://github.com">#32</a>, <a href="https://github.com">#19</a>, <a href="https://github.com">#42</a></p>
-</li>
-<li>
-<p>Contributed to forum discussions (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>, <a href="https://github.com">4</a>)</p>
-</li>
-<li>
-<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</p>
-</li>
-<li>
-<p>Some parts of the history feature I added was adopted by several other class mates (<a href="https://github.com">1</a>, <a href="https://github.com">2</a>)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Tools:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Integrated a third party library (Natty) to the project (<a href="https://github.com">#42</a>)</p>
-</li>
-<li>
-<p>Integrated a new Github plugin (CircleCI) to the team repo</p>
+<p>Did slight revisions to existing contents of the User Guide</p>
 </li>
 </ul>
 </div>
@@ -132,9 +92,6 @@
 </div>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p><em>{you can add/remove categories in the list above}</em></p>
 </div>
 </div>
 </div>
@@ -152,29 +109,69 @@
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="locating-persons-by-name-or-tags-code-find-or-f-code"><a class="link" href="#locating-persons-by-name-or-tags-code-find-or-f-code">Locating persons by name or tags: <code>find or f</code></a></h3>
+<h3 id="adding-a-prisoner-to-a-cell-code-addcell-or-ac-code-v1-3"><a class="link" href="#adding-a-prisoner-to-a-cell-code-addcell-or-ac-code-v1-3">Adding a prisoner to a cell: <code>addcell or ac</code> (v1.3)</a></h3>
 <div class="paragraph">
-<p>Finds persons whose names/tags contain any of the given keywords.<br>
-Format: <code>find n/NAME_KEYWORD [MORE_KEYWORDS] t/TAG_KEYWORD [MORE_KEYWORDS]</code></p>
+<p>Adds a person to one of the cells in the prison<br>
+Format: <code>ac INDEX CELLADDRESS</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Person added must be a prisoner and not already in a cell within the prison.
+The cell must be in the map and not full.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addcell 1 1-1</code></p>
+</li>
+<li>
+<p><code>ac 2 2-1</code>
+=== Listing prisoners in a cell : <code>listcell or lc</code> (coming in V2.0)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Shows a list of all persons in a prison cell in the prison book.<br>
+Format: <code>list CELL</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:
+* <code>listcell a1</code>
+* <code>lc c13</code>
+=== Showing cells in the map: <code>map or m</code> (v1.1)</p>
+</div>
+<div class="paragraph">
+<p>Shows a table of prison cells like a map.<br>
+Format: <code>map</code>
+=== Deleting a person from a cell : <code>deletecell or dc</code> (coming in V2.0)</p>
+</div>
+<div class="paragraph">
+<p>Deletes the specified person from the cell in the PrisonBook.<br>
+Format: <code>deletecell INDEX</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>The search is case insensitive. e.g <code>hans</code> will match <code>Hans</code></p>
+<p>Deletes the person at the specified <code>INDEX</code>.</p>
 </li>
 <li>
-<p>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></p>
+<p>The index refers to the index number shown in the most recent listing.</p>
 </li>
 <li>
-<p>Only the name and tags are searched.</p>
-</li>
-<li>
-<p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
-</li>
-<li>
-<p>Persons matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></p>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 </ul>
 </div>
@@ -186,16 +183,14 @@ Format: <code>find n/NAME_KEYWORD [MORE_KEYWORDS] t/TAG_KEYWORD [MORE_KEYWORDS]<
 <div class="ulist">
 <ul>
 <li>
-<p><code>find n/John</code><br>
-Returns <code>john</code> and <code>John Doe</code></p>
+<p><code>lc a2</code><br>
+<code>deletecell 2</code><br>
+Deletes the 2nd person in the cell in the PrisonBook.</p>
 </li>
 <li>
-<p><code>find n/Betsy Tim John</code><br>
-Returns any person having names <code>Betsy</code>, <code>Tim</code>, or <code>John</code></p>
-</li>
-<li>
-<p><code>find n/Betsy t/Friends</code><br>
-Returns any person having names <code>Betsy</code> or are tagged <code>Friends</code></p>
+<p><code>listcell b4</code><br>
+<code>dc 1</code>
+Deletes the 1st person in the cell in the PrisonBook.</p>
 </li>
 </ul>
 </div>
@@ -215,6 +210,175 @@ Returns any person having names <code>Betsy</code> or are tagged <code>Friends</
 </tr>
 </tbody>
 </table>
+<div class="sect2">
+<h3 id="prison-cell-map"><a class="link" href="#prison-cell-map">Prison Cell Map</a></h3>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<div class="paragraph">
+<p>In a prison, it is necessary to have cells, where prisoners stay in. It is important to keep track of the prisoners in the cell
+and whether the <code>Cell</code> is full.</p>
+</div>
+<div class="paragraph">
+<p>This cell system is most clearly represented using a 2-D array. Hence, this was used as the basis of the map system of the prison.
+When implemented, it will take up the right side area of the application (but this has not yet been implemented). Below is
+an idea of what the UI may look like by the end of the project. The current implementation is still shown in the box below the user input.
+This basic map shows the basic implementation of the cell system and helps keep track of what is happening in the cells.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/currentMap.PNG" alt="currentMap" width="400">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/futureMap.PNG" alt="futureMap" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>With this map system of cells, the cells can be viewed. Not only that, prisoners can also be added and removed from them.
+These changes can be viewed in the bigger map which displays the number of people in them (also shown in the UI mockup above,
+represented by the square brackets) or in individual cells.</p>
+</div>
+<div class="paragraph">
+<p>For future implementations, we can also allow only the prison wardens/owners to redefine the maximum size of the prison as their prisons
+may grow or shrink in the future. In this scenario, we will strive only to hit our non-functional requirements.</p>
+</div>
+<div class="paragraph">
+<p>Assuming the user has access to the functions to add prisoners into prison cells, they can use the <code>addcell</code> command to do so.
+Below is the sequence diagram.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AddCellSequenceDiagram.PNG" alt="AddCellSequenceDiagram" width="500">
+</div>
+</div>
+<div class="paragraph">
+<p>The cell map will have all the cells and its current occupants.</p>
+</div>
+<div class="paragraph">
+<p>Besides the cell map system being updated, we will also update the addresses of these prisoners added to the prison, since they now live in the prison, rather than in their own homes.</p>
+</div>
+<div class="paragraph">
+<p>For future implementations, there will also be a command to remove prisoners, when they are being transferred to another cell,
+or if they can leave prison and go back home to their loved ones. This will be done in a similar manner to addcell.</p>
+</div>
+<div class="paragraph">
+<p>In much further implementations, guards/prison workers can also be assigned to cells, not as prisoners but as according to their job descriptions.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-data-structure-of-cells-in-cellmap"><a class="link" href="#aspect-data-structure-of-cells-in-cellmap">Aspect: Data Structure of Cells in CellMap</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use a 2-D array`</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to visualise the system.</p>
+</li>
+<li>
+<p>Cons: Harder to do more functions that the Java API has provided. Does not fit in with the other models of Person and Tag with their UniquePersonList and UniqueTagList</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use a 2-level ArrayList`</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Can use Java functions meant for Lists, can have different number of units for each block</p>
+</li>
+<li>
+<p>Cons: Not uniform number of units for each block will be harder to take into consideration when using the individual cells.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-implementation-of-showcellscommand-map"><a class="link" href="#aspect-implementation-of-showcellscommand-map">Aspect: Implementation of ShowCellsCommand (map)</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Create a new Command to show the map.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement, similar to listing. Extending the current list of commands. Only when function is called can the map be seen.</p>
+</li>
+<li>
+<p>Cons: Easy to forget which cell in the map can add prisoners but the map is not permanently there.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Keep the map always on display.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to see when adding prisoners to cells.</p>
+</li>
+<li>
+<p>Cons: Risk security as access to map is not limited. Even if it is, anyone walking by can see the information easily.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-implementation-of-addcellcommand-addcell"><a class="link" href="#aspect-implementation-of-addcellcommand-addcell">Aspect: Implementation of AddCellCommand (addcell)</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Prisoners are added into cells in a cellMap.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Cells are always there and can hold prisoners. Since these groups are still Persons with a guard role or prisoner role, not all persons may have a cell.</p>
+</li>
+<li>
+<p>Cons: More difficult to see the individual&#8217;s cell. (have not implemented updating addresses)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Not have a cell map but to add cells to prisoners.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Might be more intuitive for the user, to check a prisoner&#8217;s cell location.</p>
+</li>
+<li>
+<p>Cons: Harder to manage a system of cells. Easy to accidentally overcrowd a cell.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> Automatically assigning cells to prisoners</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Removes the burden of choosing a cell for user. Fewer commands required as prisoners are automatically added.</p>
+</li>
+<li>
+<p>Cons: More complex in automatically choosing cells for prisoners. User might want to have control on which prisoners should be in which cell.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 <div class="paragraph">
 <p><strong>Feature Contributions</strong>:</p>
 </div>
@@ -270,6 +434,9 @@ At the same time, it also has a bright theme that helps users use the app more e
 </div>
 </li>
 </ul>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -627,15 +794,6 @@ At the same time, it also has a bright theme that helps users use the app more e
 </div>
 </li>
 </ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="project-n-a"><a class="link" href="#project-n-a">PROJECT: N/A</a></h2>
-<div class="sectionbody">
-<hr>
-<div class="paragraph">
-<p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
 </div>
