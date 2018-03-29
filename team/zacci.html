@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.6.1">
+<title>John Doe - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>John Doe - Project Portfolio</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="project-addressbook-level-4"><a class="link" href="#project-addressbook-level-4">PROJECT: AddressBook - Level 4</a></h2>
+<div class="sectionbody">
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major enhancement</strong>: added <strong>Added login and logout security system with access levels</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: Allows users of the PrisonBook to log in and logout with their usernames and passwords. The system also controls access levels (such as read/write permissions) based on the user rights.</p>
+</li>
+<li>
+<p>Justification: risonBook must have this feature to improve the security of the Prison. Not all prison guards using the PrisonBook should be able to edit and make changes to the database. They should also only be able to view information pertinent to them to avoid security breaches.</p>
+</li>
+<li>
+<p>Highlights: This enhancement affects the logic of the entire PrisonBook and requires thoughtful design to implement.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancement</strong>: added Prisoner and Guard tags to facilitate all further functionality to our PrisonBook</p>
+</li>
+<li>
+<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
+</li>
+<li>
+<p><strong>Other contributions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Project management:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Code Quality Manager</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Enhancements to existing features:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Command Aliases to shorten the amount of typing that users have to do</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Documentation:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Updated documentation accordingly</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Community:</p>
+</li>
+<li>
+<p>Tools:</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="logging-in-code-login-code-v1-2"><a class="link" href="#logging-in-code-login-code-v1-2">Logging in: <code>login</code> (v1.2)</a></h3>
+<div class="paragraph">
+<p>Logs in to your account on the PrisonBook<br>
+Format: <code>login user/USER_NAME pw/PASSWORD</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>login user/prisonwarden99 pw/password1</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logging-out-code-logout-code-v1-3"><a class="link" href="#logging-out-code-logout-code-v1-3">Logging out: <code>logout</code> (v1.3)</a></h3>
+<div class="paragraph">
+<p>Logs out of your account<br>
+Format: <code>logout</code></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="login-and-security-feature"><a class="link" href="#login-and-security-feature">Login and Security Feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<div class="sect4">
+<h5 id="model-aspect"><a class="link" href="#model-aspect">Model Aspect</a></h5>
+<div class="paragraph">
+<p>The implementation of the Login and Security feature is implemented by a <code>Session</code> which resides inside <code>Model Manager</code>. It supports the logging in and logging out of a user as well as support restricted access for specific commands. For example read access (list command) vs write access (add command and edit command).</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ModelClassDiagramwSession.jpg" alt="ModelClassDiagramwSession" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>As can be seen from the diagram, a Session is initialised upon the creation of the ModelManager.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="logic-aspect"><a class="link" href="#logic-aspect">Logic Aspect</a></h5>
+<div class="paragraph">
+<p>The implementation of the logging-in and the security levels is implemented in the <code>SessionManager</code> which is an additional step between the <code>LogicManager</code> and the <code>AddressBookParser</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/LogicClassDiagramwSession.png" alt="LogicClassDiagramwSession" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Every user input will first go through the <code>SessionManager</code> which will check if the user is currently logged in, as well as retrieve the user&#8217;s security level. It will then pass the security level to the <code>AddressBookParser</code> which will then decide whether or not to create the Command based on the required security level of the entered command.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">PROJECT: PowerPointLabs</a></h2>
+<div class="sectionbody">
+<hr>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2018-03-29 02:47:48 UTC
+</div>
+</div>
+</body>
+</html>
