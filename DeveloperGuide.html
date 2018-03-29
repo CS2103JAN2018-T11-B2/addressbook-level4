@@ -47,8 +47,8 @@
 <li><a href="#undo-redo-feature">3.1. Undo/Redo feature</a></li>
 <li><a href="#login-and-security-feature">3.2. Login and Security Feature</a></li>
 <li><a href="#prison-cell-map">3.3. Prison Cell Map</a></li>
-<li><a href="#find-command-by-tag">3.4. Find Command by Tag</a></li>
-<li><a href="#guard-scheduling-feature">3.5. Guard Scheduling Feature</a></li>
+<li><a href="#find-by-tag-command">3.4. Find by Tag Command</a></li>
+<li><a href="#scheduling-feature">3.5. Scheduling Feature</a></li>
 <li><a href="#proposed-data-encryption">3.6. [Proposed] Data Encryption</a></li>
 <li><a href="#logging">3.7. Logging</a></li>
 <li><a href="#Implementation-Configuration">3.8. Configuration</a></li>
@@ -1085,7 +1085,7 @@ or if they can leave prison and go back home to their loved ones. This will be d
 </div>
 </div>
 <div class="sect2">
-<h3 id="find-command-by-tag"><a class="link" href="#find-command-by-tag">3.4. Find Command by Tag</a></h3>
+<h3 id="find-by-tag-command"><a class="link" href="#find-by-tag-command">3.4. Find by Tag Command</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
 <div class="paragraph">
@@ -1167,38 +1167,146 @@ have to be grouped together after a single prefix</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="guard-scheduling-feature"><a class="link" href="#guard-scheduling-feature">3.5. Guard Scheduling Feature</a></h3>
+<h3 id="scheduling-feature"><a class="link" href="#scheduling-feature">3.5. Scheduling Feature</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The Guard Scheduling feature can be accessed via entering the command <code>cal</code>.</p>
+<p>The Scheduling feature can be accessed via entering the command <code>cal</code>.</p>
 </div>
 <div class="paragraph">
-<p>It opens an additional calendar window with its own command input.</p>
+<p>It allows guards/wardens to interact with a Google Calendar account through the current PrisonBook GUI.</p>
 </div>
 <div class="paragraph">
 <p>Calendar Commands that are supported are:
-add e/eventname t/timestamp
-remove [eventID]
-edit [eventID] e/eventname t/timestamp</p>
+* add e/eventname t/timestamp
+* remove [eventID]
+* edit [eventID] e/eventname t/timestamp</p>
 </div>
 <div class="paragraph">
-<p>The PrisonBook Calendar will send a HTTPS request to the Google Calendar API and change the Google account calendar.
-Upon confirmation of successful change by the Google Calendar APIR, the change will be reflected in the PrisonBook Calendar window.</p>
+<p>The PrisonBook calendar commands will send HTTPS requests to the REST calendar API and make changes to the Google account calendar.
+Upon confirmation of successful changes by the Google Calendar API, the change will be reflected next time any calendar commands are called.</p>
+</div>
+<div class="sect4">
+<h5 id="aspect-choosing-number-of-accounts-to-work-with"><a class="link" href="#aspect-choosing-number-of-accounts-to-work-with">Aspect: Choosing Number of Accounts to Work With</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Using one Google account for all prison staff</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Very simple to administrate and fits the needs of the project scope.</p>
+</li>
+<li>
+<p>Cons: No personalization for calendars of Warden/Guards.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use one Google account for Warden and one for Guards</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Two accounts is still relatively simple to maintain, allows for some separation of events-scheduling.</p>
+</li>
+<li>
+<p>Cons: All guards still share the same schedule, so they cannot have personal schedules.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> Use one Google account for Warden and one for Guards</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Two accounts is still relatively simple to maintain, allows for some separation of events-scheduling.</p>
+</li>
+<li>
+<p>Cons: All guards still share the same schedule, so they cannot have personal schedules.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 4:</strong> Use one Google account for Warden and one for Guards</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: All prison staff have their own calendar to work with, where they can have private individual events.</p>
+</li>
+<li>
+<p>Cons: Hard to maintain because we have to make sure all staff have the master prison schedule of the inmates' activities non-overlapping with personal events. There will also be a lot of calendars to keep track of, depending on how many guards are hired.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-choosing-number-of-calendars-per-person"><a class="link" href="#aspect-choosing-number-of-calendars-per-person">Aspect: Choosing Number of Calendars per Person</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Only one calendar per person</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Simple to implement, administrate and satisfies users' daily tasks</p>
+</li>
+<li>
+<p>Cons: Events cannot overlap, limited to fit events in separate rigid time slots.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Multiple calendars per person</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Users can track multiple events happening at the same time. Different calendars can also be used to organize and group logically-related events.</p>
+</li>
+<li>
+<p>Cons: Complicated on the administration side and oversteps the scope of this enhancement. Not really looking to replace personal Google Calendars, this is just to allow prison staff to work with prison schedules.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect4">
 <h5 id="aspect-implementation-of-editing-calendar"><a class="link" href="#aspect-implementation-of-editing-calendar">Aspect: Implementation of editing calendar</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p>Alternative 1 (current choice): Using command line to type with prefixes for event names and their timings.
-Pros: Ties in with users who prefer typing over mouse clicking.
-Cons: Not as intuitive as selecting timeslots to edit. Need more prefixes for users to learn.</p>
+<p><strong>Alternative 1 (current choice):</strong> Using command line to type with prefixes for event names and their timings.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Ties in with users who prefer typing over mouse clicking.</p>
 </li>
 <li>
-<p>Alternative 2: Have buttons for users to click to edit.
-Pros: More intutitive as less things to type.
-Cons: No longer command line based.</p>
+<p>Cons: Not as intuitive as selecting time slots to edit. Need more prefixes for users to learn.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Have buttons for users to click to edit.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More intuitive as less things to type.</p>
+</li>
+<li>
+<p>Cons: No longer command line based.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -2887,7 +2995,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-29 02:47:48 UTC
+Last updated 2018-03-29 03:03:19 UTC
 </div>
 </div>
 </body>
