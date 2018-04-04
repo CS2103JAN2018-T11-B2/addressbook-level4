@@ -49,7 +49,7 @@ Allows guards and prison wardens to add prisoners to cells (and in future to rem
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: changing theme of prisonBook (not done)</p>
+<p><strong>Minor enhancement</strong>: Changing browser panel to show map of prison cells.</p>
 </li>
 <li>
 <p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
@@ -137,7 +137,7 @@ The cell must be in the map and not full.
 </li>
 <li>
 <p><code>ac 2 2-1</code>
-=== Listing prisoners in a cell : <code>listcell or lc</code> (coming in V2.0)</p>
+=== Listing prisoners in a cell : <code>listcell or lc</code> [coming in V2.0]</p>
 </li>
 </ul>
 </div>
@@ -152,12 +152,12 @@ Format: <code>list CELL</code></p>
 === Showing cells in the map: <code>map or m</code> (v1.1)</p>
 </div>
 <div class="paragraph">
-<p>Shows a table of prison cells like a map.<br>
+<p>Shows a table of prison cells like a map in the command display (used for debugging and checking UI).<br>
 Format: <code>map</code>
-=== Deleting a person from a cell : <code>deletecell or dc</code> (coming in V2.0)</p>
+=== Deleting a person from a cell : <code>deletecell or dc</code> (v1.4)</p>
 </div>
 <div class="paragraph">
-<p>Deletes the specified person from the cell in the PrisonBook.<br>
+<p>Deletes the specified person from his/her cell in the PrisonBook.<br>
 Format: <code>deletecell INDEX</code></p>
 </div>
 <div class="sidebarblock">
@@ -173,6 +173,9 @@ Format: <code>deletecell INDEX</code></p>
 <li>
 <p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
+<li>
+<p>The person must be imprisoned in the prison already.</p>
+</li>
 </ul>
 </div>
 </div>
@@ -183,14 +186,8 @@ Format: <code>deletecell INDEX</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>lc a2</code><br>
-<code>deletecell 2</code><br>
-Deletes the 2nd person in the cell in the PrisonBook.</p>
-</li>
-<li>
-<p><code>listcell b4</code><br>
-<code>dc 1</code>
-Deletes the 1st person in the cell in the PrisonBook.</p>
+<p><code>dc 1</code><br>
+Deletes the first person in the prison book if he/she is imprisoned here.</p>
 </li>
 </ul>
 </div>
@@ -220,18 +217,13 @@ and whether the <code>Cell</code> is full.</p>
 </div>
 <div class="paragraph">
 <p>This cell system is most clearly represented using a 2-D array. Hence, this was used as the basis of the map system of the prison.
-When implemented, it will take up the right side area of the application (but this has not yet been implemented). Below is
-an idea of what the UI may look like by the end of the project. The current implementation is still shown in the box below the user input.
+This map is shown on the user interface on the right side area, shown in the picture below.
+Since the app is still being tested, the map command will also show in the result display box.
 This basic map shows the basic implementation of the cell system and helps keep track of what is happening in the cells.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/currentMap.PNG" alt="currentMap" width="400">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/futureMap.PNG" alt="futureMap" width="400">
+<img src="../images/Ui.PNG" alt="Ui" width="600">
 </div>
 </div>
 <div class="paragraph">
@@ -245,25 +237,24 @@ may grow or shrink in the future. In this scenario, we will strive only to hit o
 </div>
 <div class="paragraph">
 <p>Assuming the user has access to the functions to add prisoners into prison cells, they can use the <code>addcell</code> command to do so.
-Below is the sequence diagram.</p>
+Below is the sequence diagram of the logic and model components.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/AddCellSequenceDiagram.PNG" alt="AddCellSequenceDiagram" width="500">
+<img src="../images/AddCellSequenceDiagram.PNG" alt="AddCellSequenceDiagram" width="400">
 </div>
 </div>
-<div class="paragraph">
-<p>The cell map will have all the cells and its current occupants.</p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AddCellModelSequenceDiagram.PNG" alt="AddCellModelSequenceDiagram" width="400">
+</div>
 </div>
 <div class="paragraph">
 <p>Besides the cell map system being updated, we will also update the addresses of these prisoners added to the prison, since they now live in the prison, rather than in their own homes.</p>
 </div>
 <div class="paragraph">
-<p>For future implementations, there will also be a command to remove prisoners, when they are being transferred to another cell,
-or if they can leave prison and go back home to their loved ones. This will be done in a similar manner to addcell.</p>
-</div>
-<div class="paragraph">
-<p>In much further implementations, guards/prison workers can also be assigned to cells, not as prisoners but as according to their job descriptions.</p>
+<p>Prisoners can also be removed from their cells using the <code>deletecell</code> command when they are being transferred to another cell,
+or if they can leave prison and go back home to their loved ones.</p>
 </div>
 </div>
 <div class="sect3">
@@ -800,7 +791,7 @@ At the same time, it also has a bright theme that helps users use the app more e
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-29 03:03:20 UTC
+Last updated 2018-04-04 03:57:54 UTC
 </div>
 </div>
 </body>

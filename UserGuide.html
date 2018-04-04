@@ -18,7 +18,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>By: <code>CS2103-B2</code>      Since: <code>Jan 2018</code>      Licence: <code>MIT</code></p>
+<p>By: <code>CS2103-T11-B2</code>      Since: <code>Jan 2018</code>      Licence: <code>MIT</code></p>
 </div>
 </div>
 <div id="toc" class="toc">
@@ -34,13 +34,13 @@
 <li><a href="#adding-a-person-code-add-or-a-code">3.4. Adding a person: <code>add or a</code></a></li>
 <li><a href="#adding-a-prisoner-to-a-cell-code-addcell-or-ac-code-v1-3">3.5. Adding a prisoner to a cell: <code>addcell or ac</code> (v1.3)</a></li>
 <li><a href="#listing-all-persons-code-list-or-l-code">3.6. Listing all persons : <code>list or l</code></a></li>
-<li><a href="#listing-prisoners-in-a-cell-code-listcell-or-lc-code-coming-in-v2-0">3.7. Listing prisoners in a cell : <code>listcell or lc</code> (coming in V2.0)</a></li>
+<li><a href="#listing-prisoners-in-a-cell-code-listcell-or-lc-code-coming-in-v2-0">3.7. Listing prisoners in a cell : <code>listcell or lc</code> [coming in V2.0]</a></li>
 <li><a href="#showing-cells-in-the-map-code-map-or-m-code-v1-1">3.8. Showing cells in the map: <code>map or m</code> (v1.1)</a></li>
 <li><a href="#editing-a-person-code-edit-or-e-code">3.9. Editing a person : <code>edit or e</code></a></li>
 <li><a href="#locating-persons-by-name-or-tags-code-find-or-f-code">3.10. Locating persons by name or tags: <code>find or f</code></a></li>
 <li><a href="#various-commands-to-interact-with-google-calendar">3.11. Various commands to interact with Google Calendar</a></li>
 <li><a href="#deleting-a-person-code-delete-or-d-code">3.12. Deleting a person : <code>delete or d</code></a></li>
-<li><a href="#deleting-a-person-from-a-cell-code-deletecell-or-dc-code-coming-in-v2-0">3.13. Deleting a person from a cell : <code>deletecell or dc</code> (coming in V2.0)</a></li>
+<li><a href="#deleting-a-person-from-a-cell-code-deletecell-or-dc-code-v1-4">3.13. Deleting a person from a cell : <code>deletecell or dc</code> (v1.4)</a></li>
 <li><a href="#selecting-a-person-code-select-or-s-code">3.14. Selecting a person : <code>select or s</code></a></li>
 <li><a href="#listing-entered-commands-code-history-or-h-code">3.15. Listing entered commands : <code>history or h</code></a></li>
 <li><a href="#undoing-previous-command-code-undo-or-u-code">3.16. Undoing previous command : <code>undo or u</code></a></li>
@@ -258,7 +258,7 @@ Format: <code>list</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-prisoners-in-a-cell-code-listcell-or-lc-code-coming-in-v2-0"><a class="link" href="#listing-prisoners-in-a-cell-code-listcell-or-lc-code-coming-in-v2-0">3.7. Listing prisoners in a cell : <code>listcell or lc</code> (coming in V2.0)</a></h3>
+<h3 id="listing-prisoners-in-a-cell-code-listcell-or-lc-code-coming-in-v2-0"><a class="link" href="#listing-prisoners-in-a-cell-code-listcell-or-lc-code-coming-in-v2-0">3.7. Listing prisoners in a cell : <code>listcell or lc</code> [coming in V2.0]</a></h3>
 <div class="paragraph">
 <p>Shows a list of all persons in a prison cell in the prison book.<br>
 Format: <code>list CELL</code></p>
@@ -272,7 +272,7 @@ Format: <code>list CELL</code></p>
 <div class="sect2">
 <h3 id="showing-cells-in-the-map-code-map-or-m-code-v1-1"><a class="link" href="#showing-cells-in-the-map-code-map-or-m-code-v1-1">3.8. Showing cells in the map: <code>map or m</code> (v1.1)</a></h3>
 <div class="paragraph">
-<p>Shows a table of prison cells like a map.<br>
+<p>Shows a table of prison cells like a map in the command display (used for debugging and checking UI).<br>
 Format: <code>map</code></p>
 </div>
 </div>
@@ -373,7 +373,7 @@ Returns any person having names <code>Betsy</code> or are tagged <code>Friends</
 <div class="sect2">
 <h3 id="various-commands-to-interact-with-google-calendar"><a class="link" href="#various-commands-to-interact-with-google-calendar">3.11. Various commands to interact with Google Calendar</a></h3>
 <div class="sect3">
-<h4 id="view-upcoming-events-in-the-calendar-code-calendar-or-c-code"><a class="link" href="#view-upcoming-events-in-the-calendar-code-calendar-or-c-code">3.11.1. View upcoming events in the calendar: <code>calendar or c</code></a></h4>
+<h4 id="view-upcoming-events-in-the-calendar-code-calendar-or-c-code-v1-3"><a class="link" href="#view-upcoming-events-in-the-calendar-code-calendar-or-c-code-v1-3">3.11.1. View upcoming events in the calendar: <code>calendar or c</code> (v1.3)</a></h4>
 <div class="paragraph">
 <p>Format: <code>calendar</code></p>
 </div>
@@ -421,9 +421,9 @@ Deletes the 1st person in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person-from-a-cell-code-deletecell-or-dc-code-coming-in-v2-0"><a class="link" href="#deleting-a-person-from-a-cell-code-deletecell-or-dc-code-coming-in-v2-0">3.13. Deleting a person from a cell : <code>deletecell or dc</code> (coming in V2.0)</a></h3>
+<h3 id="deleting-a-person-from-a-cell-code-deletecell-or-dc-code-v1-4"><a class="link" href="#deleting-a-person-from-a-cell-code-deletecell-or-dc-code-v1-4">3.13. Deleting a person from a cell : <code>deletecell or dc</code> (v1.4)</a></h3>
 <div class="paragraph">
-<p>Deletes the specified person from the cell in the PrisonBook.<br>
+<p>Deletes the specified person from his/her cell in the PrisonBook.<br>
 Format: <code>deletecell INDEX</code></p>
 </div>
 <div class="sidebarblock">
@@ -439,6 +439,9 @@ Format: <code>deletecell INDEX</code></p>
 <li>
 <p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
+<li>
+<p>The person must be imprisoned in the prison already.</p>
+</li>
 </ul>
 </div>
 </div>
@@ -449,14 +452,8 @@ Format: <code>deletecell INDEX</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>lc a2</code><br>
-<code>deletecell 2</code><br>
-Deletes the 2nd person in the cell in the PrisonBook.</p>
-</li>
-<li>
-<p><code>listcell b4</code><br>
-<code>dc 1</code>
-Deletes the 1st person in the cell in the PrisonBook.</p>
+<p><code>dc 1</code><br>
+Deletes the first person in the prison book if he/she is imprisoned here.</p>
 </li>
 </ul>
 </div>
@@ -659,6 +656,10 @@ e.g. <code>addcell 1 1-1</code></p>
 e.g. <code>delete 3</code></p>
 </li>
 <li>
+<p><strong>DeleteCell</strong> <code>deletecell INDEX</code>
+e.g. <code>deletecell 2</code></p>
+</li>
+<li>
 <p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code><br>
 e.g. <code>edit 2 n/James Lee e/jameslee@example.com</code></p>
 </li>
@@ -698,7 +699,7 @@ e.g.<code>select 2</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-29 03:03:19 UTC
+Last updated 2018-04-04 03:57:54 UTC
 </div>
 </div>
 </body>

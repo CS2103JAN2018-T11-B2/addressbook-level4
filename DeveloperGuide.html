@@ -922,18 +922,13 @@ and whether the <code>Cell</code> is full.</p>
 </div>
 <div class="paragraph">
 <p>This cell system is most clearly represented using a 2-D array. Hence, this was used as the basis of the map system of the prison.
-When implemented, it will take up the right side area of the application (but this has not yet been implemented). Below is
-an idea of what the UI may look like by the end of the project. The current implementation is still shown in the box below the user input.
+This map is shown on the user interface on the right side area, shown in the picture below.
+Since the app is still being tested, the map command will also show in the result display box.
 This basic map shows the basic implementation of the cell system and helps keep track of what is happening in the cells.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/currentMap.PNG" alt="currentMap" width="400">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/futureMap.PNG" alt="futureMap" width="400">
+<img src="images/Ui.PNG" alt="Ui" width="600">
 </div>
 </div>
 <div class="paragraph">
@@ -947,25 +942,24 @@ may grow or shrink in the future. In this scenario, we will strive only to hit o
 </div>
 <div class="paragraph">
 <p>Assuming the user has access to the functions to add prisoners into prison cells, they can use the <code>addcell</code> command to do so.
-Below is the sequence diagram.</p>
+Below is the sequence diagram of the logic and model components.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/AddCellSequenceDiagram.PNG" alt="AddCellSequenceDiagram" width="500">
+<img src="images/AddCellSequenceDiagram.PNG" alt="AddCellSequenceDiagram" width="400">
 </div>
 </div>
-<div class="paragraph">
-<p>The cell map will have all the cells and its current occupants.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddCellModelSequenceDiagram.PNG" alt="AddCellModelSequenceDiagram" width="400">
+</div>
 </div>
 <div class="paragraph">
 <p>Besides the cell map system being updated, we will also update the addresses of these prisoners added to the prison, since they now live in the prison, rather than in their own homes.</p>
 </div>
 <div class="paragraph">
-<p>For future implementations, there will also be a command to remove prisoners, when they are being transferred to another cell,
-or if they can leave prison and go back home to their loved ones. This will be done in a similar manner to addcell.</p>
-</div>
-<div class="paragraph">
-<p>In much further implementations, guards/prison workers can also be assigned to cells, not as prisoners but as according to their job descriptions.</p>
+<p>Prisoners can also be removed from their cells using the <code>deletecell</code> command when they are being transferred to another cell,
+or if they can leave prison and go back home to their loved ones.</p>
 </div>
 </div>
 <div class="sect3">
@@ -2995,7 +2989,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-29 03:03:19 UTC
+Last updated 2018-04-04 03:57:54 UTC
 </div>
 </div>
 </body>
