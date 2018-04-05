@@ -117,7 +117,7 @@
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="logging-in-code-login-code-v1-2"><a class="link" href="#logging-in-code-login-code-v1-2">Logging in: <code>login</code> (v1.2)</a></h3>
+<h3 id="logging-in-code-login-code-0-v1-2"><a class="link" href="#logging-in-code-login-code-0-v1-2">Logging in: <code>login</code> [0] (v1.2)</a></h3>
 <div class="paragraph">
 <p>Logs in to your account on the PrisonBook<br>
 Format: <code>login user/USER_NAME pw/PASSWORD</code></p>
@@ -134,10 +134,56 @@ Format: <code>login user/USER_NAME pw/PASSWORD</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging-out-code-logout-code-v1-3"><a class="link" href="#logging-out-code-logout-code-v1-3">Logging out: <code>logout</code> (v1.3)</a></h3>
+<h3 id="logging-out-code-logout-code-0-v1-3"><a class="link" href="#logging-out-code-logout-code-0-v1-3">Logging out: <code>logout</code> [0] (v1.3)</a></h3>
 <div class="paragraph">
 <p>Logs out of your account<br>
-Format: <code>logout</code></p>
+After logging out, you will not be able to undo actions that were completed before logging out.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>logout</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="check-log-in-status-code-status-code-0-v1-4"><a class="link" href="#check-log-in-status-code-status-code-0-v1-4">Check Log-in Status: <code>status</code> [0] (v1.4)</a></h3>
+<div class="paragraph">
+<p>Checks your current log-in status<br>
+Format: <code>status</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add-new-user-code-adduser-code-3-v1-4"><a class="link" href="#add-new-user-code-adduser-code-3-v1-4">Add new user: <code>adduser</code> [3] (v1.4)</a></h3>
+<div class="paragraph">
+<p>Adds new user to have access to the PrisonBook<br>
+Format: <code>adduser user/NEW_USERNAME pw/NEW_PASSWORD sl/SECURITY_LEVEL</code></p>
+</div>
+<div class="paragraph">
+<p>Higher security levels allow users to access a greater range of commands:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Security Level 0: Most basic commands such as Login and Status.</p>
+</li>
+<li>
+<p>Security Level 1: Most commands that only require read access.</p>
+</li>
+<li>
+<p>Security Level 2: Most commands that require write access.</p>
+</li>
+<li>
+<p>Security Level 3: Complete access to all commands.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>adduser user/newuser pw/newpassword sl/1</code></p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -186,21 +232,16 @@ Format: <code>logout</code></p>
 <div class="paragraph">
 <p>Every user input will first go through the <code>SessionManager</code> which will check if the user is currently logged in, as well as retrieve the user&#8217;s security level. It will then pass the security level to the <code>AddressBookParser</code> which will then decide whether or not to create the Command based on the required security level of the entered command.</p>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">PROJECT: PowerPointLabs</a></h2>
-<div class="sectionbody">
 <hr>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-04 16:29:22 UTC
+Last updated 2018-04-05 01:36:02 UTC
 </div>
 </div>
 </body>
