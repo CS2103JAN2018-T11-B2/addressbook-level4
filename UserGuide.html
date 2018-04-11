@@ -36,22 +36,21 @@
 <li><a href="#adding-a-person-code-add-or-a-code-2">3.6. Adding a person: <code>add or a</code> [2]</a></li>
 <li><a href="#adding-a-prisoner-to-a-cell-code-addcell-or-ac-code-2-v1-3">3.7. Adding a prisoner to a cell: <code>addcell or ac</code> [2] (v1.3)</a></li>
 <li><a href="#listing-all-persons-code-list-or-l-code-1">3.8. Listing all persons : <code>list or l</code> [1]</a></li>
-<li><a href="#listing-prisoners-in-a-cell-code-listcell-or-lc-code-coming-in-v2-0">3.9. Listing prisoners in a cell : <code>listcell or lc</code> [coming in V2.0]</a></li>
+<li><a href="#listing-prisoners-in-a-cell-code-listcell-or-lc-code-v1-5rc">3.9. Listing prisoners in a cell : <code>listcell or lc</code> (v1.5rc)</a></li>
 <li><a href="#showing-cells-in-the-map-code-map-or-m-code-1-v1-1">3.10. Showing cells in the map: <code>map or m</code> [1] (v1.1)</a></li>
 <li><a href="#editing-a-person-code-edit-or-e-code-2">3.11. Editing a person : <code>edit or e</code> [2]</a></li>
 <li><a href="#locating-persons-by-name-or-tags-code-find-or-f-code-1">3.12. Locating persons by name or tags: <code>find or f</code> [1]</a></li>
-<li><a href="#view-upcoming-events-in-the-calendar-code-calendar-or-c-code-1-v1-3">3.13. View upcoming events in the calendar: <code>calendar or c</code> [1] (v1.3)</a></li>
+<li><a href="#view-upcoming-events-in-the-calendar-code-calendar-or-cal-code-1-v1-3">3.13. View upcoming events in the calendar: <code>calendar or cal</code> [1] (v1.3)</a></li>
 <li><a href="#add-upcoming-events-in-the-calendar-code-caladd-or-cala-code-1-v1-3">3.14. Add upcoming events in the calendar: <code>calAdd or calA</code> [1] (v1.3)</a></li>
 <li><a href="#deleting-a-person-code-delete-or-d-code-2">3.15. Deleting a person : <code>delete or d</code> [2]</a></li>
 <li><a href="#deleting-a-person-from-a-cell-code-deletecell-or-dc-code-2-v1-4">3.16. Deleting a person from a cell : <code>deletecell or dc</code> [2] (v1.4)</a></li>
-<li><a href="#selecting-a-person-code-select-or-s-code-0">3.17. Selecting a person : <code>select or s</code> [0]</a></li>
-<li><a href="#listing-entered-commands-code-history-or-h-code-0">3.18. Listing entered commands : <code>history or h</code> [0]</a></li>
-<li><a href="#undoing-previous-command-code-undo-or-u-code-0">3.19. Undoing previous command : <code>undo or u</code> [0]</a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-or-r-code-0">3.20. Redoing the previously undone command : <code>redo or r</code> [0]</a></li>
-<li><a href="#clearing-all-entries-code-clear-or-c-code-3">3.21. Clearing all entries : <code>clear or c</code> [3]</a></li>
-<li><a href="#exiting-the-program-code-exit-code-0">3.22. Exiting the program : <code>exit</code> [0]</a></li>
-<li><a href="#saving-the-data">3.23. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.24. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#listing-entered-commands-code-history-or-h-code-0">3.17. Listing entered commands : <code>history or h</code> [0]</a></li>
+<li><a href="#undoing-previous-command-code-undo-or-u-code-0">3.18. Undoing previous command : <code>undo or u</code> [0]</a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-or-r-code-0">3.19. Redoing the previously undone command : <code>redo or r</code> [0]</a></li>
+<li><a href="#clearing-all-entries-code-clear-or-c-code-3">3.20. Clearing all entries : <code>clear or c</code> [3]</a></li>
+<li><a href="#exiting-the-program-code-exit-code-0">3.21. Exiting the program : <code>exit</code> [0]</a></li>
+<li><a href="#saving-the-data">3.22. Saving the data</a></li>
+<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.23. Encrypting data files <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -155,7 +154,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p>Parameters can be in any order e.g. if the command specifies <code>n/NAME p/PHONE_NUMBER</code>, <code>p/PHONE_NUMBER n/NAME</code> is also acceptable.</p>
 </li>
 <li>
-<p>For security reasons, users need to log in before having access to certain commands. Users have a <code>Security Level</code> assigned to them. All commands have a minimum <code>Security Level</code> required before the user is able to access it.</p>
+<p>For security reasons, users need to log in before having access to certain commands and will only see an empty PrisonBook. Users have a <code>Security Level</code> assigned to them. All commands have a minimum <code>Security Level</code> required before the user is able to access it.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -308,7 +307,7 @@ A person can have any number of tags (including 0)
 <div class="sect2">
 <h3 id="adding-a-prisoner-to-a-cell-code-addcell-or-ac-code-2-v1-3"><a class="link" href="#adding-a-prisoner-to-a-cell-code-addcell-or-ac-code-2-v1-3">3.7. Adding a prisoner to a cell: <code>addcell or ac</code> [2] (v1.3)</a></h3>
 <div class="paragraph">
-<p>Adds a person to one of the cells in the prison<br>
+<p>Adds a person to one of the cells in the prison.<br>
 Format: <code>ac INDEX CELLADDRESS</code></p>
 </div>
 <div class="admonitionblock tip">
@@ -318,8 +317,9 @@ Format: <code>ac INDEX CELLADDRESS</code></p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Person added must be a prisoner and not already in a cell within the prison.
-The cell must be in the map and not full.
+Person added must be a prisoner and not already in a cell within the prison.<br>
+The cell must be in the map and not full.<br>
+The maximum number of people in a cell is 2 people.
 </td>
 </tr>
 </table>
@@ -346,15 +346,15 @@ Format: <code>list</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-prisoners-in-a-cell-code-listcell-or-lc-code-coming-in-v2-0"><a class="link" href="#listing-prisoners-in-a-cell-code-listcell-or-lc-code-coming-in-v2-0">3.9. Listing prisoners in a cell : <code>listcell or lc</code> [coming in V2.0]</a></h3>
+<h3 id="listing-prisoners-in-a-cell-code-listcell-or-lc-code-v1-5rc"><a class="link" href="#listing-prisoners-in-a-cell-code-listcell-or-lc-code-v1-5rc">3.9. Listing prisoners in a cell : <code>listcell or lc</code> (v1.5rc)</a></h3>
 <div class="paragraph">
 <p>Shows a list of all persons in a prison cell in the prison book.<br>
-Format: <code>list CELL</code></p>
+Format: <code>listcell CELL</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:
-* <code>listcell a1</code>
-* <code>lc c13</code></p>
+* <code>listcell 1-1</code>
+* <code>lc 3-3</code></p>
 </div>
 </div>
 <div class="sect2">
@@ -459,7 +459,7 @@ Returns any person having names <code>Betsy</code> or are tagged <code>Friends</
 </div>
 </div>
 <div class="sect2">
-<h3 id="view-upcoming-events-in-the-calendar-code-calendar-or-c-code-1-v1-3"><a class="link" href="#view-upcoming-events-in-the-calendar-code-calendar-or-c-code-1-v1-3">3.13. View upcoming events in the calendar: <code>calendar or c</code> [1] (v1.3)</a></h3>
+<h3 id="view-upcoming-events-in-the-calendar-code-calendar-or-cal-code-1-v1-3"><a class="link" href="#view-upcoming-events-in-the-calendar-code-calendar-or-cal-code-1-v1-3">3.13. View upcoming events in the calendar: <code>calendar or cal</code> [1] (v1.3)</a></h3>
 <div class="paragraph">
 <p>Format: <code>calendar</code></p>
 </div>
@@ -565,48 +565,7 @@ Deletes the first person in the prison book if he/she is imprisoned here.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="selecting-a-person-code-select-or-s-code-0"><a class="link" href="#selecting-a-person-code-select-or-s-code-0">3.17. Selecting a person : <code>select or s</code> [0]</a></h3>
-<div class="paragraph">
-<p>Selects the person identified by the index number used in the last person listing.<br>
-Format: <code>select INDEX</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Selects the person and loads the Google search page the person at the specified <code>INDEX</code>.</p>
-</li>
-<li>
-<p>The index refers to the index number shown in the most recent listing.</p>
-</li>
-<li>
-<p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>list</code><br>
-<code>select 2</code><br>
-Selects the 2nd person in the prison book.</p>
-</li>
-<li>
-<p><code>find Betsy</code><br>
-<code>select 1</code><br>
-Selects the 1st person in the results of the <code>find</code> command.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="listing-entered-commands-code-history-or-h-code-0"><a class="link" href="#listing-entered-commands-code-history-or-h-code-0">3.18. Listing entered commands : <code>history or h</code> [0]</a></h3>
+<h3 id="listing-entered-commands-code-history-or-h-code-0"><a class="link" href="#listing-entered-commands-code-history-or-h-code-0">3.17. Listing entered commands : <code>history or h</code> [0]</a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
 Format: <code>history</code></p>
@@ -627,7 +586,7 @@ Format: <code>history</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-or-u-code-0"><a class="link" href="#undoing-previous-command-code-undo-or-u-code-0">3.19. Undoing previous command : <code>undo or u</code> [0]</a></h3>
+<h3 id="undoing-previous-command-code-undo-or-u-code-0"><a class="link" href="#undoing-previous-command-code-undo-or-u-code-0">3.18. Undoing previous command : <code>undo or u</code> [0]</a></h3>
 <div class="paragraph">
 <p>Restores the prison book to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
@@ -672,7 +631,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-or-r-code-0"><a class="link" href="#redoing-the-previously-undone-command-code-redo-or-r-code-0">3.20. Redoing the previously undone command : <code>redo or r</code> [0]</a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-or-r-code-0"><a class="link" href="#redoing-the-previously-undone-command-code-redo-or-r-code-0">3.19. Redoing the previously undone command : <code>redo or r</code> [0]</a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
 Format: <code>redo</code></p>
@@ -704,28 +663,28 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-or-c-code-3"><a class="link" href="#clearing-all-entries-code-clear-or-c-code-3">3.21. Clearing all entries : <code>clear or c</code> [3]</a></h3>
+<h3 id="clearing-all-entries-code-clear-or-c-code-3"><a class="link" href="#clearing-all-entries-code-clear-or-c-code-3">3.20. Clearing all entries : <code>clear or c</code> [3]</a></h3>
 <div class="paragraph">
 <p>Clears all entries from the prison book. Clears all prison cells.<br>
 Format: <code>clear</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code-0"><a class="link" href="#exiting-the-program-code-exit-code-0">3.22. Exiting the program : <code>exit</code> [0]</a></h3>
+<h3 id="exiting-the-program-code-exit-code-0"><a class="link" href="#exiting-the-program-code-exit-code-0">3.21. Exiting the program : <code>exit</code> [0]</a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.23. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.22. Saving the data</a></h3>
 <div class="paragraph">
 <p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.24. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.23. Encrypting data files <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
@@ -751,7 +710,7 @@ There is no need to save manually.</p>
 e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague</code></p>
 </li>
 <li>
-<p><strong>AddCell</strong> <code>addcell INDEX CELLADDRESS</code>
+<p><strong>AddCell</strong> <code>addcell INDEX CELLADDRESS</code><br>
 e.g. <code>addcell 1 1-1</code></p>
 </li>
 <li>
@@ -762,7 +721,7 @@ e.g. <code>addcell 1 1-1</code></p>
 e.g. <code>delete 3</code></p>
 </li>
 <li>
-<p><strong>DeleteCell</strong> <code>deletecell INDEX</code>
+<p><strong>DeleteCell</strong> <code>deletecell INDEX</code><br>
 e.g. <code>deletecell 2</code></p>
 </li>
 <li>
@@ -777,7 +736,7 @@ e.g. <code>find n/James Jake t/boys</code></p>
 <p><strong>Calendar</strong> : <code>calendar</code></p>
 </li>
 <li>
-<p><strong>Calendar Add Event</strong> : <code>calAdd event/EVENTNAME loc/LOCATION start/STARTDATETIME end/ENDDATETIME</code>
+<p><strong>Calendar Add Event</strong> : <code>calAdd event/EVENTNAME loc/LOCATION start/STARTDATETIME end/ENDDATETIME</code><br>
 e.g. <code>calAdd event/Software Meeting loc/NUS Utown Green start/2018-06-06 10:00:00 end/2018-06-06 13:00:00</code></p>
 </li>
 <li>
@@ -788,10 +747,6 @@ e.g. <code>calAdd event/Software Meeting loc/NUS Utown Green start/2018-06-06 10
 </li>
 <li>
 <p><strong>Help</strong> : <code>help</code></p>
-</li>
-<li>
-<p><strong>Select</strong> : <code>select INDEX</code><br>
-e.g.<code>select 2</code></p>
 </li>
 <li>
 <p><strong>History</strong> : <code>history</code></p>
@@ -809,7 +764,7 @@ e.g.<code>select 2</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-11 03:02:15 UTC
+Last updated 2018-04-11 04:25:45 UTC
 </div>
 </div>
 </body>
