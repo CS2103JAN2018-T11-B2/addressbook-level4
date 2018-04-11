@@ -35,24 +35,24 @@
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: Allowing guards and prison wardens to manage the prison cells.</p>
+<p><strong>Major enhancement</strong>: Allowing users to manage the prison cells.</p>
 <div class="ulist">
 <ul>
 <li>
 <p>What it does: There is a cell map that has a fixed size and certain number of cells.
-Allows guards and prison wardens to add prisoners to cells (and in future to remove them and view them in cells)</p>
+Allows guards and prison wardens to add prisoners to cells and to remove them and view them in cells.</p>
 </li>
 <li>
-<p>Justification: This helps to keep track of prisoners.</p>
+<p>Justification: This helps to keep track of prisoners and their locations.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: Changing browser panel to show map of prison cells.</p>
+<p><strong>Minor enhancement</strong>: Changing browser panel to show map of prison cells and initial GUI of application.</p>
 </li>
 <li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103JAN2018-T11-B2/main/blob/master/collated/functional/sarahgoh97.md">Functional code</a>] [<a href="https://github.com/CS2103JAN2018-T11-B2/main/blob/master/collated/test/sarahgoh97.md">Test code</a>]</p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
@@ -65,6 +65,9 @@ Allows guards and prison wardens to add prisoners to cells (and in future to rem
 <li>
 <p>Managed release <code>v1.3</code> on GitHub</p>
 </li>
+<li>
+<p>Assigned issues to different team members</p>
+</li>
 </ul>
 </div>
 </li>
@@ -73,7 +76,7 @@ Allows guards and prison wardens to add prisoners to cells (and in future to rem
 <div class="ulist">
 <ul>
 <li>
-<p>Status bar shows number of people in th PrisonBook</p>
+<p>Status bar shows number of people in the PrisonBook</p>
 </li>
 </ul>
 </div>
@@ -112,7 +115,7 @@ Allows guards and prison wardens to add prisoners to cells (and in future to rem
 <h3 id="adding-a-prisoner-to-a-cell-code-addcell-or-ac-code-2-v1-3"><a class="link" href="#adding-a-prisoner-to-a-cell-code-addcell-or-ac-code-2-v1-3">Adding a prisoner to a cell: <code>addcell or ac</code> [2] (v1.3)</a></h3>
 <div class="paragraph">
 <p>Adds a person to one of the cells in the prison.<br>
-Format: <code>ac INDEX CELLADDRESS</code></p>
+Format: <code>addcell INDEX CELL</code></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -147,10 +150,18 @@ The maximum number of people in a cell is 2 people.
 Format: <code>listcell CELL</code></p>
 </div>
 <div class="paragraph">
-<p>Examples:
-* <code>listcell 1-1</code>
-* <code>lc 3-3</code>
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>listcell 1-1</code></p>
+</li>
+<li>
+<p><code>lc 3-3</code>
 === Showing cells in the map: <code>map or m</code> [1] (v1.1)</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>Shows a table of prison cells like a map in the command display (used for debugging and checking UI).<br>
@@ -189,6 +200,11 @@ Format: <code>deletecell INDEX</code></p>
 <li>
 <p><code>dc 1</code><br>
 Deletes the first person in the prison book if he/she is imprisoned here.</p>
+</li>
+<li>
+<p><code>listcell 1-1</code><br>
+<code>deletecell 1</code><br>
+Deletes the first person in the cell 1-1 if there are any prisoners inside it.</p>
 </li>
 </ul>
 </div>
@@ -242,12 +258,12 @@ Below is the sequence diagram of the logic and model components.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/AddCellSequenceDiagram.PNG" alt="AddCellSequenceDiagram" width="400">
+<img src="../images/AddCellSequenceDiagram.PNG" alt="AddCellSequenceDiagram" width="800">
 </div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/AddCellModelSequenceDiagram.PNG" alt="AddCellModelSequenceDiagram" width="400">
+<img src="../images/AddCellModelSequenceDiagram.PNG" alt="AddCellModelSequenceDiagram" width="800">
 </div>
 </div>
 <div class="paragraph">
@@ -272,7 +288,8 @@ or if they can leave prison and go back home to their loved ones.</p>
 <p>Pros: Easy to visualise the system.</p>
 </li>
 <li>
-<p>Cons: Harder to do more functions that the Java API has provided. Does not fit in with the other models of Person and Tag with their UniquePersonList and UniqueTagList</p>
+<p>Cons: Harder to do more functions that the Java API has provided. Does not fit in with the other models of Person and Tag and their internalList.
+It also makes it harder to implement undo and redo functions for actions below.</p>
 </li>
 </ul>
 </div>
@@ -298,7 +315,20 @@ or if they can leave prison and go back home to their loved ones.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Create a new Command to show the map.</p>
+<p><strong>Alternative 1 (current choice):</strong> Keep the map always on display.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to see when adding prisoners to cells and removing prisoners from cells.</p>
+</li>
+<li>
+<p>Cons: Anyone walking by from behind can see the information easily.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Create a new Command to show the map.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -306,19 +336,6 @@ or if they can leave prison and go back home to their loved ones.</p>
 </li>
 <li>
 <p>Cons: Easy to forget which cell in the map can add prisoners but the map is not permanently there.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Keep the map always on display.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easier to see when adding prisoners to cells.</p>
-</li>
-<li>
-<p>Cons: Risk security as access to map is not limited. Even if it is, anyone walking by can see the information easily.</p>
 </li>
 </ul>
 </div>
@@ -331,14 +348,15 @@ or if they can leave prison and go back home to their loved ones.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Prisoners are added into cells in a cellMap.</p>
+<p><strong>Alternative 1 (current choice):</strong> Prisoners are added into cells in a cellMap and their addresses will be updated.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Cells are always there and can hold prisoners. Since these groups are still Persons with a guard role or prisoner role, not all persons may have a cell.</p>
+<p>Pros: Cells are always there and can hold prisoners. Since these groups are still Persons with a guard role or prisoner role, not all persons may have a cell.
+Easier to delete prisoners from cells and update their addresses accordingly.</p>
 </li>
 <li>
-<p>Cons: More difficult to see the individual&#8217;s cell. (have not implemented updating addresses)</p>
+<p>Cons: Need to have extra implementation to ensure undo and redo commands work properly when deleting a prisoner who is imprisoned.</p>
 </li>
 </ul>
 </div>
@@ -372,371 +390,81 @@ or if they can leave prison and go back home to their loved ones.</p>
 </ul>
 </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="user-stories"><a class="link" href="#user-stories">Appendix A: User Stories</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Priorities: High (must have) - <code>* * *</code>, Medium (nice to have) - <code>* *</code>, Low (unlikely to have) - <code>*</code></p>
-</div>
-<table class="tableblock frame-all grid-all" style="width: 59%;">
-<colgroup>
-<col style="width: 22%;">
-<col style="width: 23%;">
-<col style="width: 25%;">
-<col style="width: 30%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Priority</th>
-<th class="tableblock halign-left valign-top">As a &#8230;&#8203;</th>
-<th class="tableblock halign-left valign-top">I want to &#8230;&#8203;</th>
-<th class="tableblock halign-left valign-top">So that I can&#8230;&#8203;</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">administrator</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">group guards together</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">form teams to carry out various tasks: patrol rotations, perimeter control, cell guards</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">have a track record of each prisoner’s past offences
-                          Type 1 – Injuring guard
-                          Type 2 – Infighting with other inmates
-                          Type 3 – Vandalism</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">use the appropriate level of precaution when dealing with unruly individuals</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">keep track of each prisoner’s holding cells</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ensure that there are two prisoners per cell and that certain bad prisoner combinations are avoided</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">prison warden</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">assign ranks to each guard</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">enforce access rights to view/edit prisoner and officer data</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">check the length of imprisonment of prisoners I am in charge of</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">know when they are leaving</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">add prisoners to prison cells</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">the prisoners have a prison cell to stay in</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">check number of prison cells available</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">decide whether to take more prisoners in</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">delete a prisoner</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">add more prisoners to prison</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">check when I am on duty</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">see when I have to come to work</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">check who are in my team</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">coordinate with my team</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">prison warden</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">add police officers</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">give access to new police officers</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">assign prisoners to different recess blocks</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">separate those that start fights or cause trouble when together</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">prison warden</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">shuffle patrol guards around teams every day</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">each team is made up of different members every day, prisoners will acquaint themselves with specific guards</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">prison warden</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">divide cells into sections (A, B, C, D) and name each cell numerically (A1, A2, etc…)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">refer to each cell easily when assigning prisoners to them</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">check whether there are visitor appointments</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">inform prisoners and bring them to see their visitors</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">edit details of prisoners</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">update information of prisoners</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">transfer people to other prisons</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">have more empty cells for more prisoners</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">prisoner</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">know my release date</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">look forward to the day I can see my family/friends again</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">see my assigned prisoners’ social networks: friends, enemies, family, etc…</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">use this as reference when dealing with inmates</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">guard</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">assign prisoners to solitary confinement</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">punish those that have continuously committed serious offences</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">cook</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">check dietary requirements of all people in prison</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">cook sufficient food</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">counselor</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">check what prisoners' crimes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">understand my patients better</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="sect1">
-<h2 id="use-cases"><a class="link" href="#use-cases">Appendix B: Use Cases</a></h2>
-<div class="sectionbody">
-<h3 id="use-case-add-a-prisoner" class="discrete">Use case: Add a prisoner</h3>
-<div class="paragraph">
-<p>Actor: Guard (Guard)</p>
-</div>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="sect4">
+<h5 id="aspect-implementation-of-listcellcommand-listcell"><a class="link" href="#aspect-implementation-of-listcellcommand-listcell">Aspect: Implementation of ListCellCommand (listcell)</a></h5>
+<div class="ulist">
+<ul>
 <li>
-<p>Guard requests to add prisoner</p>
+<p><strong>Alternative 1 (current choice):</strong> Users to give cell address to show prisoners in them.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement, similar in structure to <code>Find</code> Command and its listing of persons.</p>
 </li>
 <li>
-<p>PrisonBook adds prisoner</p>
-</li>
-<li>
-<p>Guard requests to list cells that are empty/not filled</p>
-</li>
-<li>
-<p>PrisonBook shows a list of empty/not filled cells</p>
-</li>
-<li>
-<p>Guard requests to view a specific cell’s prisoner’s details</p>
-</li>
-<li>
-<p>PrisonBook shows details of prisoner in cell</p>
-</li>
-<li>
-<p>Guard requests to add a prisoner to a specific cell</p>
-</li>
-<li>
-<p>PrisonBook adds prisoner to cell</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>2a. There are no cells available for new prisoner.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>2a1. PrisonBook shows an error message.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
+<p>Cons: Need to find address of cell first that is required.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>5a. The given index is invalid, outside range.</p>
-<div class="ulist none">
-<ul class="none">
+<p><strong>Alternative 2:</strong> Clicking on a cell to show prisoners in them</p>
+<div class="ulist">
+<ul>
 <li>
-<p>5a1. PrisonBook shows an error message.</p>
-<div class="paragraph">
-<p>Use case resumes at step 4.</p>
-</div>
-</li>
-</ul>
-</div>
+<p>Pros: Might be more intuitive for the user to click on a cell.</p>
 </li>
 <li>
-<p>5b. The given index of cell has no prisoners.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>5b1. PrisonBook shows an error message.</p>
-<div class="paragraph">
-<p>Use case resumes at step 4.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>7a. The given index is invalid.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>7a1. PrisonBook shows an error message.</p>
-<div class="paragraph">
-<p>Use case resumes at step 6.</p>
-</div>
+<p>Cons: Not ideal for users who prefer CLI.</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
-<h3 id="use-case-assign-prisoner-to-a-cell" class="discrete">Use case: Assign prisoner to a cell</h3>
-<div class="paragraph">
-<p>Actor: Guard</p>
 </div>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="sect4">
+<h5 id="aspect-implementation-of-deletecellcommand-deletecell"><a class="link" href="#aspect-implementation-of-deletecellcommand-deletecell">Aspect: Implementation of DeleteCellCommand (deletecell)</a></h5>
+<div class="ulist">
+<ul>
 <li>
-<p>Guard selects a prisoner</p>
+<p><strong>Alternative 1 (current choice):</strong> Removes a prisoner from a cell by choosing the prisoner and updates his/her address back accordingly.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Faster way to remove since only the index of the prisoner is required.</p>
 </li>
 <li>
-<p>Guard requests a list of available cells with room available</p>
+<p>Cons: Since cells have a size limit of 2, it is easier to delete a person after selecting a cell.</p>
 </li>
-<li>
-<p>PrisonBook shows a list of available cells</p>
-</li>
-<li>
-<p>Guard requests to add prisoner to vacant cell</p>
-</li>
-<li>
-<p>PrisonBook updates prisoner status and cell status</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>2a. The cell list is empty.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
+</ul>
 </div>
 </li>
 <li>
-<p>3a. Prisoner is already assigned to a cell.</p>
-<div class="ulist none">
-<ul class="none">
+<p><strong>Alternative 2:</strong> Choosing a cell and the person to delete from the cell after seeing the list.</p>
+<div class="ulist">
+<ul>
 <li>
-<p>3a1. PrisonBook removes cell tag from prisoner status and removes prisoner from cell status</p>
-<div class="paragraph">
-<p>Use case resumes at step 2.</p>
-</div>
+<p>Pros: Easier to choose a cell when there are many people in the PrisonBook and is difficult to see who the prisoners are.</p>
+</li>
+<li>
+<p>Cons: Requires more steps to delete a person from the cell, by having to first list then delete.
+Current implementation can work in a similar way that makes it easier to delete a prisoner from a cell.</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
-<h3 id="use-case-get-the-list-of-prisoners-in-a-certain-cell" class="discrete">Use case: Get the list of prisoners in a certain cell</h3>
-<div class="paragraph">
-<p>Actor: Guard</p>
 </div>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Guard requests a list of cells</p>
-</li>
-<li>
-<p>PrisonBook shows the list of cells</p>
-</li>
-<li>
-<p>Guard requests to view the list of prisoners assigned to a specific cell</p>
-</li>
-<li>
-<p>PrisonBook shows a list of of prisoners assigned to the cell</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>3a. Guard does not have access rights to view the details of the requested cell</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-11 12:13:55 UTC
+Last updated 2018-04-11 14:08:44 UTC
 </div>
 </div>
 </body>

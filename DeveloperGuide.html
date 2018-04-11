@@ -949,12 +949,12 @@ Below is the sequence diagram of the logic and model components.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/AddCellSequenceDiagram.PNG" alt="AddCellSequenceDiagram" width="400">
+<img src="images/AddCellSequenceDiagram.PNG" alt="AddCellSequenceDiagram" width="800">
 </div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/AddCellModelSequenceDiagram.PNG" alt="AddCellModelSequenceDiagram" width="400">
+<img src="images/AddCellModelSequenceDiagram.PNG" alt="AddCellModelSequenceDiagram" width="800">
 </div>
 </div>
 <div class="paragraph">
@@ -979,7 +979,8 @@ or if they can leave prison and go back home to their loved ones.</p>
 <p>Pros: Easy to visualise the system.</p>
 </li>
 <li>
-<p>Cons: Harder to do more functions that the Java API has provided. Does not fit in with the other models of Person and Tag with their UniquePersonList and UniqueTagList</p>
+<p>Cons: Harder to do more functions that the Java API has provided. Does not fit in with the other models of Person and Tag and their internalList.
+It also makes it harder to implement undo and redo functions for actions below.</p>
 </li>
 </ul>
 </div>
@@ -1005,7 +1006,20 @@ or if they can leave prison and go back home to their loved ones.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Create a new Command to show the map.</p>
+<p><strong>Alternative 1 (current choice):</strong> Keep the map always on display.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to see when adding prisoners to cells and removing prisoners from cells.</p>
+</li>
+<li>
+<p>Cons: Anyone walking by from behind can see the information easily.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Create a new Command to show the map.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1013,19 +1027,6 @@ or if they can leave prison and go back home to their loved ones.</p>
 </li>
 <li>
 <p>Cons: Easy to forget which cell in the map can add prisoners but the map is not permanently there.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Keep the map always on display.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easier to see when adding prisoners to cells.</p>
-</li>
-<li>
-<p>Cons: Risk security as access to map is not limited. Even if it is, anyone walking by can see the information easily.</p>
 </li>
 </ul>
 </div>
@@ -1038,14 +1039,15 @@ or if they can leave prison and go back home to their loved ones.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Prisoners are added into cells in a cellMap.</p>
+<p><strong>Alternative 1 (current choice):</strong> Prisoners are added into cells in a cellMap and their addresses will be updated.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Cells are always there and can hold prisoners. Since these groups are still Persons with a guard role or prisoner role, not all persons may have a cell.</p>
+<p>Pros: Cells are always there and can hold prisoners. Since these groups are still Persons with a guard role or prisoner role, not all persons may have a cell.
+Easier to delete prisoners from cells and update their addresses accordingly.</p>
 </li>
 <li>
-<p>Cons: More difficult to see the individual&#8217;s cell. (have not implemented updating addresses)</p>
+<p>Cons: Need to have extra implementation to ensure undo and redo commands work properly when deleting a prisoner who is imprisoned.</p>
 </li>
 </ul>
 </div>
@@ -1072,6 +1074,73 @@ or if they can leave prison and go back home to their loved ones.</p>
 </li>
 <li>
 <p>Cons: More complex in automatically choosing cells for prisoners. User might want to have control on which prisoners should be in which cell.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-implementation-of-listcellcommand-listcell"><a class="link" href="#aspect-implementation-of-listcellcommand-listcell">Aspect: Implementation of ListCellCommand (listcell)</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Users to give cell address to show prisoners in them.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement, similar in structure to <code>Find</code> Command and its listing of persons.</p>
+</li>
+<li>
+<p>Cons: Need to find address of cell first that is required.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Clicking on a cell to show prisoners in them</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Might be more intuitive for the user to click on a cell.</p>
+</li>
+<li>
+<p>Cons: Not ideal for users who prefer CLI.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-implementation-of-deletecellcommand-deletecell"><a class="link" href="#aspect-implementation-of-deletecellcommand-deletecell">Aspect: Implementation of DeleteCellCommand (deletecell)</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Removes a prisoner from a cell by choosing the prisoner and updates his/her address back accordingly.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Faster way to remove since only the index of the prisoner is required.</p>
+</li>
+<li>
+<p>Cons: Since cells have a size limit of 2, it is easier to delete a person after selecting a cell.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Choosing a cell and the person to delete from the cell after seeing the list.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to choose a cell when there are many people in the PrisonBook and is difficult to see who the prisoners are.</p>
+</li>
+<li>
+<p>Cons: Requires more steps to delete a person from the cell, by having to first list then delete.
+Current implementation can work in a similar way that makes it easier to delete a prisoner from a cell.</p>
 </li>
 </ul>
 </div>
@@ -3099,7 +3168,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-11 12:13:55 UTC
+Last updated 2018-04-11 14:08:44 UTC
 </div>
 </div>
 </body>
