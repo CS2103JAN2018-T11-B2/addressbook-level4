@@ -48,10 +48,13 @@
 <li><a href="#login-and-security-feature">3.2. Login and Security Feature</a></li>
 <li><a href="#prison-cell-map">3.3. Prison Cell Map</a></li>
 <li><a href="#find-by-tag-command">3.4. Find by Tag Command</a></li>
-<li><a href="#scheduling-feature">3.5. Scheduling Feature</a></li>
-<li><a href="#proposed-data-encryption">3.6. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.7. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.8. Configuration</a></li>
+<li><a href="#scheduling-with-google-calendar">3.5. Scheduling with Google Calendar</a></li>
+<li><a href="#view-calendar-feature">3.6. View Calendar Feature</a></li>
+<li><a href="#add-event-to-calendar-feature">3.7. Add Event to Calendar Feature</a></li>
+<li><a href="#delete-event-from-calendar-feature">3.8. Delete Event from Calendar Feature</a></li>
+<li><a href="#proposed-data-encryption">3.9. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.10. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.11. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -1161,24 +1164,18 @@ have to be grouped together after a single prefix</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="scheduling-feature"><a class="link" href="#scheduling-feature">3.5. Scheduling Feature</a></h3>
+<h3 id="scheduling-with-google-calendar"><a class="link" href="#scheduling-with-google-calendar">3.5. Scheduling with Google Calendar</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The Scheduling feature can be accessed via entering the command <code>cal</code>.</p>
-</div>
-<div class="paragraph">
-<p>It allows guards/wardens to interact with a Google Calendar account through the current PrisonBook GUI.</p>
+<p>The PrisonBook calendar commands will send HTTPS requests to the REST Calendar API, whether it is calling the listEvents, addEvents or delEvents API command.
+Upon receiving a success confirmation from the API, the change will be reflected next time any calendar commands are called.</p>
 </div>
 <div class="paragraph">
 <p>Calendar Commands that are supported are:
-* add e/eventname t/timestamp
-* remove [eventID]
-* edit [eventID] e/eventname t/timestamp</p>
-</div>
-<div class="paragraph">
-<p>The PrisonBook calendar commands will send HTTPS requests to the REST calendar API and make changes to the Google account calendar.
-Upon confirmation of successful changes by the Google Calendar API, the change will be reflected next time any calendar commands are called.</p>
+* listing upcoming events
+* adding an event
+* removing an event</p>
 </div>
 <div class="sect4">
 <h5 id="aspect-choosing-number-of-accounts-to-work-with"><a class="link" href="#aspect-choosing-number-of-accounts-to-work-with">Aspect: Choosing Number of Accounts to Work With</a></h5>
@@ -1272,32 +1269,42 @@ Upon confirmation of successful changes by the Google Calendar API, the change w
 </ul>
 </div>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="view-calendar-feature"><a class="link" href="#view-calendar-feature">3.6. View Calendar Feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.6.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The View Schedule feature can be accessed via entering the command <code>cal</code>.
+It allows guards/wardens to see upcoming events and their start times.</p>
+</div>
 <div class="sect4">
-<h5 id="aspect-implementation-of-editing-calendar"><a class="link" href="#aspect-implementation-of-editing-calendar">Aspect: Implementation of editing calendar</a></h5>
+<h5 id="aspect-event-listing-ui"><a class="link" href="#aspect-event-listing-ui">Aspect: Event Listing UI</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Using command line to type with prefixes for event names and their timings.</p>
+<p><strong>Alternative 1 (current choice):</strong> List events as a list format</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Ties in with users who prefer typing over mouse clicking.</p>
+<p>Pros: Simple to implement, shows more details than calendar UI</p>
 </li>
 <li>
-<p>Cons: Not as intuitive as selecting time slots to edit. Need more prefixes for users to learn.</p>
+<p>Cons: Not as visually pleasing, users cannot use mouse to edit calendar intuitively</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Have buttons for users to click to edit.</p>
+<p><strong>Alternative 2:</strong> List events in the calendar UI display</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: More intuitive as less things to type.</p>
+<p>Pros: More intuitive with an actual interactive calendar, allows users to click and drag using mouse</p>
 </li>
 <li>
-<p>Cons: No longer command line based.</p>
+<p>Cons: No longer command line based, takes up more space than console</p>
 </li>
 </ul>
 </div>
@@ -1308,20 +1315,119 @@ Upon confirmation of successful changes by the Google Calendar API, the change w
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.6. [Proposed] Data Encryption</a></h3>
+<h3 id="add-event-to-calendar-feature"><a class="link" href="#add-event-to-calendar-feature">3.7. Add Event to Calendar Feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.7.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The Add Event feature can be accessed via entering the command <code>calAdd event/EVENTNAME loc/LOCATION start/STARTDATETIME end/ENDDATETIME</code>.
+It allows guards/wardens to add an event, specifying the event name, location, starting and ending times.</p>
+</div>
+<div class="sect4">
+<h5 id="aspect-relevancy-of-event-attendee-list"><a class="link" href="#aspect-relevancy-of-event-attendee-list">Aspect: Relevancy of Event Attendee List</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Excluding Attendee List</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Less content for user to input when creating events, does not restrict any functionality in a prison setting</p>
+</li>
+<li>
+<p>Cons: Slightly less customization when adding events</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Including Attendee List</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Can invite specific individuals for smaller scale events</p>
+</li>
+<li>
+<p>Cons: Typing each user can become tedious and extra work for the users, also not suitable for prison setting because prisoners are not "invited" for meals or to get back into their cells</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="delete-event-from-calendar-feature"><a class="link" href="#delete-event-from-calendar-feature">3.8. Delete Event from Calendar Feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-8"><a class="link" href="#current-implementation-8">3.8.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The Delete Event feature can be accessed via entering the command <code>calDel EVENTNUMBER</code>.
+It allows guards/wardens to remove events from the upcoming events list.</p>
+</div>
+<div class="sect4">
+<h5 id="aspect-specification-of-which-event-to-delete"><a class="link" href="#aspect-specification-of-which-event-to-delete">Aspect: Specification of Which Event to Delete</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Enumerating the event list and storing it in an array</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy interface for users, they just pick a simple integer from the list</p>
+</li>
+<li>
+<p>Cons: Have to map these enumerations to the actual IDs</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Displaying the actual event IDs from the API</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: No additional parsing or eventID storing is needed</p>
+</li>
+<li>
+<p>Cons: Users have to type the event IDs manually, which are seemingly random alphanumeric strings (prone to human error)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> No change to list</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: No additional clutter to existing list</p>
+</li>
+<li>
+<p>Cons: Users have to specify event name and start/end times, which is quite tedious</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.9. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.7. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.10. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.8, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.11, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1352,7 +1458,7 @@ Upon confirmation of successful changes by the Google Calendar API, the change w
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.8. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.11. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2371,40 +2477,20 @@ for <code>RemarkCommandParser</code>.</p>
 <p><strong>Value proposition</strong>: manage contacts faster than a typical mouse/GUI driven app</p>
 </div>
 <div class="paragraph">
-<p><strong>Feature Contributions</strong>:</p>
+<p><strong>Feature Contributions</strong>:
+* Chung-Yen (Philos) Tsai (philos22)
+  1. Major enhancement:<br>
+  Scheduling: Keeps track of schedule of prisoners and guards.
+  2. Minor enhancement:<br>
+  Find by tag: This function will allow admins to filter user list by tags. Tags may include classification of Prisoner vs. Guards, Prisoner cell blocks and cell numbers, Guards' current teams and assignments, etc&#8230;&#8203;
+* Isaac Gideon Tan (zacci)
+  1. Major enhancement:<br>
+  Login and Authorization Levels: Enable creation of account for guards, logging in, and authorization levels for commands that may compromise the security of the Prison data.
+  2. Minor enhancement:<br>
+  Additional Attribute to store 'Role' information. To identify the person as a Prisoner or Guard</p>
 </div>
 <div class="ulist">
 <ul>
-<li>
-<p>Chung-Yen (Philos) Tsai (philos22)</p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Major enhancement:<br>
-Scheduling: Keeps track of schedule of prisoners and guards.</p>
-</li>
-<li>
-<p>Minor enhancement:<br>
-Find by tag: This function will allow admins to filter user list by tags. Tags may include classification of Prisoner vs. Guards, Prisoner cell blocks and cell numbers, Guards' current teams and assignments, etc&#8230;&#8203;</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Isaac Gideon Tan (zacci)</p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Major enhancement:<br>
-Login and Authorization Levels: Enable creation of account for guards, logging in, and authorization levels for commands that may compromise the security of the Prison data.</p>
-</li>
-<li>
-<p>Minor enhancement:<br>
-Additional Attribute to store 'Role' information. To identify the person as a Prisoner or Guard</p>
-</li>
-</ol>
-</div>
-</li>
 <li>
 <p>Sarah Goh Shi Ning (sarahgoh97)</p>
 <div class="olist arabic">
@@ -2989,7 +3075,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-11 04:25:45 UTC
+Last updated 2018-04-11 10:00:59 UTC
 </div>
 </div>
 </body>

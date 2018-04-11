@@ -40,17 +40,16 @@
 <li><a href="#showing-cells-in-the-map-code-map-or-m-code-1-v1-1">3.10. Showing cells in the map: <code>map or m</code> [1] (v1.1)</a></li>
 <li><a href="#editing-a-person-code-edit-or-e-code-2">3.11. Editing a person : <code>edit or e</code> [2]</a></li>
 <li><a href="#locating-persons-by-name-or-tags-code-find-or-f-code-1">3.12. Locating persons by name or tags: <code>find or f</code> [1]</a></li>
-<li><a href="#view-upcoming-events-in-the-calendar-code-calendar-or-cal-code-1-v1-3">3.13. View upcoming events in the calendar: <code>calendar or cal</code> [1] (v1.3)</a></li>
-<li><a href="#add-upcoming-events-in-the-calendar-code-caladd-or-cala-code-1-v1-3">3.14. Add upcoming events in the calendar: <code>calAdd or calA</code> [1] (v1.3)</a></li>
-<li><a href="#deleting-a-person-code-delete-or-d-code-2">3.15. Deleting a person : <code>delete or d</code> [2]</a></li>
-<li><a href="#deleting-a-person-from-a-cell-code-deletecell-or-dc-code-2-v1-4">3.16. Deleting a person from a cell : <code>deletecell or dc</code> [2] (v1.4)</a></li>
-<li><a href="#listing-entered-commands-code-history-or-h-code-0">3.17. Listing entered commands : <code>history or h</code> [0]</a></li>
-<li><a href="#undoing-previous-command-code-undo-or-u-code-0">3.18. Undoing previous command : <code>undo or u</code> [0]</a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-or-r-code-0">3.19. Redoing the previously undone command : <code>redo or r</code> [0]</a></li>
-<li><a href="#clearing-all-entries-code-clear-or-c-code-3">3.20. Clearing all entries : <code>clear or c</code> [3]</a></li>
-<li><a href="#exiting-the-program-code-exit-code-0">3.21. Exiting the program : <code>exit</code> [0]</a></li>
-<li><a href="#saving-the-data">3.22. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.23. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#various-commands-to-interact-with-google-calendar">3.13. Various commands to interact with Google Calendar</a></li>
+<li><a href="#deleting-a-person-code-delete-or-d-code-2">3.14. Deleting a person : <code>delete or d</code> [2]</a></li>
+<li><a href="#deleting-a-person-from-a-cell-code-deletecell-or-dc-code-2-v1-4">3.15. Deleting a person from a cell : <code>deletecell or dc</code> [2] (v1.4)</a></li>
+<li><a href="#listing-entered-commands-code-history-or-h-code-0">3.16. Listing entered commands : <code>history or h</code> [0]</a></li>
+<li><a href="#undoing-previous-command-code-undo-or-u-code-0">3.17. Undoing previous command : <code>undo or u</code> [0]</a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-or-r-code-0">3.18. Redoing the previously undone command : <code>redo or r</code> [0]</a></li>
+<li><a href="#clearing-all-entries-code-clear-or-c-code-3">3.19. Clearing all entries : <code>clear or c</code> [3]</a></li>
+<li><a href="#exiting-the-program-code-exit-code-0">3.20. Exiting the program : <code>exit</code> [0]</a></li>
+<li><a href="#saving-the-data">3.21. Saving the data</a></li>
+<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.22. Encrypting data files <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -412,7 +411,7 @@ Edits the name of the 2nd person to be <code>Betsy Crower</code> and clears all 
 <div class="sect2">
 <h3 id="locating-persons-by-name-or-tags-code-find-or-f-code-1"><a class="link" href="#locating-persons-by-name-or-tags-code-find-or-f-code-1">3.12. Locating persons by name or tags: <code>find or f</code> [1]</a></h3>
 <div class="paragraph">
-<p>Finds persons whose names/tags contain any of the given keywords.<br>
+<p>Finds persons whose names/tags contain all of the given keywords.<br>
 Format: <code>find n/NAME_KEYWORD [MORE_KEYWORDS] t/TAG_KEYWORD [MORE_KEYWORDS]</code></p>
 </div>
 <div class="sidebarblock">
@@ -432,7 +431,7 @@ Format: <code>find n/NAME_KEYWORD [MORE_KEYWORDS] t/TAG_KEYWORD [MORE_KEYWORDS]<
 <p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
 </li>
 <li>
-<p>Persons matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></p>
+<p>Persons matching all keywords will be returned (i.e. <code>AND</code> search). e.g. <code>n/Hans t/family</code> will return <code>n/Hans t/family</code>, not <code>n/Hans t/enemy</code> or <code>n/Gret t/family</code></p>
 </li>
 </ul>
 </div>
@@ -453,29 +452,25 @@ Returns any person having names <code>Betsy</code>, <code>Tim</code>, or <code>J
 </li>
 <li>
 <p><code>find n/Betsy t/Friends</code><br>
-Returns any person having names <code>Betsy</code> or are tagged <code>Friends</code></p>
+Returns any person having names <code>Betsy</code> and are tagged <code>Friends</code></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="view-upcoming-events-in-the-calendar-code-calendar-or-cal-code-1-v1-3"><a class="link" href="#view-upcoming-events-in-the-calendar-code-calendar-or-cal-code-1-v1-3">3.13. View upcoming events in the calendar: <code>calendar or cal</code> [1] (v1.3)</a></h3>
+<h3 id="various-commands-to-interact-with-google-calendar"><a class="link" href="#various-commands-to-interact-with-google-calendar">3.13. Various commands to interact with Google Calendar</a></h3>
+<div class="paragraph">
+<p>For the first time that you open the calendar, you will be prompted to login to the PrisonBook Google account. The PrisonBook app will attempt to open the browser for you, alternatively you can copy the link and login with the following details:
+* Google Username: prisonbooksystem | Password: prisonbook2018</p>
+</div>
+<div class="sect3">
+<h4 id="view-upcoming-events-in-the-calendar-code-calendar-or-cal-code-1-v1-3"><a class="link" href="#view-upcoming-events-in-the-calendar-code-calendar-or-cal-code-1-v1-3">3.13.1. View upcoming events in the calendar: <code>calendar or cal</code> [1] (v1.3)</a></h4>
 <div class="paragraph">
 <p>Format: <code>calendar</code></p>
 </div>
-<div class="paragraph">
-<p>For the first time that you open the calendar, you will be prompted to login to the PrisonBook Google account. The PrisonBook app will attempt to open the browser for you, alternatively you can copy the link and login with the following details:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Google Username: prisonbooksystem | Password: prisonbook2018</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="add-upcoming-events-in-the-calendar-code-caladd-or-cala-code-1-v1-3"><a class="link" href="#add-upcoming-events-in-the-calendar-code-caladd-or-cala-code-1-v1-3">3.14. Add upcoming events in the calendar: <code>calAdd or calA</code> [1] (v1.3)</a></h3>
+<div class="sect3">
+<h4 id="add-event-to-the-calendar-code-caladd-or-cala-code-3-v1-4"><a class="link" href="#add-event-to-the-calendar-code-caladd-or-cala-code-3-v1-4">3.13.2. Add event to the calendar: <code>calAdd or calA</code> [3] (v1.4)</a></h4>
 <div class="paragraph">
 <p>Format: <code>calAdd event/EVENTNAME loc/LOCATION start/STARTDATETIME end/ENDDATETIME</code></p>
 </div>
@@ -485,8 +480,20 @@ Returns any person having names <code>Betsy</code> or are tagged <code>Friends</
 Adds an event <code>Software Meeting</code> at <code>NUS Utown Green</code> from <code>June 6th, 2018 10am</code> to <code>June 6th, 2018 1pm</code></p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="delete-event-from-the-calendar-code-caldel-or-cald-code-3-v1-5"><a class="link" href="#delete-event-from-the-calendar-code-caldel-or-cald-code-3-v1-5">3.13.3. Delete event from the calendar: <code>calDel or calD</code> [3] (v1.5)</a></h4>
+<div class="paragraph">
+<p>Format: <code>calDel EVENTNUMBER</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:
+* <code>calDel 11</code><br>
+Deletes the 11th event on the calendar events list</p>
+</div>
+</div>
+</div>
 <div class="sect2">
-<h3 id="deleting-a-person-code-delete-or-d-code-2"><a class="link" href="#deleting-a-person-code-delete-or-d-code-2">3.15. Deleting a person : <code>delete or d</code> [2]</a></h3>
+<h3 id="deleting-a-person-code-delete-or-d-code-2"><a class="link" href="#deleting-a-person-code-delete-or-d-code-2">3.14. Deleting a person : <code>delete or d</code> [2]</a></h3>
 <div class="paragraph">
 <p>Deletes the specified person from the prison book.<br>
 Format: <code>delete INDEX</code></p>
@@ -527,7 +534,7 @@ Deletes the 1st person in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person-from-a-cell-code-deletecell-or-dc-code-2-v1-4"><a class="link" href="#deleting-a-person-from-a-cell-code-deletecell-or-dc-code-2-v1-4">3.16. Deleting a person from a cell : <code>deletecell or dc</code> [2] (v1.4)</a></h3>
+<h3 id="deleting-a-person-from-a-cell-code-deletecell-or-dc-code-2-v1-4"><a class="link" href="#deleting-a-person-from-a-cell-code-deletecell-or-dc-code-2-v1-4">3.15. Deleting a person from a cell : <code>deletecell or dc</code> [2] (v1.4)</a></h3>
 <div class="paragraph">
 <p>Deletes the specified person from his/her cell in the PrisonBook.<br>
 Format: <code>deletecell INDEX</code></p>
@@ -565,7 +572,7 @@ Deletes the first person in the prison book if he/she is imprisoned here.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-or-h-code-0"><a class="link" href="#listing-entered-commands-code-history-or-h-code-0">3.17. Listing entered commands : <code>history or h</code> [0]</a></h3>
+<h3 id="listing-entered-commands-code-history-or-h-code-0"><a class="link" href="#listing-entered-commands-code-history-or-h-code-0">3.16. Listing entered commands : <code>history or h</code> [0]</a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
 Format: <code>history</code></p>
@@ -586,7 +593,7 @@ Format: <code>history</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-or-u-code-0"><a class="link" href="#undoing-previous-command-code-undo-or-u-code-0">3.18. Undoing previous command : <code>undo or u</code> [0]</a></h3>
+<h3 id="undoing-previous-command-code-undo-or-u-code-0"><a class="link" href="#undoing-previous-command-code-undo-or-u-code-0">3.17. Undoing previous command : <code>undo or u</code> [0]</a></h3>
 <div class="paragraph">
 <p>Restores the prison book to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
@@ -631,7 +638,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-or-r-code-0"><a class="link" href="#redoing-the-previously-undone-command-code-redo-or-r-code-0">3.19. Redoing the previously undone command : <code>redo or r</code> [0]</a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-or-r-code-0"><a class="link" href="#redoing-the-previously-undone-command-code-redo-or-r-code-0">3.18. Redoing the previously undone command : <code>redo or r</code> [0]</a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
 Format: <code>redo</code></p>
@@ -663,28 +670,28 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-or-c-code-3"><a class="link" href="#clearing-all-entries-code-clear-or-c-code-3">3.20. Clearing all entries : <code>clear or c</code> [3]</a></h3>
+<h3 id="clearing-all-entries-code-clear-or-c-code-3"><a class="link" href="#clearing-all-entries-code-clear-or-c-code-3">3.19. Clearing all entries : <code>clear or c</code> [3]</a></h3>
 <div class="paragraph">
 <p>Clears all entries from the prison book. Clears all prison cells.<br>
 Format: <code>clear</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code-0"><a class="link" href="#exiting-the-program-code-exit-code-0">3.21. Exiting the program : <code>exit</code> [0]</a></h3>
+<h3 id="exiting-the-program-code-exit-code-0"><a class="link" href="#exiting-the-program-code-exit-code-0">3.20. Exiting the program : <code>exit</code> [0]</a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.22. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.21. Saving the data</a></h3>
 <div class="paragraph">
 <p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.23. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.22. Encrypting data files <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
@@ -740,6 +747,10 @@ e.g. <code>find n/James Jake t/boys</code></p>
 e.g. <code>calAdd event/Software Meeting loc/NUS Utown Green start/2018-06-06 10:00:00 end/2018-06-06 13:00:00</code></p>
 </li>
 <li>
+<p><strong>Calendar Delete Event</strong> : <code>calDel EVENTNUMBER</code>
+e.g. <code>calDel 7</code></p>
+</li>
+<li>
 <p><strong>List</strong> : <code>list</code></p>
 </li>
 <li>
@@ -764,7 +775,7 @@ e.g. <code>calAdd event/Software Meeting loc/NUS Utown Green start/2018-06-06 10
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-11 04:25:45 UTC
+Last updated 2018-04-11 10:00:59 UTC
 </div>
 </div>
 </body>
