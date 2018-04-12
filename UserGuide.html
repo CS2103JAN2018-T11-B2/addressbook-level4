@@ -33,7 +33,7 @@
 <li><a href="#logging-out-code-logout-code-0-v1-3">3.3. Logging out: <code>logout</code> [0] (v1.3)</a></li>
 <li><a href="#check-log-in-status-code-status-code-0-v1-4">3.4. Check Log-in Status: <code>status</code> [0] (v1.4)</a></li>
 <li><a href="#add-new-user-code-adduser-code-3-v1-4">3.5. Add new user: <code>adduser</code> [3] (v1.4)</a></li>
-<li><a href="#delete-a-user-code-deleteuser-code-1-v1-5rc">3.6. Delete a user: <code>deleteuser</code> [1] (v1.5rc)</a></li>
+<li><a href="#delete-a-user-code-deleteuser-code-2-v1-5rc">3.6. Delete a user: <code>deleteuser</code> [2] (v1.5rc)</a></li>
 <li><a href="#adding-a-person-code-add-or-a-code-2">3.7. Adding a person: <code>add or a</code> [2]</a></li>
 <li><a href="#adding-a-prisoner-to-a-cell-code-addcell-or-ac-code-2-v1-3">3.8. Adding a prisoner to a cell: <code>addcell or ac</code> [2] (v1.3)</a></li>
 <li><a href="#listing-all-persons-code-list-or-l-code-1">3.9. Listing all persons : <code>list or l</code> [1]</a></li>
@@ -93,7 +93,7 @@ This app will not work with earlier versions of Java 8.
 <p>Copy the file to the folder you want to use as the home folder for your PrisonBook.</p>
 </li>
 <li>
-<p>Double-click the file to start the app. The GUI should appear in a few seconds.</p>
+<p>Double-click the file to start the app. The GUI should appear in a few seconds. Do NOT use command prompt to open the app.</p>
 <div class="imageblock">
 <div class="content">
 <img src="images/Ui.png" alt="Ui" width="790">
@@ -272,7 +272,7 @@ Format: <code>adduser user/NEW_USERNAME pw/NEW_PASSWORD sl/SECURITY_LEVEL</code>
 </div>
 </div>
 <div class="sect2">
-<h3 id="delete-a-user-code-deleteuser-code-1-v1-5rc"><a class="link" href="#delete-a-user-code-deleteuser-code-1-v1-5rc">3.6. Delete a user: <code>deleteuser</code> [1] (v1.5rc)</a></h3>
+<h3 id="delete-a-user-code-deleteuser-code-2-v1-5rc"><a class="link" href="#delete-a-user-code-deleteuser-code-2-v1-5rc">3.6. Delete a user: <code>deleteuser</code> [2] (v1.5rc)</a></h3>
 <div class="paragraph">
 <p>Deletes a user from the PrisonBook<br>
 Format: <code>deleteuser user/USERNAME</code></p>
@@ -746,51 +746,109 @@ There is no need to save manually.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Security Level 0:<br>
-<strong>Check status</strong> : <code>status</code><br>
-<strong>Exit</strong> : <code>exit</code><br>
-<strong>Help</strong> : <code>help</code><br>
-<strong>History</strong> : <code>history</code> or <code>h</code><br>
-<strong>Log in</strong> : <code>login</code><br>
-<strong>Log out</strong> : <code>logout</code><br>
-<strong>Undo</strong> : <code>undo</code> or <code>u</code><br>
-<strong>Redo</strong> : <code>redo</code> or <code>r</code></p>
+<p>Security Level 0:<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Check status</strong> : <code>status</code><br></p>
 </li>
 <li>
-<p>Security Level 1:<br>
-<strong>Calendar</strong> : <code>calendar</code> or <code>cal</code><br>
-<strong>Delete user</strong> : <code>deleteuser user/NEW_USERNAME</code><br>
-e.g. <code>deleteuser user/prisonguard</code><br>
-<strong>Find</strong> : <code>find n/NAME_KEYWORD [MORE_KEYWORDS] t/TAG_KEYWORD [MORE_KEYWORDS]</code><br>
-e.g. <code>find n/Meier</code><br>
-<strong>List</strong> : <code>list</code> or <code>l</code><br>
-<strong>List prisoners in a cell</strong> : <code>listcell CELL</code><br>
-e.g. <code>listcell 1-1</code><br>
-<strong>Map</strong> : <code>map</code> or <code>m</code></p>
+<p><strong>Exit</strong> : <code>exit</code><br></p>
 </li>
 <li>
-<p>Security Level 2:<br>
-<strong>Add</strong> : <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/p t/friend t/colleague</code><br>
-<strong>Add prisoner to cell</strong> : <code>addcell INDEX CELL</code><br>
-e.g. <code>addcell 1 1-1</code><br>
-<strong>Delete</strong> : <code>delete INDEX</code><br>
-e.g. <code>delete 1</code><br>
-<strong>Delete prisoner from cell</strong> : <code>deletecell INDEX</code><br>
-e.g. <code>deletecell 1</code><br>
-<strong>Edit</strong> : <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [t/TAG]&#8230;&#8203;</code><br>
-eg. <code>edit 1 p/91234567 e/johndoe@example.com</code></p>
+<p><strong>Help</strong> : <code>help</code><br></p>
 </li>
 <li>
-<p>Security Level 3:<br>
-<strong>Add user</strong> : <code>adduser user/NEW_USERNAME pw/NEW_PASSWORD sl/SECURITY_LEVEL</code><br>
+<p><strong>History</strong> : <code>history</code> or <code>h</code><br></p>
+</li>
+<li>
+<p><strong>Log in</strong> : <code>login</code><br></p>
+</li>
+<li>
+<p><strong>Log out</strong> : <code>logout</code><br></p>
+</li>
+<li>
+<p><strong>Undo</strong> : <code>undo</code> or <code>u</code><br></p>
+</li>
+<li>
+<p><strong>Redo</strong> : <code>redo</code> or <code>r</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Security Level 1:<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Calendar</strong> : <code>calendar</code> or <code>cal</code><br></p>
+</li>
+<li>
+<p><strong>Find</strong> : <code>find n/NAME_KEYWORD [MORE_KEYWORDS] t/TAG_KEYWORD [MORE_KEYWORDS]</code><br>
+e.g. <code>find n/Meier</code><br></p>
+</li>
+<li>
+<p><strong>List</strong> : <code>list</code> or <code>l</code><br></p>
+</li>
+<li>
+<p><strong>List prisoners in a cell</strong> : <code>listcell CELL</code><br>
+e.g. <code>listcell 1-1</code><br></p>
+</li>
+<li>
+<p><strong>Map</strong> : <code>map</code> or <code>m</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Security Level 2:<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Add</strong> : <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/p t/friend t/colleague</code><br></p>
+</li>
+<li>
+<p><strong>Add prisoner to cell</strong> : <code>addcell INDEX CELL</code><br>
+e.g. <code>addcell 1 1-1</code><br></p>
+</li>
+<li>
+<p><strong>Delete</strong> : <code>delete INDEX</code><br>
+e.g. <code>delete 1</code><br></p>
+</li>
+<li>
+<p><strong>Delete prisoner from cell</strong> : <code>deletecell INDEX</code><br>
+e.g. <code>deletecell 1</code><br></p>
+</li>
+<li>
+<p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [t/TAG]&#8230;&#8203;</code><br>
+eg. <code>edit 1 p/91234567 e/johndoe@example.com</code><br></p>
+</li>
+<li>
+<p><strong>Delete User</strong>: <code>deleteuser user/USERNAME_TO_DELETE</code><br>
+eg. deleteuser user/prisonguard1</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Security Level 3:<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Add user</strong> : <code>adduser user/NEW_USERNAME pw/NEW_PASSWORD sl/SECURITY_LEVEL</code><br>
 e.g. <code>adduser user/newuser pw/newpassword sl/1</code></p>
 </li>
 <li>
 <p><strong>Calendar Delete Event</strong> : <code>calDel EVENTNUMBER</code><br>
-e.g. <code>calDel 7</code>
-<strong>Add event to calendar</strong> : <code>calAdd event/EVENTNAME loc/LOCATION start/STARTDATETIME end/ENDDATETIME</code><br>
+e.g. <code>calDel 7</code><br></p>
+</li>
+<li>
+<p><strong>Add event to calendar</strong> : <code>calAdd event/EVENTNAME loc/LOCATION start/STARTDATETIME end/ENDDATETIME</code><br>
 e.g. <code>calAdd event/IT Skills Training loc/Computer Lab 1 start/2018-06-06 10:00:00 end/2018-06-06 12:00:00</code><br></p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -799,7 +857,7 @@ e.g. <code>calAdd event/IT Skills Training loc/Computer Lab 1 start/2018-06-06 1
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-11 17:29:43 UTC
+Last updated 2018-04-12 02:52:10 UTC
 </div>
 </div>
 </body>
