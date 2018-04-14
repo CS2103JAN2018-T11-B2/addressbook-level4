@@ -5,14 +5,14 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.6.1">
-<title>Sarah Goh Shi Ning- Project Portfolio</title>
+<title>Sarah Goh Shi Ning - Project Portfolio</title>
 <link rel="stylesheet" href="../stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 <link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
 </head>
 <body class="article">
 <div id="header">
-<h1>Sarah Goh Shi Ning- Project Portfolio</h1>
+<h1>Sarah Goh Shi Ning - Project Portfolio</h1>
 </div>
 <div id="content">
 <div class="sect1">
@@ -25,7 +25,9 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Prisonbook is a desktop address book application used for Prison Guards/Inmates management. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.</p>
+<p>Prisonbook is a desktop address book application used for Prison Guards/Inmates management.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX.
+It is written in Java, and has about 10 kLoC.</p>
 </div>
 </div>
 </div>
@@ -40,16 +42,26 @@
 <ul>
 <li>
 <p>What it does: There is a cell map that has a fixed size and certain number of cells.
-Allows guards and prison wardens to add prisoners to cells and to remove them and view them in cells.</p>
+It allows guards and prison wardens to add prisoners to cells and to remove them.
+It also allows guards and prison wardens to view a list of prisoners in a specified cell to help them do the previously mentioned features.</p>
 </li>
 <li>
-<p>Justification: This helps to keep track of prisoners and their locations.</p>
+<p>Justification: This helps to keep track of prisoners and their locations and to take into consideration prisoner combinations
+when adding and removing them from cells.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: Changing browser panel to show map of prison cells and initial GUI of application.</p>
+<p><strong>Minor enhancement</strong>: Changing browser panel to show map of prison cells. Hides information on GUI before logging in and after logging out.
+It will also show the list of persons in PrisonBook and people in the map when logged in successfully.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Justification: This helps to boost security for the application, by preventing users who have insufficient security level to view classified information.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103JAN2018-T11-B2/main/blob/master/collated/functional/sarahgoh97.md">Functional code</a>] [<a href="https://github.com/CS2103JAN2018-T11-B2/main/blob/master/collated/test/sarahgoh97.md">Test code</a>]</p>
@@ -64,6 +76,9 @@ Allows guards and prison wardens to add prisoners to cells and to remove them an
 <ul>
 <li>
 <p>Managed release <code>v1.3</code> on GitHub</p>
+</li>
+<li>
+<p>Opened and tagged issues</p>
 </li>
 <li>
 <p>Assigned issues to different team members</p>
@@ -86,7 +101,7 @@ Allows guards and prison wardens to add prisoners to cells and to remove them an
 <div class="ulist">
 <ul>
 <li>
-<p>Did slight revisions to existing contents of the User Guide</p>
+<p>Did revisions to existing contents of the User Guide and Developer Guide</p>
 </li>
 </ul>
 </div>
@@ -140,11 +155,13 @@ The maximum number of people in a cell is 2 people.
 <p><code>addcell 1 1-1</code></p>
 </li>
 <li>
-<p><code>ac 2 2-1</code>
-=== Listing prisoners in a cell : <code>listcell or lc</code> (v1.5rc)</p>
+<p><code>ac 2 2-1</code></p>
 </li>
 </ul>
 </div>
+</div>
+<div class="sect2">
+<h3 id="listing-prisoners-in-a-cell-code-listcell-or-lc-code-v1-5rc"><a class="link" href="#listing-prisoners-in-a-cell-code-listcell-or-lc-code-v1-5rc">Listing prisoners in a cell : <code>listcell or lc</code> (v1.5rc)</a></h3>
 <div class="paragraph">
 <p>Shows a list of all persons in a prison cell in the prison book.<br>
 Format: <code>listcell CELL</code></p>
@@ -158,16 +175,20 @@ Format: <code>listcell CELL</code></p>
 <p><code>listcell 1-1</code></p>
 </li>
 <li>
-<p><code>lc 3-3</code>
-=== Showing cells in the map: <code>map or m</code> [1] (v1.1)</p>
+<p><code>lc 3-3</code></p>
 </li>
 </ul>
 </div>
+</div>
+<div class="sect2">
+<h3 id="showing-cells-in-the-map-code-map-or-m-code-1-v1-1"><a class="link" href="#showing-cells-in-the-map-code-map-or-m-code-1-v1-1">Showing cells in the map: <code>map or m</code> [1] (v1.1)</a></h3>
 <div class="paragraph">
 <p>Shows a table of prison cells like a map in the command display (used for debugging and checking UI).<br>
-Format: <code>map</code>
-=== Deleting a person from a cell : <code>deletecell or dc</code> [2] (v1.4)</p>
+Format: <code>map</code></p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-person-from-a-cell-code-deletecell-or-dc-code-2-v1-4"><a class="link" href="#deleting-a-person-from-a-cell-code-deletecell-or-dc-code-2-v1-4">Deleting a person from a cell : <code>deletecell or dc</code> [2] (v1.4)</a></h3>
 <div class="paragraph">
 <p>Deletes the specified person from his/her cell in the PrisonBook.<br>
 Format: <code>deletecell INDEX</code></p>
@@ -212,6 +233,120 @@ Deletes the first person in the cell 1-1 if there are any prisoners inside it.</
 </div>
 </div>
 <div class="sect1">
+<h2 id="command-summary"><a class="link" href="#command-summary">Command Summary</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Security Level 0:<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Check status</strong> : <code>status</code><br></p>
+</li>
+<li>
+<p><strong>Exit</strong> : <code>exit</code><br></p>
+</li>
+<li>
+<p><strong>Help</strong> : <code>help</code><br></p>
+</li>
+<li>
+<p><strong>History</strong> : <code>history</code> or <code>h</code><br></p>
+</li>
+<li>
+<p><strong>Log in</strong> : <code>login</code><br></p>
+</li>
+<li>
+<p><strong>Log out</strong> : <code>logout</code><br></p>
+</li>
+<li>
+<p><strong>Undo</strong> : <code>undo</code> or <code>u</code><br></p>
+</li>
+<li>
+<p><strong>Redo</strong> : <code>redo</code> or <code>r</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Security Level 1:<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Calendar</strong> : <code>calendar</code> or <code>cal</code><br></p>
+</li>
+<li>
+<p><strong>Find</strong> : <code>find n/NAME_KEYWORD [MORE_KEYWORDS] t/TAG_KEYWORD [MORE_KEYWORDS]</code><br>
+e.g. <code>find n/Meier</code><br></p>
+</li>
+<li>
+<p><strong>List</strong> : <code>list</code> or <code>l</code><br></p>
+</li>
+<li>
+<p><strong>List prisoners in a cell</strong> : <code>listcell CELL</code><br>
+e.g. <code>listcell 1-1</code><br></p>
+</li>
+<li>
+<p><strong>Map</strong> : <code>map</code> or <code>m</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Security Level 2:<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Add</strong> : <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/p t/friend t/colleague</code><br></p>
+</li>
+<li>
+<p><strong>Add prisoner to cell</strong> : <code>addcell INDEX CELL</code><br>
+e.g. <code>addcell 1 1-1</code><br></p>
+</li>
+<li>
+<p><strong>Delete</strong> : <code>delete INDEX</code><br>
+e.g. <code>delete 1</code><br></p>
+</li>
+<li>
+<p><strong>Delete prisoner from cell</strong> : <code>deletecell INDEX</code><br>
+e.g. <code>deletecell 1</code><br></p>
+</li>
+<li>
+<p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [t/TAG]&#8230;&#8203;</code><br>
+eg. <code>edit 1 p/91234567 e/johndoe@example.com</code><br></p>
+</li>
+<li>
+<p><strong>Delete User</strong>: <code>deleteuser user/USERNAME_TO_DELETE</code><br>
+eg. deleteuser user/prisonguard1</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Security Level 3:<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Add user</strong> : <code>adduser user/NEW_USERNAME pw/NEW_PASSWORD sl/SECURITY_LEVEL</code><br>
+e.g. <code>adduser user/newuser pw/newpassword sl/1</code></p>
+</li>
+<li>
+<p><strong>Calendar Delete Event</strong> : <code>calDel EVENTNUMBER</code><br>
+e.g. <code>calDel 7</code><br></p>
+</li>
+<li>
+<p><strong>Add event to calendar</strong> : <code>calAdd event/EVENTNAME loc/LOCATION start/STARTDATETIME end/ENDDATETIME</code><br>
+e.g. <code>calAdd event/IT Skills Training loc/Computer Lab 1 start/2018-06-06 10:00:00 end/2018-06-06 12:00:00</code><br></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all spread">
@@ -225,32 +360,48 @@ Deletes the first person in the cell 1-1 if there are any prisoners inside it.</
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="prison-cell-map"><a class="link" href="#prison-cell-map">Prison Cell Map</a></h3>
+<h3 id="prison-cell-system"><a class="link" href="#prison-cell-system">Prison Cell System</a></h3>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
 <div class="paragraph">
-<p>In a prison, it is necessary to have cells, where prisoners stay in. It is important to keep track of the prisoners in the cell
-and whether the <code>Cell</code> is full.</p>
+<p>In a prison, it is necessary to have cells where prisoners stay in.
+It is important to keep track of the prisoners in the cell and whether the <code>Cell</code> is full.</p>
 </div>
 <div class="paragraph">
-<p>This cell system is most clearly represented using a 2-D array. Hence, this was used as the basis of the map system of the prison.
-This map is shown on the user interface on the right side area, shown in the picture below.
-Since the app is still being tested, the map command will also show in the result display box.
-This basic map shows the basic implementation of the cell system and helps keep track of what is happening in the cells.</p>
+<p>This cell system is most clearly represented using a 2-D array.
+Hence, this was used as the basis of the map system of the prison.
+However, to prevent accidental changes, a read-only version of the cells are returned in an ObservableList.
+Since this is part of the <code>Model</code> component of the PrisonBook, the <code>Model</code> component has been updated accordingly as shown below.
+At the bottom of the <code>Model</code> class diagram, it has been updated to show how the cell system is linked to the other components.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/Ui.PNG" alt="Ui" width="600">
+<img src="../images/ModelClassDiagram.png" alt="ModelClassDiagram">
 </div>
 </div>
 <div class="paragraph">
-<p>With this map system of cells, the cells can be viewed. Not only that, prisoners can also be added and removed from them.
+<p>To save and load the data of the cell system, storage also played an important component to ensure no data is lost when closing the app.
+Below is a class diagram of <code>Storage</code> to show how the cells are saved. A new type is added to the storage so that it knows how to save and load data for cells.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/StorageClassDiagram.png" alt="StorageClassDiagram">
+</div>
+</div>
+<div class="paragraph">
+<p>This map is shown on the user interface on the right side area, shown in the picture below.
+Since the app is still being tested, the <code>map</code> command will also show the actual cells in the result display box.
+This basic map shows the cell system and helps keep track of what is happening in the cells.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Ui.png" alt="Ui" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>This cell system helps users visualise the locations of the prisoners more easily. Not only that, prisoners can also be added and removed from them.
 These changes can be viewed in the bigger map which displays the number of people in them (also shown in the UI mockup above,
-represented by the square brackets) or in individual cells.</p>
-</div>
-<div class="paragraph">
-<p>For future implementations, we can also allow only the prison wardens/owners to redefine the maximum size of the prison as their prisons
-may grow or shrink in the future. In this scenario, we will strive only to hit our non-functional requirements.</p>
+represented by the square brackets) in individual cells.</p>
 </div>
 <div class="paragraph">
 <p>Assuming the user has access to the functions to add prisoners into prison cells, they can use the <code>addcell</code> command to do so.
@@ -273,6 +424,16 @@ Below is the sequence diagram of the logic and model components.</p>
 <p>Prisoners can also be removed from their cells using the <code>deletecell</code> command when they are being transferred to another cell,
 or if they can leave prison and go back home to their loved ones.</p>
 </div>
+<div class="paragraph">
+<p>To aid in adding prisoners to cells and deleting them from the cells, a <code>listcell</code> command has been implemented.
+With this command, users can see who are in a specified cell. This helps users know whether the cell is full and
+if some of these prisoners should not be added to the same cell.</p>
+</div>
+<div class="paragraph">
+<p>For future implementations, we can also allow only the prison wardens/owners to redefine the maximum size of the prison as their prisons
+may grow or shrink in the future. In this application, we will only show an example with 15 cells with a maximum of 2 prisoners per cell.
+These values can be easily changed and we will customise it based on your needs. The naming of the cells can also be adjusted accordingly.</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
@@ -281,7 +442,7 @@ or if they can leave prison and go back home to their loved ones.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Use a 2-D array`</p>
+<p><strong>Alternative 1 (current choice):</strong> Use a 2-D array</p>
 <div class="ulist">
 <ul>
 <li>
@@ -295,7 +456,7 @@ It also makes it harder to implement undo and redo functions for actions below.<
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Use a 2-level ArrayList`</p>
+<p><strong>Alternative 2:</strong> Use a 2-level ArrayList</p>
 <div class="ulist">
 <ul>
 <li>
@@ -307,11 +468,24 @@ It also makes it harder to implement undo and redo functions for actions below.<
 </ul>
 </div>
 </li>
+<li>
+<p><strong>Alternative 3:</strong> Use a ObservableList</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to save state of cells when undoing and redoing.</p>
+</li>
+<li>
+<p>Cons: Harder to visualise where each row of cells/prisons end.</p>
+</li>
+</ul>
+</div>
+</li>
 </ul>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-implementation-of-showcellscommand-map"><a class="link" href="#aspect-implementation-of-showcellscommand-map">Aspect: Implementation of ShowCellsCommand (map)</a></h5>
+<h5 id="aspect-implementation-of-showcellscommand-code-map-code"><a class="link" href="#aspect-implementation-of-showcellscommand-code-map-code">Aspect: Implementation of ShowCellsCommand (<code>map</code>)</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -322,7 +496,7 @@ It also makes it harder to implement undo and redo functions for actions below.<
 <p>Pros: Easier to see when adding prisoners to cells and removing prisoners from cells.</p>
 </li>
 <li>
-<p>Cons: Anyone walking by from behind can see the information easily.</p>
+<p>Cons: Anyone walking by from behind can see the information easily and compromises security.</p>
 </li>
 </ul>
 </div>
@@ -344,7 +518,7 @@ It also makes it harder to implement undo and redo functions for actions below.<
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-implementation-of-addcellcommand-addcell"><a class="link" href="#aspect-implementation-of-addcellcommand-addcell">Aspect: Implementation of AddCellCommand (addcell)</a></h5>
+<h5 id="aspect-implementation-of-addcellcommand-code-addcell-code"><a class="link" href="#aspect-implementation-of-addcellcommand-code-addcell-code">Aspect: Implementation of AddCellCommand (<code>addcell</code>)</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -352,11 +526,12 @@ It also makes it harder to implement undo and redo functions for actions below.<
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Cells are always there and can hold prisoners. Since these groups are still Persons with a guard role or prisoner role, not all persons may have a cell.
-Easier to delete prisoners from cells and update their addresses accordingly.</p>
+<p>Pros: Cells are always there and can hold prisoners. Since persons in the PrisonBook can be either prisoners or guards, not all persons may have a cell.
+Easier to delete prisoners from cells and update their addresses accordingly when they are released from prison.</p>
 </li>
 <li>
-<p>Cons: Need to have extra implementation to ensure undo and redo commands work properly when deleting a prisoner who is imprisoned.</p>
+<p>Cons: Need to have extra implementation to ensure undo and redo commands work properly when deleting a prisoner who is imprisoned as well
+as to remove them or add them to cells.</p>
 </li>
 </ul>
 </div>
@@ -369,7 +544,8 @@ Easier to delete prisoners from cells and update their addresses accordingly.</p
 <p>Pros: Might be more intuitive for the user, to check a prisoner&#8217;s cell location.</p>
 </li>
 <li>
-<p>Cons: Harder to manage a system of cells. Easy to accidentally overcrowd a cell.</p>
+<p>Cons: Harder to manage a system of cells. Easy to accidentally overcrowd a cell. Not all persons in PrisonBook are prisoners.
+Some of them are guards.</p>
 </li>
 </ul>
 </div>
@@ -391,7 +567,7 @@ Easier to delete prisoners from cells and update their addresses accordingly.</p
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-implementation-of-listcellcommand-listcell"><a class="link" href="#aspect-implementation-of-listcellcommand-listcell">Aspect: Implementation of ListCellCommand (listcell)</a></h5>
+<h5 id="aspect-implementation-of-listcellcommand-code-listcell-code"><a class="link" href="#aspect-implementation-of-listcellcommand-code-listcell-code">Aspect: Implementation of ListCellCommand (<code>listcell</code>)</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -424,7 +600,7 @@ Easier to delete prisoners from cells and update their addresses accordingly.</p
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-implementation-of-deletecellcommand-deletecell"><a class="link" href="#aspect-implementation-of-deletecellcommand-deletecell">Aspect: Implementation of DeleteCellCommand (deletecell)</a></h5>
+<h5 id="aspect-implementation-of-deletecellcommand-code-deletecell-code"><a class="link" href="#aspect-implementation-of-deletecellcommand-code-deletecell-code">Aspect: Implementation of DeleteCellCommand (<code>deletecell</code>)</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -432,7 +608,7 @@ Easier to delete prisoners from cells and update their addresses accordingly.</p
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Faster way to remove since only the index of the prisoner is required.</p>
+<p>Pros: Faster way to remove since only the index of the prisoner is required. User does not have to figure out which cell the prisoner he or she is in.</p>
 </li>
 <li>
 <p>Cons: Since cells have a size limit of 2, it is easier to delete a person after selecting a cell.</p>
@@ -460,15 +636,16 @@ Current implementation can work in a similar way that makes it easier to delete 
 <ol class="arabic">
 <li>
 <p>Major enhancement:<br>
-Creating a cell system/map of all the prison cells in the prison.
+Creating a cell system of all the prison cells in the prison.
 This helps users add and remove prisoners to their prison and prevent users from overcrowding their prison.
-It can also help users keep track of locations of the cells of each prisoner.</p>
+It can also help users keep track of locations of the cells of each prisoner.
+Users can also add and remove prisoners more easily by first listing people in each cell to decide where to add or remove them.</p>
 </li>
 <li>
 <p>Minor enhancement:<br>
-Allow user to change between bright and dark themes.
-This helps users to prevent people nearby from looking at the information.
-At the same time, it also has a bright theme that helps users use the app more easily.</p>
+Adding to UI to show map of the cell system instead of having a browser panel.
+It also updates the UI to show the list of persons and the map when first logged in
+and to hide it when logging out and when the application is first opened.</p>
 </li>
 </ol>
 </div>
@@ -480,10 +657,296 @@ At the same time, it also has a bright theme that helps users use the app more e
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="use-cases"><a class="link" href="#use-cases">Appendix A: Use Cases</a></h2>
+<div class="sectionbody">
+<h3 id="use-case-add-an-event-on-the-calendar" class="discrete">Use case: Add an event on the calendar.</h3>
+<div class="paragraph">
+<p>Actor: Guard (Guard)</p>
+</div>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Guard requests to add event to calendar.</p>
+</li>
+<li>
+<p>PrisonBook adds event to calendar.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. PrisonBook detects that guard&#8217;s security level is not high enough.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. PrisonBook shows an error message regarding security level.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1b. The format of adding event to calendar is wrong.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1b1. PrisonBook shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+<h3 id="use-case-add-prisoner-to-a-cell" class="discrete">Use case: Add prisoner to a cell</h3>
+<div class="paragraph">
+<p>Actor: Guard</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>PrisonBook shows a list of available cells.</p>
+</li>
+<li>
+<p>Guard selects a prisoner and cell to add.</p>
+</li>
+<li>
+<p>PrisonBook updates prisoner status and cell status.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. Guard does not have sufficient access to view cells.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>2a. PrisonBook detects that prisoner is already added to a cell.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. PrisonBook sends an error message regarding prisoner already imprisoned.</p>
+<div class="paragraph">
+<p>Use case resumes at step 1.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3a. PrisonBook detects that the cell is already full.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. PrisonBook sends an error message regarding adding prisoner to a full cell.</p>
+<div class="paragraph">
+<p>Use case resumes at step 1.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>4a. PrisonBook detects that address of cell is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>4a1. PrisonBook sends an error message regarding invalid cell address.</p>
+<div class="paragraph">
+<p>Use case resumes at step 1.</p>
+</div>
+<h3 id="use-case-get-the-list-of-prisoners-in-a-certain-cell" class="discrete">Use case: Get the list of prisoners in a certain cell</h3>
+<div class="paragraph">
+<p>Actor: Guard</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Guard requests a list of prisoners in a specified cell</p>
+</li>
+<li>
+<p>PrisonBook shows the list of prisoners in specified cell</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. Guard does not have access rights to view the details of the requested cell</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="minor-feature-showing-prisoners-in-the-ui"><a class="link" href="#minor-feature-showing-prisoners-in-the-ui">Minor Feature: Showing prisoners in the UI</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Checking accuracy of map displayed.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Have sufficient security level[1]</p>
+</li>
+<li>
+<p>Test case: Starting up the app and before logging in
+Expected: No details regarding cells shown on the map.
+Map shows that user has insufficient access to view information.</p>
+</li>
+<li>
+<p>Test case: Using features below while logged in
+Expected: UI matches what <code>map</code> command shows on the display.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="major-feature-managing-prisoners-in-a-prison"><a class="link" href="#major-feature-managing-prisoners-in-a-prison">Major Feature: Managing prisoners in a prison</a></h3>
+<div class="sect3">
+<h4 id="adding-a-prisoner-to-a-cell"><a class="link" href="#adding-a-prisoner-to-a-cell">Adding a prisoner to a cell</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Adding a prisoner to a cell when all prisoners are listed and has sufficient security level [2].</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list, from initial state of program.</p>
+</li>
+<li>
+<p>Test case: <code>addcell 5 1-5</code> (person at index is a prisoner and is not in a cell and cell is not full)<br>
+Expected: Fifth person is added to the cell with address 1-5.
+Address of the prisoner updated in the person card and message of prisoner added to cell is displayed.
+The map on the right side of the UI will also update correspondingly by adding to the number corresponding to cell address 1-5.
+Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Test case: <code>addcell 0 1-4</code>
+Expected: No prisoner is added to a cell because of the index.
+Error message displayed regarding format. The map and status bar will not be updated.</p>
+</li>
+<li>
+<p>Other incorrect add cell commands to try: <code>ac</code>, <code>addcell 2 1=1</code>,<br>
+Expected: No change to UI and displays error message.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="deleting-prisoner-from-a-cell"><a class="link" href="#deleting-prisoner-from-a-cell">Deleting prisoner from a cell</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Deleting a prisoner from a cell when all prisoners are listed and has sufficient security level [2].</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list, from initial state of program.</p>
+</li>
+<li>
+<p>Test case: <code>deletecell 1</code>
+Expected: Prisoner is deleted from his/her cell and their original cell will be updated.
+Message regarding prisoner being released will be displayed.
+The map on the right will be updated, as well as the prisoner&#8217;s address back to their old address.</p>
+</li>
+<li>
+<p>Test case: <code>deletecell 0</code>
+Expected: No change to map and to the list of persons.
+Message regarding error will be shown for correct format of command.</p>
+</li>
+<li>
+<p>Other incorrect delete cell commands to try: <code>dc</code>, <code>dc 0</code><br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="listing-prisoners-in-a-cell"><a class="link" href="#listing-prisoners-in-a-cell">Listing prisoners in a cell</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Listing a prisoner from a cell when here is sufficient security level [1].</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>listcell 1-1</code>
+Expected: List of prisoners in cell address 1-1 will be updated and shown.</p>
+</li>
+<li>
+<p>Test case: <code>listcell 10-10</code>
+Expected: There is no change in the UI except the error message regarding an invalid cell.</p>
+</li>
+<li>
+<p>Other incorrect list cell commands to try: <code>lc</code>, <code>lc 1</code><br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-13 12:40:10 UTC
+Last updated 2018-04-14 03:02:05 UTC
 </div>
 </div>
 </body>

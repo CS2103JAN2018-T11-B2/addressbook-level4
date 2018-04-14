@@ -46,7 +46,7 @@
 <ul class="sectlevel2">
 <li><a href="#undo-redo-feature">3.1. Undo/Redo feature</a></li>
 <li><a href="#login-and-security-feature">3.2. Login and Security Feature</a></li>
-<li><a href="#prison-cell-map">3.3. Prison Cell Map</a></li>
+<li><a href="#prison-cell-system">3.3. Prison Cell System</a></li>
 <li><a href="#find-by-tag-command">3.4. Find by Tag Command</a></li>
 <li><a href="#scheduling-with-google-calendar">3.5. Scheduling with Google Calendar</a></li>
 <li><a href="#view-calendar-feature">3.6. View Calendar Feature</a></li>
@@ -81,23 +81,17 @@
 <li><a href="#managing-dependencies">6.6. Managing Dependencies</a></li>
 </ul>
 </li>
-<li><a href="#GetStartedProgramming">Appendix A: Suggested Programming Tasks to Get Started</a>
+<li><a href="#GetStartedProgramming">Appendix A: Product Scope</a></li>
+<li><a href="#user-stories">Appendix B: User Stories</a></li>
+<li><a href="#use-cases">Appendix C: Use Cases</a></li>
+<li><a href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></li>
+<li><a href="#glossary">Appendix E: Glossary</a></li>
+<li><a href="#instructions-for-manual-testing">Appendix F: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
-<li><a href="#GetStartedProgramming-EachComponent">A.1. Improving each component</a></li>
-<li><a href="#GetStartedProgramming-RemarkCommand">A.2. Creating a new command: <code>remark</code></a></li>
-</ul>
-</li>
-<li><a href="#product-scope">Appendix B: Product Scope</a></li>
-<li><a href="#user-stories">Appendix C: User Stories</a></li>
-<li><a href="#use-cases">Appendix D: Use Cases</a></li>
-<li><a href="#non-functional-requirements">Appendix E: Non Functional Requirements</a></li>
-<li><a href="#glossary">Appendix F: Glossary</a></li>
-<li><a href="#product-survey">Appendix G: Product Survey</a></li>
-<li><a href="#instructions-for-manual-testing">Appendix H: Instructions for Manual Testing</a>
-<ul class="sectlevel2">
-<li><a href="#launch-and-shutdown">H.1. Launch and Shutdown</a></li>
-<li><a href="#deleting-a-person">H.2. Deleting a person</a></li>
-<li><a href="#saving-data">H.3. Saving data</a></li>
+<li><a href="#launch-and-shutdown">F.1. Launch and Shutdown</a></li>
+<li><a href="#minor-feature-showing-prisoners-in-the-ui">F.2. Minor Feature: Showing prisoners in the UI</a></li>
+<li><a href="#major-feature-managing-prisoners-in-a-prison">F.3. Major Feature: Managing prisoners in a prison</a></li>
+<li><a href="#saving-data">F.4. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -287,7 +281,7 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 <p>Get some sense of the overall design by reading <a href="#Design-Architecture">Section 2.1, &#8220;Architecture&#8221;</a>.</p>
 </li>
 <li>
-<p>Take a look at <a href="#GetStartedProgramming">Appendix A, <em>Suggested Programming Tasks to Get Started</em></a>.</p>
+<p>Take a look at <a href="#GetStartedProgramming">Appendix A, <em>Product Scope</em></a>.</p>
 </li>
 </ol>
 </div>
@@ -916,32 +910,48 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="prison-cell-map"><a class="link" href="#prison-cell-map">3.3. Prison Cell Map</a></h3>
+<h3 id="prison-cell-system"><a class="link" href="#prison-cell-system">3.3. Prison Cell System</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>In a prison, it is necessary to have cells, where prisoners stay in. It is important to keep track of the prisoners in the cell
-and whether the <code>Cell</code> is full.</p>
+<p>In a prison, it is necessary to have cells where prisoners stay in.
+It is important to keep track of the prisoners in the cell and whether the <code>Cell</code> is full.</p>
 </div>
 <div class="paragraph">
-<p>This cell system is most clearly represented using a 2-D array. Hence, this was used as the basis of the map system of the prison.
-This map is shown on the user interface on the right side area, shown in the picture below.
-Since the app is still being tested, the map command will also show in the result display box.
-This basic map shows the basic implementation of the cell system and helps keep track of what is happening in the cells.</p>
+<p>This cell system is most clearly represented using a 2-D array.
+Hence, this was used as the basis of the map system of the prison.
+However, to prevent accidental changes, a read-only version of the cells are returned in an ObservableList.
+Since this is part of the <code>Model</code> component of the PrisonBook, the <code>Model</code> component has been updated accordingly as shown below.
+At the bottom of the <code>Model</code> class diagram, it has been updated to show how the cell system is linked to the other components.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/Ui.PNG" alt="Ui" width="600">
+<img src="images/ModelClassDiagram.png" alt="ModelClassDiagram">
 </div>
 </div>
 <div class="paragraph">
-<p>With this map system of cells, the cells can be viewed. Not only that, prisoners can also be added and removed from them.
+<p>To save and load the data of the cell system, storage also played an important component to ensure no data is lost when closing the app.
+Below is a class diagram of <code>Storage</code> to show how the cells are saved. A new type is added to the storage so that it knows how to save and load data for cells.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/StorageClassDiagram.png" alt="StorageClassDiagram">
+</div>
+</div>
+<div class="paragraph">
+<p>This map is shown on the user interface on the right side area, shown in the picture below.
+Since the app is still being tested, the <code>map</code> command will also show the actual cells in the result display box.
+This basic map shows the cell system and helps keep track of what is happening in the cells.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Ui.png" alt="Ui" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>This cell system helps users visualise the locations of the prisoners more easily. Not only that, prisoners can also be added and removed from them.
 These changes can be viewed in the bigger map which displays the number of people in them (also shown in the UI mockup above,
-represented by the square brackets) or in individual cells.</p>
-</div>
-<div class="paragraph">
-<p>For future implementations, we can also allow only the prison wardens/owners to redefine the maximum size of the prison as their prisons
-may grow or shrink in the future. In this scenario, we will strive only to hit our non-functional requirements.</p>
+represented by the square brackets) in individual cells.</p>
 </div>
 <div class="paragraph">
 <p>Assuming the user has access to the functions to add prisoners into prison cells, they can use the <code>addcell</code> command to do so.
@@ -964,6 +974,16 @@ Below is the sequence diagram of the logic and model components.</p>
 <p>Prisoners can also be removed from their cells using the <code>deletecell</code> command when they are being transferred to another cell,
 or if they can leave prison and go back home to their loved ones.</p>
 </div>
+<div class="paragraph">
+<p>To aid in adding prisoners to cells and deleting them from the cells, a <code>listcell</code> command has been implemented.
+With this command, users can see who are in a specified cell. This helps users know whether the cell is full and
+if some of these prisoners should not be added to the same cell.</p>
+</div>
+<div class="paragraph">
+<p>For future implementations, we can also allow only the prison wardens/owners to redefine the maximum size of the prison as their prisons
+may grow or shrink in the future. In this application, we will only show an example with 15 cells with a maximum of 2 prisoners per cell.
+These values can be easily changed and we will customise it based on your needs. The naming of the cells can also be adjusted accordingly.</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.3.2. Design Considerations</a></h4>
@@ -972,7 +992,7 @@ or if they can leave prison and go back home to their loved ones.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Use a 2-D array`</p>
+<p><strong>Alternative 1 (current choice):</strong> Use a 2-D array</p>
 <div class="ulist">
 <ul>
 <li>
@@ -986,7 +1006,7 @@ It also makes it harder to implement undo and redo functions for actions below.<
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Use a 2-level ArrayList`</p>
+<p><strong>Alternative 2:</strong> Use a 2-level ArrayList</p>
 <div class="ulist">
 <ul>
 <li>
@@ -998,11 +1018,24 @@ It also makes it harder to implement undo and redo functions for actions below.<
 </ul>
 </div>
 </li>
+<li>
+<p><strong>Alternative 3:</strong> Use a ObservableList</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to save state of cells when undoing and redoing.</p>
+</li>
+<li>
+<p>Cons: Harder to visualise where each row of cells/prisons end.</p>
+</li>
+</ul>
+</div>
+</li>
 </ul>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-implementation-of-showcellscommand-map"><a class="link" href="#aspect-implementation-of-showcellscommand-map">Aspect: Implementation of ShowCellsCommand (map)</a></h5>
+<h5 id="aspect-implementation-of-showcellscommand-code-map-code"><a class="link" href="#aspect-implementation-of-showcellscommand-code-map-code">Aspect: Implementation of ShowCellsCommand (<code>map</code>)</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1013,7 +1046,7 @@ It also makes it harder to implement undo and redo functions for actions below.<
 <p>Pros: Easier to see when adding prisoners to cells and removing prisoners from cells.</p>
 </li>
 <li>
-<p>Cons: Anyone walking by from behind can see the information easily.</p>
+<p>Cons: Anyone walking by from behind can see the information easily and compromises security.</p>
 </li>
 </ul>
 </div>
@@ -1035,7 +1068,7 @@ It also makes it harder to implement undo and redo functions for actions below.<
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-implementation-of-addcellcommand-addcell"><a class="link" href="#aspect-implementation-of-addcellcommand-addcell">Aspect: Implementation of AddCellCommand (addcell)</a></h5>
+<h5 id="aspect-implementation-of-addcellcommand-code-addcell-code"><a class="link" href="#aspect-implementation-of-addcellcommand-code-addcell-code">Aspect: Implementation of AddCellCommand (<code>addcell</code>)</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1043,11 +1076,12 @@ It also makes it harder to implement undo and redo functions for actions below.<
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Cells are always there and can hold prisoners. Since these groups are still Persons with a guard role or prisoner role, not all persons may have a cell.
-Easier to delete prisoners from cells and update their addresses accordingly.</p>
+<p>Pros: Cells are always there and can hold prisoners. Since persons in the PrisonBook can be either prisoners or guards, not all persons may have a cell.
+Easier to delete prisoners from cells and update their addresses accordingly when they are released from prison.</p>
 </li>
 <li>
-<p>Cons: Need to have extra implementation to ensure undo and redo commands work properly when deleting a prisoner who is imprisoned.</p>
+<p>Cons: Need to have extra implementation to ensure undo and redo commands work properly when deleting a prisoner who is imprisoned as well
+as to remove them or add them to cells.</p>
 </li>
 </ul>
 </div>
@@ -1060,7 +1094,8 @@ Easier to delete prisoners from cells and update their addresses accordingly.</p
 <p>Pros: Might be more intuitive for the user, to check a prisoner&#8217;s cell location.</p>
 </li>
 <li>
-<p>Cons: Harder to manage a system of cells. Easy to accidentally overcrowd a cell.</p>
+<p>Cons: Harder to manage a system of cells. Easy to accidentally overcrowd a cell. Not all persons in PrisonBook are prisoners.
+Some of them are guards.</p>
 </li>
 </ul>
 </div>
@@ -1082,7 +1117,7 @@ Easier to delete prisoners from cells and update their addresses accordingly.</p
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-implementation-of-listcellcommand-listcell"><a class="link" href="#aspect-implementation-of-listcellcommand-listcell">Aspect: Implementation of ListCellCommand (listcell)</a></h5>
+<h5 id="aspect-implementation-of-listcellcommand-code-listcell-code"><a class="link" href="#aspect-implementation-of-listcellcommand-code-listcell-code">Aspect: Implementation of ListCellCommand (<code>listcell</code>)</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1115,7 +1150,7 @@ Easier to delete prisoners from cells and update their addresses accordingly.</p
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-implementation-of-deletecellcommand-deletecell"><a class="link" href="#aspect-implementation-of-deletecellcommand-deletecell">Aspect: Implementation of DeleteCellCommand (deletecell)</a></h5>
+<h5 id="aspect-implementation-of-deletecellcommand-code-deletecell-code"><a class="link" href="#aspect-implementation-of-deletecellcommand-code-deletecell-code">Aspect: Implementation of DeleteCellCommand (<code>deletecell</code>)</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1123,7 +1158,7 @@ Easier to delete prisoners from cells and update their addresses accordingly.</p
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Faster way to remove since only the index of the prisoner is required.</p>
+<p>Pros: Faster way to remove since only the index of the prisoner is required. User does not have to figure out which cell the prisoner he or she is in.</p>
 </li>
 <li>
 <p>Cons: Since cells have a size limit of 2, it is easier to delete a person after selecting a cell.</p>
@@ -1783,733 +1818,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 </div>
 <div class="sect1">
-<h2 id="GetStartedProgramming"><a class="link" href="#GetStartedProgramming">Appendix A: Suggested Programming Tasks to Get Started</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Suggested path for new programmers:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>First, add small local-impact (i.e. the impact of the change does not go beyond the component) enhancements to one component at a time. Some suggestions are given in <a href="#GetStartedProgramming-EachComponent">Section A.1, &#8220;Improving each component&#8221;</a>.</p>
-</li>
-<li>
-<p>Next, add a feature that touches multiple components to learn how to implement an end-to-end feature across all components. <a href="#GetStartedProgramming-RemarkCommand">Section A.2, &#8220;Creating a new command: <code>remark</code>&#8221;</a> explains how to go about adding such a feature.</p>
-</li>
-</ol>
-</div>
-<div class="sect2">
-<h3 id="GetStartedProgramming-EachComponent"><a class="link" href="#GetStartedProgramming-EachComponent">A.1. Improving each component</a></h3>
-<div class="paragraph">
-<p>Each individual exercise in this section is component-based (i.e. you would not need to modify the other components to get it to work).</p>
-</div>
-<h4 id="code-logic-code-component" class="discrete"><code>Logic</code> component</h4>
-<div class="paragraph">
-<p><strong>Scenario:</strong> You are in charge of <code>logic</code>. During dog-fooding, your team realize that it is troublesome for the user to type the whole command in order to execute a command. Your team devise some strategies to help cut down the amount of typing necessary, and one of the suggestions was to implement aliases for the command words. Your job is to implement such aliases.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Do take a look at <a href="#Design-Logic">Section 2.3, &#8220;Logic component&#8221;</a> before attempting to modify the <code>Logic</code> component.
-</td>
-</tr>
-</table>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add a shorthand equivalent alias for each of the individual commands. For example, besides typing <code>clear</code>, the user can also type <code>c</code> to remove all persons in the list.</p>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Hints</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Just like we store each individual command word constant <code>COMMAND_WORD</code> inside <code>*Command.java</code> (e.g.  <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/logic/commands/FindCommand.java"><code>FindCommand#COMMAND_WORD</code></a>, <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/logic/commands/DeleteCommand.java"><code>DeleteCommand#COMMAND_WORD</code></a>), you need a new constant for aliases as well (e.g. <code>FindCommand#COMMAND_ALIAS</code>).</p>
-</li>
-<li>
-<p><a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/logic/parser/AddressBookParser.java"><code>AddressBookParser</code></a> is responsible for analyzing command words.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Solution</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Modify the switch statement in <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/logic/parser/AddressBookParser.java"><code>AddressBookParser#parseCommand(String)</code></a> such that both the proper command word and alias can be used to execute the same intended command.</p>
-</li>
-<li>
-<p>Add new tests for each of the aliases that you have added.</p>
-</li>
-<li>
-<p>Update the user guide to document the new aliases.</p>
-</li>
-<li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/785">PR</a> for the full solution.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<h4 id="code-model-code-component" class="discrete"><code>Model</code> component</h4>
-<div class="paragraph">
-<p><strong>Scenario:</strong> You are in charge of <code>model</code>. One day, the <code>logic</code>-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the address book, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Do take a look at <a href="#Design-Model">Section 2.4, &#8220;Model component&#8221;</a> before attempting to modify the <code>Model</code> component.
-</td>
-</tr>
-</table>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add a <code>removeTag(Tag)</code> method. The specified tag will be removed from everyone in the address book.</p>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Hints</p>
-<div class="ulist">
-<ul>
-<li>
-<p>The <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/model/Model.java"><code>Model</code></a> and the <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/model/AddressBook.java"><code>AddressBook</code></a> API need to be updated.</p>
-</li>
-<li>
-<p>Think about how you can use SLAP to design the method. Where should we place the main logic of deleting tags?</p>
-</li>
-<li>
-<p>Find out which of the existing API methods in  <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/model/AddressBook.java"><code>AddressBook</code></a> and <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/model/person/Person.java"><code>Person</code></a> classes can be used to implement the tag removal logic. <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/model/AddressBook.java"><code>AddressBook</code></a> allows you to update a person, and <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/model/person/Person.java"><code>Person</code></a> allows you to update the tags.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Solution</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Implement a <code>removeTag(Tag)</code> method in <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/model/AddressBook.java"><code>AddressBook</code></a>. Loop through each person, and remove the <code>tag</code> from each person.</p>
-</li>
-<li>
-<p>Add a new API method <code>deleteTag(Tag)</code> in <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/model/ModelManager.java"><code>ModelManager</code></a>. Your <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/model/ModelManager.java"><code>ModelManager</code></a> should call <code>AddressBook#removeTag(Tag)</code>.</p>
-</li>
-<li>
-<p>Add new tests for each of the new public methods that you have added.</p>
-</li>
-<li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/790">PR</a> for the full solution.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>The current codebase has a flaw in tags management. Tags no longer in use by anyone may still exist on the <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/model/AddressBook.java"><code>AddressBook</code></a>. This may cause some tests to fail. See issue  <a href="https://github.com/se-edu/addressbook-level4/issues/753"><code>#753</code></a> for more information about this flaw.</p>
-</li>
-<li>
-<p>The solution PR has a temporary fix for the flaw mentioned above in its first commit.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<h4 id="code-ui-code-component" class="discrete"><code>Ui</code> component</h4>
-<div class="paragraph">
-<p><strong>Scenario:</strong> You are in charge of <code>ui</code>. During a beta testing session, your team is observing how the users use your address book application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn&#8217;t prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last person in the list. Your job is to implement improvements to the UI to solve all these problems.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Do take a look at <a href="#Design-Ui">Section 2.2, &#8220;UI component&#8221;</a> before attempting to modify the <code>UI</code> component.
-</td>
-</tr>
-</table>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Use different colors for different tags inside person cards. For example, <code>friends</code> tags can be all in brown, and <code>colleagues</code> tags can be all in yellow.</p>
-<div class="paragraph">
-<p><strong>Before</strong></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/getting-started-ui-tag-before.png" alt="getting started ui tag before" width="300">
-</div>
-</div>
-<div class="paragraph">
-<p><strong>After</strong></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/getting-started-ui-tag-after.png" alt="getting started ui tag after" width="300">
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Hints</p>
-<div class="ulist">
-<ul>
-<li>
-<p>The tag labels are created inside <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/ui/PersonCard.java">the <code>PersonCard</code> constructor</a> (<code>new Label(tag.tagName)</code>). <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html">JavaFX&#8217;s <code>Label</code> class</a> allows you to modify the style of each Label, such as changing its color.</p>
-</li>
-<li>
-<p>Use the .css attribute <code>-fx-background-color</code> to add a color.</p>
-</li>
-<li>
-<p>You may wish to modify <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/resources/view/DarkTheme.css"><code>DarkTheme.css</code></a> to include some pre-defined colors using css, especially if you have experience with web-based css.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Solution</p>
-<div class="ulist">
-<ul>
-<li>
-<p>You can modify the existing test methods for <code>PersonCard</code> 's to include testing the tag&#8217;s color as well.</p>
-</li>
-<li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/798">PR</a> for the full solution.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>The PR uses the hash code of the tag names to generate a color. This is deliberately designed to ensure consistent colors each time the application runs. You may wish to expand on this design to include additional features, such as allowing users to set their own tag colors, and directly saving the colors to storage, so that tags retain their colors even if the hash code algorithm changes.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>Modify <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java"><code>NewResultAvailableEvent</code></a> such that <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/ui/ResultDisplay.java"><code>ResultDisplay</code></a> can show a different style on error (currently it shows the same regardless of errors).</p>
-<div class="paragraph">
-<p><strong>Before</strong></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/getting-started-ui-result-before.png" alt="getting started ui result before" width="200">
-</div>
-</div>
-<div class="paragraph">
-<p><strong>After</strong></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/getting-started-ui-result-after.png" alt="getting started ui result after" width="200">
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Hints</p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java"><code>NewResultAvailableEvent</code></a> is raised by <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/ui/CommandBox.java"><code>CommandBox</code></a> which also knows whether the result is a success or failure, and is caught by <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/ui/ResultDisplay.java"><code>ResultDisplay</code></a> which is where we want to change the style to.</p>
-</li>
-<li>
-<p>Refer to <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/ui/CommandBox.java"><code>CommandBox</code></a> for an example on how to display an error.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Solution</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Modify <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java"><code>NewResultAvailableEvent</code></a> 's constructor so that users of the event can indicate whether an error has occurred.</p>
-</li>
-<li>
-<p>Modify <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/ui/ResultDisplay.java"><code>ResultDisplay#handleNewResultAvailableEvent(NewResultAvailableEvent)</code></a> to react to this event appropriately.</p>
-</li>
-<li>
-<p>You can write two different kinds of tests to ensure that the functionality works:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>The unit tests for <code>ResultDisplay</code> can be modified to include verification of the color.</p>
-</li>
-<li>
-<p>The system tests <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/test/java/systemtests/AddressBookSystemTest.java"><code>AddressBookSystemTest#assertCommandBoxShowsDefaultStyle() and AddressBookSystemTest#assertCommandBoxShowsErrorStyle()</code></a> to include verification for <code>ResultDisplay</code> as well.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/799">PR</a> for the full solution.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Do read the commits one at a time if you feel overwhelmed.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>Modify the <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> to show the total number of people in the address book.</p>
-<div class="paragraph">
-<p><strong>Before</strong></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/getting-started-ui-status-before.png" alt="getting started ui status before" width="500">
-</div>
-</div>
-<div class="paragraph">
-<p><strong>After</strong></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/getting-started-ui-status-after.png" alt="getting started ui status after" width="500">
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Hints</p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/resources/view/StatusBarFooter.fxml"><code>StatusBarFooter.fxml</code></a> will need a new <code>StatusBar</code>. Be sure to set the <code>GridPane.columnIndex</code> properly for each <code>StatusBar</code> to avoid misalignment!</p>
-</li>
-<li>
-<p><a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> needs to initialize the status bar on application start, and to update it accordingly whenever the address book is updated.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Solution</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Modify the constructor of <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> to take in the number of persons when the application just started.</p>
-</li>
-<li>
-<p>Use <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/ui/StatusBarFooter.java"><code>StatusBarFooter#handleAddressBookChangedEvent(AddressBookChangedEvent)</code></a> to update the number of persons whenever there are new changes to the addressbook.</p>
-</li>
-<li>
-<p>For tests, modify <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/test/java/guitests/guihandles/StatusBarFooterHandle.java"><code>StatusBarFooterHandle</code></a> by adding a state-saving functionality for the total number of people status, just like what we did for save location and sync status.</p>
-</li>
-<li>
-<p>For system tests, modify <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/test/java/systemtests/AddressBookSystemTest.java"><code>AddressBookSystemTest</code></a> to also verify the new total number of persons status bar.</p>
-</li>
-<li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/803">PR</a> for the full solution.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<h4 id="code-storage-code-component" class="discrete"><code>Storage</code> component</h4>
-<div class="paragraph">
-<p><strong>Scenario:</strong> You are in charge of <code>storage</code>. For your next project milestone, your team plans to implement a new feature of saving the address book to the cloud. However, the current implementation of the application constantly saves the address book after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the address book storage.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Do take a look at <a href="#Design-Storage">Section 2.5, &#8220;Storage component&#8221;</a> before attempting to modify the <code>Storage</code> component.
-</td>
-</tr>
-</table>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add a new method <code>backupAddressBook(ReadOnlyAddressBook)</code>, so that the address book can be saved in a fixed temporary location.</p>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Hint</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Add the API method in <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/storage/AddressBookStorage.java"><code>AddressBookStorage</code></a> interface.</p>
-</li>
-<li>
-<p>Implement the logic in <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/storage/StorageManager.java"><code>StorageManager</code></a> and <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/storage/XmlAddressBookStorage.java"><code>XmlAddressBookStorage</code></a> class.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Solution</p>
-<div class="ulist">
-<ul>
-<li>
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/594">PR</a> for the full solution.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="GetStartedProgramming-RemarkCommand"><a class="link" href="#GetStartedProgramming-RemarkCommand">A.2. Creating a new command: <code>remark</code></a></h3>
-<div class="paragraph">
-<p>By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.</p>
-</div>
-<div class="paragraph">
-<p><strong>Scenario:</strong> You are a software maintainer for <code>addressbook</code>, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible <code>remark</code> field for each contact, rather than relying on tags alone. After designing the specification for the <code>remark</code> command, you are convinced that this feature is worth implementing. Your job is to implement the <code>remark</code> command.</p>
-</div>
-<div class="sect3">
-<h4 id="description"><a class="link" href="#description">A.2.1. Description</a></h4>
-<div class="paragraph">
-<p>Edits the remark for a person specified in the <code>INDEX</code>.<br>
-Format: <code>remark INDEX r/[REMARK]</code></p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>remark 1 r/Likes to drink coffee.</code><br>
-Edits the remark for the first person to <code>Likes to drink coffee.</code></p>
-</li>
-<li>
-<p><code>remark 1 r/</code><br>
-Removes the remark for the first person.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="step-by-step-instructions"><a class="link" href="#step-by-step-instructions">A.2.2. Step-by-step Instructions</a></h4>
-<div class="sect4">
-<h5 id="step-1-logic-teach-the-app-to-accept-remark-which-does-nothing"><a class="link" href="#step-1-logic-teach-the-app-to-accept-remark-which-does-nothing">[Step 1] Logic: Teach the app to accept 'remark' which does nothing</a></h5>
-<div class="paragraph">
-<p>Let&#8217;s start by teaching the application how to parse a <code>remark</code> command. We will add the logic of <code>remark</code> later.</p>
-</div>
-<div class="paragraph">
-<p><strong>Main:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add a <code>RemarkCommand</code> that extends <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/logic/commands/UndoableCommand.java"><code>UndoableCommand</code></a>. Upon execution, it should just throw an <code>Exception</code>.</p>
-</li>
-<li>
-<p>Modify <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/logic/parser/AddressBookParser.java"><code>AddressBookParser</code></a> to accept a <code>RemarkCommand</code>.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Tests:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add <code>RemarkCommandTest</code> that tests that <code>executeUndoableCommand()</code> throws an Exception.</p>
-</li>
-<li>
-<p>Add new test method to <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/test/java/seedu/address/logic/parser/AddressBookParserTest.java"><code>AddressBookParserTest</code></a>, which tests that typing "remark" returns an instance of <code>RemarkCommand</code>.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="step-2-logic-teach-the-app-to-accept-remark-arguments"><a class="link" href="#step-2-logic-teach-the-app-to-accept-remark-arguments">[Step 2] Logic: Teach the app to accept 'remark' arguments</a></h5>
-<div class="paragraph">
-<p>Let&#8217;s teach the application to parse arguments that our <code>remark</code> command will accept. E.g. <code>1 r/Likes to drink coffee.</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Main:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Modify <code>RemarkCommand</code> to take in an <code>Index</code> and <code>String</code> and print those two parameters as the error message.</p>
-</li>
-<li>
-<p>Add <code>RemarkCommandParser</code> that knows how to parse two arguments, one index and one with prefix 'r/'.</p>
-</li>
-<li>
-<p>Modify <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/logic/parser/AddressBookParser.java"><code>AddressBookParser</code></a> to use the newly implemented <code>RemarkCommandParser</code>.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Tests:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Modify <code>RemarkCommandTest</code> to test the <code>RemarkCommand#equals()</code> method.</p>
-</li>
-<li>
-<p>Add <code>RemarkCommandParserTest</code> that tests different boundary values
-for <code>RemarkCommandParser</code>.</p>
-</li>
-<li>
-<p>Modify <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/test/java/seedu/address/logic/parser/AddressBookParserTest.java"><code>AddressBookParserTest</code></a> to test that the correct command is generated according to the user input.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="step-3-ui-add-a-placeholder-for-remark-in-code-personcard-code"><a class="link" href="#step-3-ui-add-a-placeholder-for-remark-in-code-personcard-code">[Step 3] Ui: Add a placeholder for remark in <code>PersonCard</code></a></h5>
-<div class="paragraph">
-<p>Let&#8217;s add a placeholder on all our <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/ui/PersonCard.java"><code>PersonCard</code></a> s to display a remark for each person later.</p>
-</div>
-<div class="paragraph">
-<p><strong>Main:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add a <code>Label</code> with any random text inside <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/resources/view/PersonListCard.fxml"><code>PersonListCard.fxml</code></a>.</p>
-</li>
-<li>
-<p>Add FXML annotation in <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/ui/PersonCard.java"><code>PersonCard</code></a> to tie the variable to the actual label.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Tests:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Modify <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/test/java/guitests/guihandles/PersonCardHandle.java"><code>PersonCardHandle</code></a> so that future tests can read the contents of the remark label.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="step-4-model-add-code-remark-code-class"><a class="link" href="#step-4-model-add-code-remark-code-class">[Step 4] Model: Add <code>Remark</code> class</a></h5>
-<div class="paragraph">
-<p>We have to properly encapsulate the remark in our <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/model/person/Person.java"><code>Person</code></a> class. Instead of just using a <code>String</code>, let&#8217;s follow the conventional class structure that the codebase already uses by adding a <code>Remark</code> class.</p>
-</div>
-<div class="paragraph">
-<p><strong>Main:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add <code>Remark</code> to model component (you can copy from <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/model/person/Address.java"><code>Address</code></a>, remove the regex and change the names accordingly).</p>
-</li>
-<li>
-<p>Modify <code>RemarkCommand</code> to now take in a <code>Remark</code> instead of a <code>String</code>.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Tests:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add test for <code>Remark</code>, to test the <code>Remark#equals()</code> method.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="step-5-model-modify-code-person-code-to-support-a-code-remark-code-field"><a class="link" href="#step-5-model-modify-code-person-code-to-support-a-code-remark-code-field">[Step 5] Model: Modify <code>Person</code> to support a <code>Remark</code> field</a></h5>
-<div class="paragraph">
-<p>Now we have the <code>Remark</code> class, we need to actually use it inside <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/model/person/Person.java"><code>Person</code></a>.</p>
-</div>
-<div class="paragraph">
-<p><strong>Main:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add <code>getRemark()</code> in <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/model/person/Person.java"><code>Person</code></a>.</p>
-</li>
-<li>
-<p>You may assume that the user will not be able to use the <code>add</code> and <code>edit</code> commands to modify the remarks field (i.e. the person will be created without a remark).</p>
-</li>
-<li>
-<p>Modify <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/model/util/SampleDataUtil.java/"><code>SampleDataUtil</code></a> to add remarks for the sample data (delete your <code>addressBook.xml</code> so that the application will load the sample data when you launch it.)</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="step-6-storage-add-code-remark-code-field-to-code-xmladaptedperson-code-class"><a class="link" href="#step-6-storage-add-code-remark-code-field-to-code-xmladaptedperson-code-class">[Step 6] Storage: Add <code>Remark</code> field to <code>XmlAdaptedPerson</code> class</a></h5>
-<div class="paragraph">
-<p>We now have <code>Remark</code> s for <code>Person</code> s, but they will be gone when we exit the application. Let&#8217;s modify <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/storage/XmlAdaptedPerson.java"><code>XmlAdaptedPerson</code></a> to include a <code>Remark</code> field so that it will be saved.</p>
-</div>
-<div class="paragraph">
-<p><strong>Main:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add a new Xml field for <code>Remark</code>.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Tests:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Fix <code>invalidAndValidPersonAddressBook.xml</code>, <code>typicalPersonsAddressBook.xml</code>, <code>validAddressBook.xml</code> etc., such that the XML tests will not fail due to a missing <code>&lt;remark&gt;</code> element.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="step-6b-test-add-withremark-for-code-personbuilder-code"><a class="link" href="#step-6b-test-add-withremark-for-code-personbuilder-code">[Step 6b] Test: Add withRemark() for <code>PersonBuilder</code></a></h5>
-<div class="paragraph">
-<p>Since <code>Person</code> can now have a <code>Remark</code>, we should add a helper method to <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/test/java/seedu/address/testutil/PersonBuilder.java"><code>PersonBuilder</code></a>, so that users are able to create remarks when building a <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/model/person/Person.java"><code>Person</code></a>.</p>
-</div>
-<div class="paragraph">
-<p><strong>Tests:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Add a new method <code>withRemark()</code> for <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/test/java/seedu/address/testutil/PersonBuilder.java"><code>PersonBuilder</code></a>. This method will create a new <code>Remark</code> for the person that it is currently building.</p>
-</li>
-<li>
-<p>Try and use the method on any sample <code>Person</code> in <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/test/java/seedu/address/testutil/TypicalPersons.java"><code>TypicalPersons</code></a>.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="step-7-ui-connect-code-remark-code-field-to-code-personcard-code"><a class="link" href="#step-7-ui-connect-code-remark-code-field-to-code-personcard-code">[Step 7] Ui: Connect <code>Remark</code> field to <code>PersonCard</code></a></h5>
-<div class="paragraph">
-<p>Our remark label in <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/ui/PersonCard.java"><code>PersonCard</code></a> is still a placeholder. Let&#8217;s bring it to life by binding it with the actual <code>remark</code> field.</p>
-</div>
-<div class="paragraph">
-<p><strong>Main:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Modify <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/main/java/seedu/address/ui/PersonCard.java"><code>PersonCard</code></a>'s constructor to bind the <code>Remark</code> field to the <code>Person</code> 's remark.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Tests:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Modify <a href="https://github.com/CS2103JAN2018-T11-B2/main//src/test/java/seedu/address/ui/testutil/GuiTestAssert.java"><code>GuiTestAssert#assertCardDisplaysPerson(&#8230;&#8203;)</code></a> so that it will compare the now-functioning remark label.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="step-8-logic-implement-code-remarkcommand-execute-code-logic"><a class="link" href="#step-8-logic-implement-code-remarkcommand-execute-code-logic">[Step 8] Logic: Implement <code>RemarkCommand#execute()</code> logic</a></h5>
-<div class="paragraph">
-<p>We now have everything set up&#8230;&#8203; but we still can&#8217;t modify the remarks. Let&#8217;s finish it up by adding in actual logic for our <code>remark</code> command.</p>
-</div>
-<div class="paragraph">
-<p><strong>Main:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Replace the logic in <code>RemarkCommand#execute()</code> (that currently just throws an <code>Exception</code>), with the actual logic to modify the remarks of a person.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Tests:</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Update <code>RemarkCommandTest</code> to test that the <code>execute()</code> logic works.</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="full-solution"><a class="link" href="#full-solution">A.2.3. Full Solution</a></h4>
-<div class="paragraph">
-<p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/599">PR</a> for the step-by-step solution.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="product-scope"><a class="link" href="#product-scope">Appendix B: Product Scope</a></h2>
+<h2 id="GetStartedProgramming"><a class="link" href="#GetStartedProgramming">Appendix A: Product Scope</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong>Target user profile</strong>:</p>
@@ -2594,15 +1903,16 @@ Additional Attribute to store 'Role' information. To identify the person as a Pr
 <ol class="arabic">
 <li>
 <p>Major enhancement:<br>
-Creating a cell system/map of all the prison cells in the prison.
+Creating a cell system of all the prison cells in the prison.
 This helps users add and remove prisoners to their prison and prevent users from overcrowding their prison.
-It can also help users keep track of locations of the cells of each prisoner.</p>
+It can also help users keep track of locations of the cells of each prisoner.
+Users can also add and remove prisoners more easily by first listing people in each cell to decide where to add or remove them.</p>
 </li>
 <li>
 <p>Minor enhancement:<br>
-Allow user to change between bright and dark themes.
-This helps users to prevent people nearby from looking at the information.
-At the same time, it also has a bright theme that helps users use the app more easily.</p>
+Adding to UI to show map of the cell system instead of having a browser panel.
+It also updates the UI to show the list of persons and the map when first logged in
+and to hide it when logging out and when the application is first opened.</p>
 </li>
 </ol>
 </div>
@@ -2612,7 +1922,7 @@ At the same time, it also has a bright theme that helps users use the app more e
 </div>
 </div>
 <div class="sect1">
-<h2 id="user-stories"><a class="link" href="#user-stories">Appendix C: User Stories</a></h2>
+<h2 id="user-stories"><a class="link" href="#user-stories">Appendix B: User Stories</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Priorities: High (must have) - <code>* * *</code>, Medium (nice to have) - <code>* *</code>, Low (unlikely to have) - <code>*</code></p>
@@ -2717,7 +2027,7 @@ At the same time, it also has a bright theme that helps users use the app more e
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">prison warden</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">divide cells into sections (A, B, C, D) and name each cell numerically (A1, A2, etc…)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">divide cells into blocks (1, 2, 3) and name each cell numerically (1-1, 1-2, etc…)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">refer to each cell easily when assigning prisoners to them</p></td>
 </tr>
 <tr>
@@ -2773,9 +2083,9 @@ At the same time, it also has a bright theme that helps users use the app more e
 </div>
 </div>
 <div class="sect1">
-<h2 id="use-cases"><a class="link" href="#use-cases">Appendix D: Use Cases</a></h2>
+<h2 id="use-cases"><a class="link" href="#use-cases">Appendix C: Use Cases</a></h2>
 <div class="sectionbody">
-<h3 id="use-case-add-a-prisoner" class="discrete">Use case: Add a prisoner</h3>
+<h3 id="use-case-add-an-event-on-the-calendar" class="discrete">Use case: Add an event on the calendar.</h3>
 <div class="paragraph">
 <p>Actor: Guard (Guard)</p>
 </div>
@@ -2785,28 +2095,10 @@ At the same time, it also has a bright theme that helps users use the app more e
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Guard requests to add prisoner</p>
+<p>Guard requests to add event to calendar.</p>
 </li>
 <li>
-<p>PrisonBook adds prisoner</p>
-</li>
-<li>
-<p>Guard requests to list cells that are empty/not filled</p>
-</li>
-<li>
-<p>PrisonBook shows a list of empty/not filled cells</p>
-</li>
-<li>
-<p>Guard requests to view a specific cell’s prisoner’s details</p>
-</li>
-<li>
-<p>PrisonBook shows details of prisoner in cell</p>
-</li>
-<li>
-<p>Guard requests to add a prisoner to a specific cell</p>
-</li>
-<li>
-<p>PrisonBook adds prisoner to cell</p>
+<p>PrisonBook adds event to calendar.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2819,11 +2111,11 @@ At the same time, it also has a bright theme that helps users use the app more e
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>2a. There are no cells available for new prisoner.</p>
+<p>1a. PrisonBook detects that guard&#8217;s security level is not high enough.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>2a1. PrisonBook shows an error message.</p>
+<p>1a1. PrisonBook shows an error message regarding security level.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2832,49 +2124,23 @@ At the same time, it also has a bright theme that helps users use the app more e
 </div>
 </li>
 <li>
-<p>5a. The given index is invalid, outside range.</p>
+<p>1b. The format of adding event to calendar is wrong.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>5a1. PrisonBook shows an error message.</p>
+<p>1b1. PrisonBook shows an error message.</p>
 <div class="paragraph">
-<p>Use case resumes at step 4.</p>
+<p>Use case ends.</p>
 </div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>5b. The given index of cell has no prisoners.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>5b1. PrisonBook shows an error message.</p>
-<div class="paragraph">
-<p>Use case resumes at step 4.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>7a. The given index is invalid.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>7a1. PrisonBook shows an error message.</p>
-<div class="paragraph">
-<p>Use case resumes at step 6.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="use-case-assign-prisoner-to-a-cell" class="discrete">Use case: Assign prisoner to a cell</h3>
+<h3 id="use-case-add-prisoner-to-a-cell" class="discrete">Use case: Add prisoner to a cell</h3>
 <div class="paragraph">
 <p>Actor: Guard</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
@@ -2882,19 +2148,13 @@ At the same time, it also has a bright theme that helps users use the app more e
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Guard selects a prisoner</p>
+<p>PrisonBook shows a list of available cells.</p>
 </li>
 <li>
-<p>Guard requests a list of available cells with room available</p>
+<p>Guard selects a prisoner and cell to add.</p>
 </li>
 <li>
-<p>PrisonBook shows a list of available cells</p>
-</li>
-<li>
-<p>Guard requests to add prisoner to vacant cell</p>
-</li>
-<li>
-<p>PrisonBook updates prisoner status and cell status</p>
+<p>PrisonBook updates prisoner status and cell status.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2907,46 +2167,66 @@ At the same time, it also has a bright theme that helps users use the app more e
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>2a. The cell list is empty.</p>
+<p>1a. Guard does not have sufficient access to view cells.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
 </li>
 <li>
-<p>3a. Prisoner is already assigned to a cell.</p>
+<p>2a. PrisonBook detects that prisoner is already added to a cell.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a1. PrisonBook removes cell tag from prisoner status and removes prisoner from cell status</p>
+<p>2a1. PrisonBook sends an error message regarding prisoner already imprisoned.</p>
 <div class="paragraph">
-<p>Use case resumes at step 2.</p>
+<p>Use case resumes at step 1.</p>
 </div>
 </li>
 </ul>
 </div>
 </li>
+<li>
+<p>3a. PrisonBook detects that the cell is already full.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. PrisonBook sends an error message regarding adding prisoner to a full cell.</p>
+<div class="paragraph">
+<p>Use case resumes at step 1.</p>
+</div>
+</li>
 </ul>
+</div>
+</li>
+<li>
+<p>4a. PrisonBook detects that address of cell is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>4a1. PrisonBook sends an error message regarding invalid cell address.</p>
+<div class="paragraph">
+<p>Use case resumes at step 1.</p>
 </div>
 <h3 id="use-case-get-the-list-of-prisoners-in-a-certain-cell" class="discrete">Use case: Get the list of prisoners in a certain cell</h3>
 <div class="paragraph">
 <p>Actor: Guard</p>
 </div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Guard requests a list of cells</p>
+<p>Guard requests a list of prisoners in a specified cell</p>
 </li>
 <li>
-<p>PrisonBook shows the list of cells</p>
-</li>
-<li>
-<p>Guard requests to view the list of prisoners assigned to a specific cell</p>
-</li>
-<li>
-<p>PrisonBook shows a list of of prisoners assigned to the cell</p>
+<p>PrisonBook shows the list of prisoners in specified cell</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2959,7 +2239,7 @@ At the same time, it also has a bright theme that helps users use the app more e
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a. Guard does not have access rights to view the details of the requested cell</p>
+<p>2a. Guard does not have access rights to view the details of the requested cell</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2969,7 +2249,7 @@ At the same time, it also has a bright theme that helps users use the app more e
 </div>
 </div>
 <div class="sect1">
-<h2 id="non-functional-requirements"><a class="link" href="#non-functional-requirements">Appendix E: Non Functional Requirements</a></h2>
+<h2 id="non-functional-requirements"><a class="link" href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -2999,7 +2279,7 @@ At the same time, it also has a bright theme that helps users use the app more e
 </div>
 </div>
 <div class="sect1">
-<h2 id="glossary"><a class="link" href="#glossary">Appendix F: Glossary</a></h2>
+<h2 id="glossary"><a class="link" href="#glossary">Appendix E: Glossary</a></h2>
 <div class="sectionbody">
 <div class="dlist">
 <dl>
@@ -3007,60 +2287,30 @@ At the same time, it also has a bright theme that helps users use the app more e
 <dd>
 <p>Windows, Linux, Unix, OS-X</p>
 </dd>
-<dt class="hdlist1"><a id="private-contact-detail"></a> Private contact detail</dt>
+<dt class="hdlist1"><a id="warden"></a> Prison warden</dt>
 <dd>
-<p>A contact detail that is not meant to be shared with others</p>
+<p>Owner of the prison, who has the highest level of access available.</p>
+</dd>
+<dt class="hdlist1"><a id="guard"></a> Guard</dt>
+<dd>
+<p>A person working in the prison, to watch over prisoners and ensure order.</p>
 </dd>
 <dt class="hdlist1"><a id="prisoner"></a> Prisoner</dt>
 <dd>
-<p>A person has been imprisoned for a crime.</p>
+<p>A person has been sent to prison for a crime.</p>
+</dd>
+<dt class="hdlist1"><a id="cell"></a> Cell</dt>
+<dd>
+<p>A place where prisoners stay and live in when they are imprisoned.
+Each cell has a maximum number of people who can live in them to prevent overcrowding.
+Their addresses are fixed and cannot be changed unless the application is customised.</p>
 </dd>
 </dl>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="product-survey"><a class="link" href="#product-survey">Appendix G: Product Survey</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>PrisonBook</strong></p>
-</div>
-<div class="paragraph">
-<p>Author:
-Isaac
-Sarah Goh Shi Ning
-Philos (Chung-Yen) Tsai</p>
-</div>
-<div class="paragraph">
-<p>Pros:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Cons:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="instructions-for-manual-testing"><a class="link" href="#instructions-for-manual-testing">Appendix H: Instructions for Manual Testing</a></h2>
+<h2 id="instructions-for-manual-testing"><a class="link" href="#instructions-for-manual-testing">Appendix F: Instructions for Manual Testing</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Given below are instructions to test the app manually.</p>
@@ -3078,7 +2328,7 @@ These instructions only provide a starting point for testers to work on; testers
 </table>
 </div>
 <div class="sect2">
-<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">H.1. Launch and Shutdown</a></h3>
+<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">F.1. Launch and Shutdown</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3090,7 +2340,10 @@ These instructions only provide a starting point for testers to work on; testers
 </li>
 <li>
 <p>Double-click the jar file<br>
-Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.</p>
+Expected: Shows the GUI with a set of sample prisoners and guards. The window size may not be optimum.</p>
+</li>
+<li>
+<p>Please do not open the jar file through a terminal.</p>
 </li>
 </ol>
 </div>
@@ -3111,31 +2364,92 @@ Expected: The most recent window size and location is retained.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
-</div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person"><a class="link" href="#deleting-a-person">H.2. Deleting a person</a></h3>
+<h3 id="minor-feature-showing-prisoners-in-the-ui"><a class="link" href="#minor-feature-showing-prisoners-in-the-ui">F.2. Minor Feature: Showing prisoners in the UI</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Deleting a person while all persons are listed</p>
+<p>Checking accuracy of map displayed.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list.</p>
+<p>Prerequisites: Have sufficient security level[1]</p>
 </li>
 <li>
-<p>Test case: <code>delete 1</code><br>
-Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.</p>
+<p>Test case: Starting up the app and before logging in
+Expected: No details regarding cells shown on the map.
+Map shows that user has insufficient access to view information.</p>
 </li>
 <li>
-<p>Test case: <code>delete 0</code><br>
-Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.</p>
+<p>Test case: Using features below while logged in
+Expected: UI matches what <code>map</code> command shows on the display.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="major-feature-managing-prisoners-in-a-prison"><a class="link" href="#major-feature-managing-prisoners-in-a-prison">F.3. Major Feature: Managing prisoners in a prison</a></h3>
+<div class="sect3">
+<h4 id="adding-a-prisoner-to-a-cell"><a class="link" href="#adding-a-prisoner-to-a-cell">F.3.1. Adding a prisoner to a cell</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Adding a prisoner to a cell when all prisoners are listed and has sufficient security level [2].</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list, from initial state of program.</p>
 </li>
 <li>
-<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
+<p>Test case: <code>addcell 5 1-5</code> (person at index is a prisoner and is not in a cell and cell is not full)<br>
+Expected: Fifth person is added to the cell with address 1-5.
+Address of the prisoner updated in the person card and message of prisoner added to cell is displayed.
+The map on the right side of the UI will also update correspondingly by adding to the number corresponding to cell address 1-5.
+Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Test case: <code>addcell 0 1-4</code>
+Expected: No prisoner is added to a cell because of the index.
+Error message displayed regarding format. The map and status bar will not be updated.</p>
+</li>
+<li>
+<p>Other incorrect add cell commands to try: <code>ac</code>, <code>addcell 2 1=1</code>,<br>
+Expected: No change to UI and displays error message.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="deleting-prisoner-from-a-cell"><a class="link" href="#deleting-prisoner-from-a-cell">F.3.2. Deleting prisoner from a cell</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Deleting a prisoner from a cell when all prisoners are listed and has sufficient security level [2].</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list, from initial state of program.</p>
+</li>
+<li>
+<p>Test case: <code>deletecell 1</code>
+Expected: Prisoner is deleted from his/her cell and their original cell will be updated.
+Message regarding prisoner being released will be displayed.
+The map on the right will be updated, as well as the prisoner&#8217;s address back to their old address.</p>
+</li>
+<li>
+<p>Test case: <code>deletecell 0</code>
+Expected: No change to map and to the list of persons.
+Message regarding error will be shown for correct format of command.</p>
+</li>
+<li>
+<p>Other incorrect delete cell commands to try: <code>dc</code>, <code>dc 0</code><br>
 Expected: Similar to previous.</p>
 </li>
 </ol>
@@ -3143,12 +2457,36 @@ Expected: Similar to previous.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
+</div>
+<div class="sect3">
+<h4 id="listing-prisoners-in-a-cell"><a class="link" href="#listing-prisoners-in-a-cell">F.3.3. Listing prisoners in a cell</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Listing a prisoner from a cell when here is sufficient security level [1].</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>listcell 1-1</code>
+Expected: List of prisoners in cell address 1-1 will be updated and shown.</p>
+</li>
+<li>
+<p>Test case: <code>listcell 10-10</code>
+Expected: There is no change in the UI except the error message regarding an invalid cell.</p>
+</li>
+<li>
+<p>Other incorrect list cell commands to try: <code>lc</code>, <code>lc 1</code><br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">H.3. Saving data</a></h3>
+<h3 id="saving-data"><a class="link" href="#saving-data">F.4. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3156,15 +2494,13 @@ Expected: Similar to previous.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p><em>{explain how to simulate a missing/corrupted file and the expected behavior}</em></p>
+<p>Should the data file be missing, a sample prison book will be provided, with the 3 users mentioned in the user guide:
+prisonwarden, prisonleader and prisonguard</p>
 </li>
 </ol>
 </div>
 </li>
 </ol>
-</div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
 </div>
 </div>
 </div>
@@ -3172,7 +2508,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-13 12:40:10 UTC
+Last updated 2018-04-14 03:02:05 UTC
 </div>
 </div>
 </body>
