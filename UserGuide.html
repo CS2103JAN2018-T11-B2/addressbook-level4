@@ -37,7 +37,7 @@
 <li><a href="#adding-a-person-code-add-or-a-code-2">3.7. Adding a person: <code>add or a</code> [2]</a></li>
 <li><a href="#adding-a-prisoner-to-a-cell-code-addcell-or-ac-code-2-v1-3">3.8. Adding a prisoner to a cell: <code>addcell or ac</code> [2] (v1.3)</a></li>
 <li><a href="#listing-all-persons-code-list-or-l-code-1">3.9. Listing all persons : <code>list or l</code> [1]</a></li>
-<li><a href="#listing-prisoners-in-a-cell-code-listcell-or-lc-code-v1-5rc">3.10. Listing prisoners in a cell : <code>listcell or lc</code> (v1.5rc)</a></li>
+<li><a href="#listing-prisoners-in-a-cell-code-listcell-or-lc-code-1-v1-5rc">3.10. Listing prisoners in a cell : <code>listcell or lc</code> [1] (v1.5rc)</a></li>
 <li><a href="#showing-cells-in-the-map-code-map-or-m-code-1-v1-1">3.11. Showing cells in the map: <code>map or m</code> [1] (v1.1)</a></li>
 <li><a href="#editing-a-person-code-edit-or-e-code-2">3.12. Editing a person : <code>edit or e</code> [2]</a></li>
 <li><a href="#locating-persons-by-name-or-tags-code-find-or-f-code-1">3.13. Locating persons by name or tags: <code>find or f</code> [1]</a></li>
@@ -369,7 +369,7 @@ Format: <code>list</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-prisoners-in-a-cell-code-listcell-or-lc-code-v1-5rc"><a class="link" href="#listing-prisoners-in-a-cell-code-listcell-or-lc-code-v1-5rc">3.10. Listing prisoners in a cell : <code>listcell or lc</code> (v1.5rc)</a></h3>
+<h3 id="listing-prisoners-in-a-cell-code-listcell-or-lc-code-1-v1-5rc"><a class="link" href="#listing-prisoners-in-a-cell-code-listcell-or-lc-code-1-v1-5rc">3.10. Listing prisoners in a cell : <code>listcell or lc</code> [1] (v1.5rc)</a></h3>
 <div class="paragraph">
 <p>Shows a list of all persons in a prison cell in the prison book.<br>
 Format: <code>listcell CELL</code></p>
@@ -604,7 +604,7 @@ Format: <code>deletecell INDEX</code></p>
 <ul>
 <li>
 <p><code>dc 1</code><br>
-Deletes the first person in the prison book if he/she is imprisoned here.</p>
+Deletes the first person in the prison book from his/her cell if he/she is imprisoned here.</p>
 </li>
 <li>
 <p><code>listcell 1-1</code><br>
@@ -672,7 +672,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </li>
 <li>
 <p><code>delete 1</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+<code>undo</code> (reverses the <code>delete 1</code> command)</p>
 </li>
 </ul>
 </div>
@@ -704,7 +704,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 <code>undo</code> (reverses the <code>edit</code> command)<br>
 <code>undo</code> (reverses the <code>delete 1</code> command)<br>
 <code>redo</code> (reapplies the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>edit</code> command)<br></p>
+<code>redo</code> (reapplies the <code>edit</code> command)</p>
 </li>
 </ul>
 </div>
@@ -862,7 +862,7 @@ e.g. <code>calAdd event/IT Skills Training loc/Computer Lab 1 start/2018-06-06 1
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-14 03:50:28 UTC
+Last updated 2018-04-14 08:49:59 UTC
 </div>
 </div>
 </body>

@@ -53,7 +53,7 @@ when adding and removing them from cells.</p>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: Changing browser panel to show map of prison cells. Hides information on GUI before logging in and after logging out.
+<p><strong>Minor enhancement</strong>: Map of prison cells on GUI. It hides information on GUI before logging in and after logging out.
 It will also show the list of persons in PrisonBook and people in the map when logged in successfully.</p>
 <div class="ulist">
 <ul>
@@ -92,6 +92,9 @@ It will also show the list of persons in PrisonBook and people in the map when l
 <ul>
 <li>
 <p>Status bar shows number of people in the PrisonBook</p>
+</li>
+<li>
+<p>Map panel to show cell system of prison</p>
 </li>
 </ul>
 </div>
@@ -161,33 +164,6 @@ The maximum number of people in a cell is 2 people.
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-prisoners-in-a-cell-code-listcell-or-lc-code-v1-5rc"><a class="link" href="#listing-prisoners-in-a-cell-code-listcell-or-lc-code-v1-5rc">Listing prisoners in a cell : <code>listcell or lc</code> (v1.5rc)</a></h3>
-<div class="paragraph">
-<p>Shows a list of all persons in a prison cell in the prison book.<br>
-Format: <code>listcell CELL</code></p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>listcell 1-1</code></p>
-</li>
-<li>
-<p><code>lc 3-3</code></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="showing-cells-in-the-map-code-map-or-m-code-1-v1-1"><a class="link" href="#showing-cells-in-the-map-code-map-or-m-code-1-v1-1">Showing cells in the map: <code>map or m</code> [1] (v1.1)</a></h3>
-<div class="paragraph">
-<p>Shows a table of prison cells like a map in the command display (used for debugging and checking UI).<br>
-Format: <code>map</code></p>
-</div>
-</div>
-<div class="sect2">
 <h3 id="deleting-a-person-from-a-cell-code-deletecell-or-dc-code-2-v1-4"><a class="link" href="#deleting-a-person-from-a-cell-code-deletecell-or-dc-code-2-v1-4">Deleting a person from a cell : <code>deletecell or dc</code> [2] (v1.4)</a></h3>
 <div class="paragraph">
 <p>Deletes the specified person from his/her cell in the PrisonBook.<br>
@@ -220,7 +196,7 @@ Format: <code>deletecell INDEX</code></p>
 <ul>
 <li>
 <p><code>dc 1</code><br>
-Deletes the first person in the prison book if he/she is imprisoned here.</p>
+Deletes the first person in the prison book from his/her cell if he/she is imprisoned here.</p>
 </li>
 <li>
 <p><code>listcell 1-1</code><br>
@@ -228,6 +204,33 @@ Deletes the first person in the prison book if he/she is imprisoned here.</p>
 Deletes the first person in the cell 1-1 if there are any prisoners inside it.</p>
 </li>
 </ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-prisoners-in-a-cell-code-listcell-or-lc-code-1-v1-5rc"><a class="link" href="#listing-prisoners-in-a-cell-code-listcell-or-lc-code-1-v1-5rc">Listing prisoners in a cell : <code>listcell or lc</code> [1] (v1.5rc)</a></h3>
+<div class="paragraph">
+<p>Shows a list of all persons in a prison cell in the prison book.<br>
+Format: <code>listcell CELL</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>listcell 1-1</code></p>
+</li>
+<li>
+<p><code>lc 3-3</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="showing-cells-in-the-map-code-map-or-m-code-1-v1-1"><a class="link" href="#showing-cells-in-the-map-code-map-or-m-code-1-v1-1">Showing cells in the map: <code>map or m</code> [1] (v1.1)</a></h3>
+<div class="paragraph">
+<p>Shows a table of prison cells like a map in the command display (used for debugging and checking UI).<br>
+Format: <code>map</code></p>
 </div>
 </div>
 </div>
@@ -256,7 +259,7 @@ It is important to keep track of the prisoners in the cell and whether the <code
 <div class="paragraph">
 <p>This cell system is most clearly represented using a 2-D array.
 Hence, this was used as the basis of the map system of the prison.
-However, to prevent accidental changes, a read-only version of the cells are returned in an ObservableList.
+However, to prevent accidental changes, a read-only version of the cells are returned in an <code>ObservableList</code>.
 Since this is part of the <code>Model</code> component of the PrisonBook, the <code>Model</code> component has been updated accordingly as shown below.
 At the bottom of the <code>Model</code> class diagram, it has been updated to show how the cell system is linked to the other components.</p>
 </div>
@@ -281,13 +284,12 @@ This basic map shows the cell system and helps keep track of what is happening i
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/Ui.png" alt="Ui" width="600">
+<img src="../images/MapPanel.png" alt="MapPanel" width="550">
 </div>
 </div>
 <div class="paragraph">
 <p>This cell system helps users visualise the locations of the prisoners more easily. Not only that, prisoners can also be added and removed from them.
-These changes can be viewed in the bigger map which displays the number of people in them (also shown in the UI mockup above,
-represented by the square brackets) in individual cells.</p>
+These changes can be viewed in the bigger map which displays the number of people in individual cells below each cell address.</p>
 </div>
 <div class="paragraph">
 <p>Assuming the user has access to the functions to add prisoners into prison cells, they can use the <code>addcell</code> command to do so.
@@ -295,12 +297,12 @@ Below is the sequence diagram of the logic and model components.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/AddCellSequenceDiagram.PNG" alt="AddCellSequenceDiagram" width="800">
+<img src="../images/AddCellSequenceDiagram.PNG" alt="AddCellSequenceDiagram" width="550">
 </div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/AddCellModelSequenceDiagram.PNG" alt="AddCellModelSequenceDiagram" width="800">
+<img src="../images/AddCellModelSequenceDiagram.PNG" alt="AddCellModelSequenceDiagram" width="550">
 </div>
 </div>
 <div class="paragraph">
@@ -355,7 +357,7 @@ It also makes it harder to implement undo and redo functions for actions below.<
 </div>
 </li>
 <li>
-<p><strong>Alternative 3:</strong> Use a ObservableList</p>
+<p><strong>Alternative 3:</strong> Use an ObservableList</p>
 <div class="ulist">
 <ul>
 <li>
@@ -529,8 +531,8 @@ Users can also add and remove prisoners more easily by first listing people in e
 </li>
 <li>
 <p>Minor enhancement:<br>
-Adding to UI to show map of the cell system instead of having a browser panel.
-It also updates the UI to show the list of persons and the map when first logged in
+Show map of the cell system on the UI.
+Also implemented the UI to show the list of persons and the map when first logged in
 and to hide it when logging out and when the application is first opened.</p>
 </li>
 </ol>
@@ -546,19 +548,19 @@ and to hide it when logging out and when the application is first opened.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Checking accuracy of map displayed.</p>
+<p>Map panel in UI showing the map of cells in the system.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
 <p>Prerequisites: Have sufficient security level[1]</p>
 </li>
 <li>
-<p>Test case: Starting up the app and before logging in
+<p>Test case: Starting up the app and before logging in<br>
 Expected: No details regarding cells shown on the map.
 Map shows that user has insufficient access to view information.</p>
 </li>
 <li>
-<p>Test case: Using features below while logged in
+<p>Test case: Using features below while logged in<br>
 Expected: UI matches what <code>map</code> command shows on the display.</p>
 </li>
 </ol>
@@ -588,12 +590,12 @@ The map on the right side of the UI will also update correspondingly by adding t
 Timestamp in the status bar is updated.</p>
 </li>
 <li>
-<p>Test case: <code>addcell 0 1-4</code>
+<p>Test case: <code>addcell 0 1-4</code><br>
 Expected: No prisoner is added to a cell because of the index.
 Error message displayed regarding format. The map and status bar will not be updated.</p>
 </li>
 <li>
-<p>Other incorrect add cell commands to try: <code>ac</code>, <code>addcell 2 1=1</code>,<br>
+<p>Other incorrect add cell commands to try: <code>ac</code>, <code>addcell 2 1=1</code><br>
 Expected: No change to UI and displays error message.</p>
 </li>
 </ol>
@@ -614,13 +616,13 @@ Expected: No change to UI and displays error message.</p>
 <p>Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list, from initial state of program.</p>
 </li>
 <li>
-<p>Test case: <code>deletecell 1</code>
+<p>Test case: <code>deletecell 1</code><br>
 Expected: Prisoner is deleted from his/her cell and their original cell will be updated.
 Message regarding prisoner being released will be displayed.
 The map on the right will be updated, as well as the prisoner&#8217;s address back to their old address.</p>
 </li>
 <li>
-<p>Test case: <code>deletecell 0</code>
+<p>Test case: <code>deletecell 0</code><br>
 Expected: No change to map and to the list of persons.
 Message regarding error will be shown for correct format of command.</p>
 </li>
@@ -643,11 +645,11 @@ Expected: Similar to previous.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Test case: <code>listcell 1-1</code>
+<p>Test case: <code>listcell 1-1</code><br>
 Expected: List of prisoners in cell address 1-1 will be updated and shown.</p>
 </li>
 <li>
-<p>Test case: <code>listcell 10-10</code>
+<p>Test case: <code>listcell 10-10</code><br>
 Expected: There is no change in the UI except the error message regarding an invalid cell.</p>
 </li>
 <li>
@@ -666,7 +668,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-14 03:50:28 UTC
+Last updated 2018-04-14 08:49:59 UTC
 </div>
 </div>
 </body>
