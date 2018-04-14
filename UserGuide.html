@@ -109,13 +109,13 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p><strong><code>list</code></strong> : lists all contacts</p>
+<p><strong><code>list</code></strong> : lists all prisoners and guards</p>
 </li>
 <li>
-<p><strong><code>add</code></strong> <code>n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01</code> : adds a contact named <code>John Doe</code> to the Address Book.</p>
+<p><strong><code>add</code></strong> <code>n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01</code> : adds a contact named <code>John Doe</code> to PrisonBook.</p>
 </li>
 <li>
-<p><strong><code>delete</code></strong> <code>3</code> : deletes the 3rd contact shown in the current list</p>
+<p><strong><code>delete</code></strong> <code>3</code> : deletes the 3rd person shown in the current list</p>
 </li>
 <li>
 <p><strong><code>exit</code></strong> : exits the app</p>
@@ -242,13 +242,11 @@ Format: <code>status</code></p>
 Format: <code>adduser user/NEW_USERNAME pw/NEW_PASSWORD sl/SECURITY_LEVEL</code></p>
 </div>
 <div class="paragraph">
-<p>Higher security levels allow users to access a greater range of commands:</p>
+<p>Higher security levels allow users to access a greater range of commands:
+Security levels for new users must be from levels 1 to 3, refer to the list below for the differences in security levels.</p>
 </div>
 <div class="ulist">
 <ul>
-<li>
-<p>Security Level 0: Most basic commands such as Login and Status.</p>
-</li>
 <li>
 <p>Security Level 1: Most commands that only require read access.</p>
 </li>
@@ -274,7 +272,7 @@ Format: <code>adduser user/NEW_USERNAME pw/NEW_PASSWORD sl/SECURITY_LEVEL</code>
 <div class="sect2">
 <h3 id="delete-a-user-code-deleteuser-code-2-v1-5rc"><a class="link" href="#delete-a-user-code-deleteuser-code-2-v1-5rc">3.6. Delete a user: <code>deleteuser</code> [2] (v1.5rc)</a></h3>
 <div class="paragraph">
-<p>Deletes a user from the PrisonBook<br>
+<p>Deletes a user from PrisonBook<br>
 Format: <code>deleteuser user/USERNAME</code></p>
 </div>
 <div class="paragraph">
@@ -297,7 +295,7 @@ Format: <code>deleteuser user/USERNAME</code></p>
 <div class="sect2">
 <h3 id="adding-a-person-code-add-or-a-code-2"><a class="link" href="#adding-a-person-code-add-or-a-code-2">3.7. Adding a person: <code>add or a</code> [2]</a></h3>
 <div class="paragraph">
-<p>Adds a person to the prison book<br>
+<p>Adds a person to PrisonBook<br>
 Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="admonitionblock tip">
@@ -364,14 +362,14 @@ The maximum number of people in a cell is 2 people.
 <div class="sect2">
 <h3 id="listing-all-persons-code-list-or-l-code-1"><a class="link" href="#listing-all-persons-code-list-or-l-code-1">3.9. Listing all persons : <code>list or l</code> [1]</a></h3>
 <div class="paragraph">
-<p>Shows a list of all persons in the prison book.<br>
+<p>Shows a list of all persons in PrisonBook.<br>
 Format: <code>list</code></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="listing-prisoners-in-a-cell-code-listcell-or-lc-code-1-v1-5rc"><a class="link" href="#listing-prisoners-in-a-cell-code-listcell-or-lc-code-1-v1-5rc">3.10. Listing prisoners in a cell : <code>listcell or lc</code> [1] (v1.5rc)</a></h3>
 <div class="paragraph">
-<p>Shows a list of all persons in a prison cell in the prison book.<br>
+<p>Shows a list of all persons in a prison cell in PrisonBook.<br>
 Format: <code>listcell CELL</code></p>
 </div>
 <div class="paragraph">
@@ -398,8 +396,8 @@ Format: <code>map</code></p>
 <div class="sect2">
 <h3 id="editing-a-person-code-edit-or-e-code-2"><a class="link" href="#editing-a-person-code-edit-or-e-code-2">3.12. Editing a person : <code>edit or e</code> [2]</a></h3>
 <div class="paragraph">
-<p>Edits an existing person in the prison book.<br>
-Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [t/TAG]&#8230;&#8203;</code></p>
+<p>Edits an existing person in PrisonBook.<br>
+Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -498,42 +496,63 @@ Returns any person having names <code>Betsy</code> and are tagged <code>Friends<
 <div class="sect2">
 <h3 id="various-commands-to-interact-with-google-calendar"><a class="link" href="#various-commands-to-interact-with-google-calendar">3.14. Various commands to interact with Google Calendar</a></h3>
 <div class="paragraph">
-<p>For the first time that you open the calendar, you will be prompted to login to the PrisonBook Google account. The PrisonBook app will attempt to open the browser for you, alternatively you can copy the link and login with the following details:
-* Google Username: prisonbooksystem | Password: prisonbook2018</p>
+<p>For the first time that you open the calendar, you will be prompted to login to PrisonBook Google account. The PrisonBook app will attempt to open the browser for you, alternatively you can copy the link and login with the following details:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Google Username: prisonbooksystem | Password: prisonbook2018</p>
+</li>
+</ul>
 </div>
 <div class="sect3">
 <h4 id="view-upcoming-events-in-the-calendar-code-calendar-or-cal-code-1-v1-3"><a class="link" href="#view-upcoming-events-in-the-calendar-code-calendar-or-cal-code-1-v1-3">3.14.1. View upcoming events in the calendar: <code>calendar or cal</code> [1] (v1.3)</a></h4>
 <div class="paragraph">
-<p>Format: <code>calendar</code></p>
+<p>Displays first 10 events in the calendar below Command Line Input.<br>
+Format: <code>calendar</code></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="add-event-to-the-calendar-code-caladd-or-cala-code-3-v1-4"><a class="link" href="#add-event-to-the-calendar-code-caladd-or-cala-code-3-v1-4">3.14.2. Add event to the calendar: <code>calAdd or calA</code> [3] (v1.4)</a></h4>
 <div class="paragraph">
-<p>Format: <code>calAdd event/EVENTNAME loc/LOCATION start/STARTDATETIME end/ENDDATETIME</code></p>
+<p>Adds an event to the calendar.<br>
+Format: <code>calAdd event/EVENTNAME loc/LOCATION start/STARTDATETIME end/ENDDATETIME</code></p>
 </div>
 <div class="paragraph">
-<p>Examples:
-* <code>calAdd event/IT Skills Training loc/Computer Lab 1 start/2018-06-06 10:00:00 end/2018-06-06 12:00:00</code><br>
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>calAdd event/IT Skills Training loc/Computer Lab 1 start/2018-06-06 10:00:00 end/2018-06-06 12:00:00</code><br>
 Adds an event <code>IT Skills Training</code> at <code>Computer Lab 1</code> from <code>June 6th, 2018 10am</code> to <code>June 6th, 2018 12pm</code></p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="delete-event-from-the-calendar-code-caldel-or-cald-code-3-v1-5"><a class="link" href="#delete-event-from-the-calendar-code-caldel-or-cald-code-3-v1-5">3.14.3. Delete event from the calendar: <code>calDel or calD</code> [3] (v1.5)</a></h4>
 <div class="paragraph">
-<p>Format: <code>calDel EVENTNUMBER</code></p>
+<p>Deletes an event from the first 10 events in the calendar.<br>
+Format: <code>calDel EVENTNUMBER</code></p>
 </div>
 <div class="paragraph">
-<p>Examples:
-* <code>calDel 11</code><br>
-Deletes the 11th event on the calendar events list</p>
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>calDel 5</code><br>
+Deletes the 5th event on the calendar events list.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="deleting-a-person-code-delete-or-d-code-2"><a class="link" href="#deleting-a-person-code-delete-or-d-code-2">3.15. Deleting a person : <code>delete or d</code> [2]</a></h3>
 <div class="paragraph">
-<p>Deletes the specified person from the prison book.<br>
+<p>Deletes the specified person from PrisonBook.<br>
 Format: <code>delete INDEX</code></p>
 </div>
 <div class="sidebarblock">
@@ -561,7 +580,7 @@ Format: <code>delete INDEX</code></p>
 <li>
 <p><code>list</code><br>
 <code>delete 2</code><br>
-Deletes the 2nd person in the prison book.</p>
+Deletes the 2nd person in PrisonBook.</p>
 </li>
 <li>
 <p><code>find Betsy</code><br>
@@ -574,7 +593,7 @@ Deletes the 1st person in the results of the <code>find</code> command.</p>
 <div class="sect2">
 <h3 id="deleting-a-person-from-a-cell-code-deletecell-or-dc-code-2-v1-4"><a class="link" href="#deleting-a-person-from-a-cell-code-deletecell-or-dc-code-2-v1-4">3.16. Deleting a person from a cell : <code>deletecell or dc</code> [2] (v1.4)</a></h3>
 <div class="paragraph">
-<p>Deletes the specified person from his/her cell in the PrisonBook.<br>
+<p>Deletes the specified person from his/her cell in PrisonBook.<br>
 Format: <code>deletecell INDEX</code></p>
 </div>
 <div class="sidebarblock">
@@ -604,7 +623,7 @@ Format: <code>deletecell INDEX</code></p>
 <ul>
 <li>
 <p><code>dc 1</code><br>
-Deletes the first person in the prison book from his/her cell if he/she is imprisoned here.</p>
+Deletes the first person in PrisonBook from his/her cell if he/she is imprisoned here.</p>
 </li>
 <li>
 <p><code>listcell 1-1</code><br>
@@ -638,7 +657,7 @@ Format: <code>history</code></p>
 <div class="sect2">
 <h3 id="undoing-previous-command-code-undo-or-u-code-0"><a class="link" href="#undoing-previous-command-code-undo-or-u-code-0">3.18. Undoing previous command : <code>undo or u</code> [0]</a></h3>
 <div class="paragraph">
-<p>Restores the prison book to the state before the previous <em>undoable</em> command was executed.<br>
+<p>Restores PrisonBook to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
 </div>
 <div class="admonitionblock note">
@@ -649,7 +668,7 @@ Format: <code>undo</code></p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Undoable commands: those commands that modify the prison book&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>).</p>
+<p>Undoable commands: those commands that modify PrisonBook&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>).</p>
 </div>
 </td>
 </tr>
@@ -862,7 +881,7 @@ e.g. <code>calAdd event/IT Skills Training loc/Computer Lab 1 start/2018-06-06 1
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-14 08:49:59 UTC
+Last updated 2018-04-14 12:22:52 UTC
 </div>
 </div>
 </body>
