@@ -1,11 +1,9 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DATETIME_FORMAT;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAccessor;
 import java.util.Collection;
 import java.util.HashSet;
@@ -282,17 +280,13 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> DateTime} if present.
      */
-    public static DateTime parseDateTime(String dateTime) throws DateTimeParseException{
+    public static DateTime parseDateTime(String dateTime) throws IllegalValueException {
 
         String theDateTime = dateTime.replaceAll("[\\[\\]]", "").replaceAll("Optional", "");
 
-        try {
-            TemporalAccessor ta = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").parse(theDateTime);
-            String strDateTime = LocalDateTime.from(ta).toString() + ":00+08:00";
-            return new DateTime(strDateTime);
-        } catch (DateTimeParseException e) {
-            throw new DateTimeParseException(MESSAGE_INVALID_DATETIME_FORMAT, theDateTime, 0, e);
-        }
+        TemporalAccessor ta = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").parse(theDateTime);
+        String strDateTime = LocalDateTime.from(ta).toString() + ":00+08:00";
+        return new DateTime(strDateTime);
     }
 
 }
