@@ -1339,9 +1339,7 @@ Current implementation can work in a similar way that makes it easier to delete 
 <h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>When the Find command is called, FindCommandParser will look for the tag and/or name prefixes (t/ and n/ respectively).
-The arguments following each prefix will be made into a list. A mapping is then generated with the prefixes as the keys
- and the argument-lists as values. The name search portion will run like before, the tag search will follow a similar
- approach; creating a new predicate instance and return matching results if they exist.</p>
+The arguments following each prefix will be made into a list. A mapping is then generated between prefixes/values and new predicate instances are created.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1427,13 +1425,12 @@ have to be grouped together after a single prefix</p>
 <div class="paragraph">
 <p>The PrisonBook calendar commands will instantiate a calendar class to interact with the Google Calendar API.
 The initial step is to obtain valid credentials authorized from the API side to access its resources, then
-the calendar class will send HTTPS requests to the server, whether it is calling the listEvents, addEvents or delEvents API command.
-Upon receiving a success confirmation from the API, the change will be reflected next time any calendar commands are called.</p>
+the calendar class will send HTTPS requests to the server, whether it is calling the listEvents, addEvents or delEvents API command.</p>
 </div>
 <div class="paragraph">
-<p>Calendar Commands that are supported are:
-* listing upcoming events
-* adding an event
+<p>Calendar Commands that are supported are:<br>
+* listing upcoming events<br>
+* adding an event<br>
 * removing an event</p>
 </div>
 <div class="imageblock">
@@ -1489,7 +1486,7 @@ Upon receiving a success confirmation from the API, the change will be reflected
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: All prison staff have their own calendar to work with, where they can have private individual events.</p>
+<p>Pros: All prison staff have their own calendar for private individual events.</p>
 </li>
 <li>
 <p>Cons: Hard to maintain because we have to make sure all staff have the master prison schedule of the inmates' activities non-overlapping with personal events. There will also be a lot of calendars to keep track of, depending on how many guards are hired.</p>
@@ -2918,7 +2915,7 @@ prisonwarden, prisonleader and prisonguard</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 17:26:53 UTC
+Last updated 2018-04-15 17:35:55 UTC
 </div>
 </div>
 </body>
