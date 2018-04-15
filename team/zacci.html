@@ -67,6 +67,12 @@
 <li>
 <p>Code Quality Manager</p>
 </li>
+<li>
+<p>Opened and Tagged Issues</p>
+</li>
+<li>
+<p>Assigned issues to different team members</p>
+</li>
 </ul>
 </div>
 </li>
@@ -386,19 +392,179 @@ The <code>UniqueUserMap</code> is implemented using a Hashmap which maps <code>u
 </ul>
 </div>
 </li>
+<li>
+<p>Isaac Gideon Tan (zacci)</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Major enhancement:<br>
+Login and Authorization Levels: Enable creation of account for guards, logging in, and authorization levels for commands that may compromise the security of the Prison data.</p>
+</li>
+<li>
+<p>Minor enhancement:<br>
+Additional Attribute to store 'Role' information. To identify the person as a Prisoner or Guard</p>
+</li>
+</ol>
+</div>
+</li>
 </ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="major-feature-users-sessions-and-security-levels"><a class="link" href="#major-feature-users-sessions-and-security-levels">Major Feature: Users, Sessions and Security Levels</a></h3>
+<div class="sect3">
+<h4 id="logging-in-and-logging-out"><a class="link" href="#logging-in-and-logging-out">Logging in and Logging out</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>For security purposes, users of PrisonBook need to login with their user details in order to to view the information on the PrisonBook. They can also logout after finishing their session, so that the next person will need to login again.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: You must not be logged in. (By default, you are not logged in when you first open the application.)<br>
+Test case: Type <code>login user/prisonguard pw/password1</code><br>
+Expected: PrisonBook will display <code>Login Success</code></p>
+</li>
+<li>
+<p>Prerequisites: You are logged in.<br>
+Test case: Type <code>status</code> to show your current session&#8217;s details<br>
+Expected: <code>Username: prisonguard Security Level: 1</code></p>
+</li>
+<li>
+<p>Prerequisites: You are logged in.<br>
+Test case: Type <code>logout</code> to logout<br>
+Expected: PrisonBook will display <code>Successfully logged out</code>. Furthermore the person details in the left panel will be cleared, and the cell details in the right panel will reflect that you have insufficient authority to view the information.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="commands-have-restricted-access"><a class="link" href="#commands-have-restricted-access">Commands have restricted access</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>A minimum Security Level is required to use and access certain commands.<br>
+Refer to Section 5: Command Summary for the detailed list of commands and their respective minimum security level ranging from 0 to 3.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: Type <code>logout</code> to ensure that you are logged out. (By default you are not logged in when you first open the application)<br>
+Type <code>list</code><br>
+Expected: PrisonBook will show <code>Your security level is insufficient to access this command.</code><br></p>
+</li>
+<li>
+<p>Test case: Login using <code>login user/prisonleader pw/password2</code> (This user has Security Level of 2)<br>
+Type <code>list</code><br>
+Expected: PrisonBook will say <code>Listed all persons</code> and show the full list of persons on the left column of the UI.<br>
+You can test the other commands with the following user details:</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p><code>login user/prisonwarden pw/password3</code> Security Level 3.</p>
+</li>
+<li>
+<p><code>login user/prisonleader pw/password2</code> Security Level 2.</p>
+</li>
+<li>
+<p><code>login user/prisonguard pw/password1</code> Security Level 1.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="adding-a-new-user"><a class="link" href="#adding-a-new-user">Adding a new user</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>You can add new users to the PrisonBook when you want to give access to new people.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Have sufficient security level[3]<br>
+Test case: <code>adduser user/prisonguard99 pw/password2 sl/1</code><br>
+Expected: <code>New user prisonguard99 added to PrisonBook</code><br>
+You can then proceed to logout and attempt to login with the new user <code>prisonguard99</code>.</p>
+</li>
+<li>
+<p>Prerequisites: Have sufficient security level[3]<br>
+Test case: <code>adduser user/prisonwarden pw/password3 sl/3</code><br>
+Expected: <code>prisonwarden is already a user in PrisonBook</code><br></p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="deleting-a-user"><a class="link" href="#deleting-a-user">Deleting a user</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>You can delete users from the PrisonBook</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: You must be logged in with a higher security level than the user you want to delete. (Users with security level 3 can delete anyone, including other security level 3 users.)<br>
+Test case: Login with <code>login user/prisonleader pw/password2</code>, then type <code>deleteuser user/prisonguard99</code> (Which was added above in F.2.3)<br>
+Expected: <code>User has been successfully deleted</code>. You can logout and attempt to login to <code>prisonguard99</code> but you will not be able to successfully login as the user has been deleted.</p>
+</li>
+<li>
+<p>Prerequisites: You must be logged in with a minimum security level of 2.<br>
+Test case: <code>delete user/nonexistentuser</code>
+Expected: <code>The username does not exist</code></p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="minor-feature-role-attribute-added-to-persons"><a class="link" href="#minor-feature-role-attribute-added-to-persons">Minor Feature: Role Attribute added to Persons</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Allow user to indicate to the PrisonBook if added person is a Guard or a Prisoner.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Have sufficient security level[2]</p>
+</li>
+<li>
+<p>Test case: <code>add n/Sample Prisoner a/Chua Chu Kang p/91234567 e/sp@example.com r/p</code><br>
+Expected: New person to show up on the UI with the name Sample Prisoner and shown to be a Prisoner on the person card.</p>
+</li>
+<li>
+<p>Test case: <code>add n/Sample Guard a/Chua Chu Kang p/91234567 e/sg@example.com r/g</code><br>
+Expected: New person to show up on the UI with the name Sample Guard and shown to be a Guard on the person card.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
 </div>
 <hr>
 </div>
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 14:37:00 UTC
+Last updated 2018-04-15 14:50:08 UTC
 </div>
 </div>
 </body>
