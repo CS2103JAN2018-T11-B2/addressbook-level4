@@ -220,32 +220,173 @@ Security levels for new users must be from levels 1 to 3, refer to the list belo
 <h3 id="login-and-security-feature"><a class="link" href="#login-and-security-feature">Login and Security Feature</a></h3>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
-<div class="sect4">
-<h5 id="model-aspect"><a class="link" href="#model-aspect">Model Aspect</a></h5>
 <div class="paragraph">
-<p>The implementation of the Login and Security feature is implemented by a <code>Session</code> which resides inside <code>Model Manager</code>. It supports the logging in and logging out of a user as well as support restricted access for specific commands. For example read access (list command) vs write access (add command and edit command).</p>
+<p>The Login and Security feature in the PrisonBook is implemented using Users and Sessions.</p>
+</div>
+<div class="sect4">
+<h5 id="sessions"><a class="link" href="#sessions">Sessions</a></h5>
+<div class="paragraph">
+<p>Sessions are implemented with a <code>Session</code> class which resides inside <code>Model Manager</code>. It supports the logging in and logging out of a user as well as support restricted access for specific commands. For example read access (list command) vs write access (add command and edit command).</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/ModelClassDiagramwSession.jpg" alt="ModelClassDiagramwSession" width="800">
+<img src="../images/ModelClassDiagramwSessionwCells.png" alt="ModelClassDiagramwSessionwCells" width="800">
 </div>
 </div>
 <div class="paragraph">
-<p>As can be seen from the diagram, a Session is initialised upon the creation of the ModelManager.</p>
+<p>As can be seen from the diagram, a Session is initialised upon the creation of the ModelManager. The session stores information such as the logged-in user&#8217;s username, as well as the security level of the user.</p>
 </div>
-</div>
-<div class="sect4">
-<h5 id="logic-aspect"><a class="link" href="#logic-aspect">Logic Aspect</a></h5>
 <div class="paragraph">
-<p>The implementation of the logging-in and the security levels is implemented in the <code>SessionManager</code> which is an additional step between the <code>LogicManager</code> and the <code>AddressBookParser</code>.</p>
+<p>The accessibility of each command by the user is implemented on the logic level. Each command has a static <code>minimumSecurityLevel</code>. The usage of a command goes through the sequence diagram as follows (the example command being used here is the Delete command).</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/LogicClassDiagramwSession.png" alt="LogicClassDiagramwSession" width="800">
+<img src="../images/SecurityLevelSequenceDiagram.png" alt="SecurityLevelSequenceDiagram" width="800">
 </div>
 </div>
 <div class="paragraph">
-<p>Every user input will first go through the <code>SessionManager</code> which will check if the user is currently logged in, as well as retrieve the user&#8217;s security level. It will then pass the security level to the <code>AddressBookParser</code> which will then decide whether or not to create the Command based on the required security level of the entered command.</p>
+<p>The <code>LogicManager</code> checks the <code>minSecurityLevel</code> of the command against the <code>securityLevel</code> of the current <code>Session</code> in the Model. If <code>the securityLevel</code> greater than or equal to the <code>minSecurityLevel</code>, the LogicManager will then call the <code>execute()</code> method on the Command.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h5>
+<div class="sect5">
+<h6 id="aspect-implementation-for-checking-of-security-level-for-command-access"><a class="link" href="#aspect-implementation-for-checking-of-security-level-for-command-access">Aspect: Implementation for checking of security level for command access</a></h6>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Implemented by the <code>LogicManager</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Decreases coupling between <code>Command</code> and <code>Session</code>. This allows for flexibility in future implementation changes.</p>
+</li>
+<li>
+<p>Cons: Sequence during execution needs to go back and forth with the <code>LogicManager</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Implement at the <code>Command</code> level</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to understand, the sequence during execution keeps moving on to the next step instead of going back and forth with the LogicManager.</p>
+</li>
+<li>
+<p>Cons: Commands are also responsible for checking if they should be run. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="users"><a class="link" href="#users">Users</a></h5>
+<div class="paragraph">
+<p>Users are implemented with a <code>User</code> class, as well as a <code>UniqueUserMap</code> class which also reside in the <code>Model Manager</code>.<br>
+The <code>UniqueUserMap</code> is implemented using a Hashmap which maps <code>usernames</code> as Keys and <code>User</code> as Values. Additionally, there is an internal list implemented via an <code>ObservableList</code> of all the Users in the Hashmap.</p>
+</div>
+<div class="paragraph">
+<p>To save the database of the users, a new type is added to the storage so that it is able to store the Users in the storage file.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/StorageClassDiagramwUserwCells.png" alt="StorageClassDiagramwUserwCells" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Upon initialization of the AddressBook, the AddressBook will read the user data from the storage file and create the internal list of Users. The list is then iterated through and mapped to the HashMap.</p>
+</div>
+<div class="paragraph">
+<p>When adding and deleting users, both the Hashmap and the internal list are updated so as to reflect accurately in the model and stored correctly in the storage.</p>
+</div>
+<div class="paragraph">
+<p>Currently, the user data, including passwords are stored in plaintext, which may pose a security problem. For future implementations, we will include hashing of the passwords before storage to as to increase the security of the application.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h5>
+<div class="sect5">
+<h6 id="aspect-data-structures-for-uniqueusermap"><a class="link" href="#aspect-data-structures-for-uniqueusermap">Aspect: Data Structures for UniqueUserMap</a></h6>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Hashmap + ObservableList</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to access users, can immediately call up the correct <code>User</code> object by passing in the username key. Whereas the ObservableList is used to complement the storage of the user data, where it is necessary to iterate through all the Users in order to store in the storage .xml file.</p>
+</li>
+<li>
+<p>Cons: Duplicate information stored in two different data structures.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> ObservableList only</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: No duplication of Users. Storing is also easy as it uses the existing AddressBook storage framework which works with ObservableLists.</p>
+</li>
+<li>
+<p>Cons: Everytime we want to access a specific User, we have to iterate through the entire list of Users in order to do so.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> HashMap only</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Fast access of users in O(1) time</p>
+</li>
+<li>
+<p>Cons: Unable to be stored efficiently with the current method of storing which works with XML file.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="aspect-storage-location-of-user-data"><a class="link" href="#aspect-storage-location-of-user-data">Aspect: Storage location of User Data</a></h6>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Stored in the same XML File with the AddressBook data</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement with current method of saving, where the entire AddressBook is upon an Address Book Changed Event. There is no need to maintain an additional stack for a User Database for UndoRedo.</p>
+</li>
+<li>
+<p>Cons: User data should theoretically be separated from AddressBook data (persons, cells, tags).</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Store in a separate XML File</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Separation of storage for two different aspects. If User data file is corrupted, it does not affect the AddressBook data and vice versa.</p>
+</li>
+<li>
+<p>Cons: Very difficult to implement with the current method of saving. Furthermore, there needs to be addtional stacks implemented to keep track of the past states of User data for the UndoRedo functions.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 <hr>
 </div>
@@ -254,9 +395,10 @@ Security levels for new users must be from levels 1 to 3, refer to the list belo
 </div>
 </div>
 </div>
+</div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 11:28:22 UTC
+Last updated 2018-04-15 14:37:00 UTC
 </div>
 </div>
 </body>

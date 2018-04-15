@@ -89,9 +89,11 @@
 <li><a href="#instructions-for-manual-testing">Appendix F: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
 <li><a href="#launch-and-shutdown">F.1. Launch and Shutdown</a></li>
-<li><a href="#minor-feature-showing-prisoners-in-the-ui">F.2. Minor Feature: Showing prisoners in the UI</a></li>
-<li><a href="#major-feature-managing-prisoners-in-a-prison">F.3. Major Feature: Managing prisoners in a prison</a></li>
-<li><a href="#saving-data">F.4. Saving data</a></li>
+<li><a href="#major-feature-users-sessions-and-security-levels">F.2. Major Feature: Users, Sessions and Security Levels</a></li>
+<li><a href="#minor-feature-role-attribute-added-to-persons">F.3. Minor Feature: Role Attribute added to Persons</a></li>
+<li><a href="#minor-feature-showing-prisoners-in-the-ui">F.4. Minor Feature: Showing prisoners in the UI</a></li>
+<li><a href="#major-feature-managing-prisoners-in-a-prison">F.5. Major Feature: Managing prisoners in a prison</a></li>
+<li><a href="#saving-data">F.6. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -882,32 +884,174 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <h3 id="login-and-security-feature"><a class="link" href="#login-and-security-feature">3.2. Login and Security Feature</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
-<div class="sect4">
-<h5 id="model-aspect"><a class="link" href="#model-aspect">Model Aspect</a></h5>
 <div class="paragraph">
-<p>The implementation of the Login and Security feature is implemented by a <code>Session</code> which resides inside <code>Model Manager</code>. It supports the logging in and logging out of a user as well as support restricted access for specific commands. For example read access (list command) vs write access (add command and edit command).</p>
+<p>The Login and Security feature in the PrisonBook is implemented using Users and Sessions.</p>
+</div>
+<div class="sect4">
+<h5 id="sessions"><a class="link" href="#sessions">Sessions</a></h5>
+<div class="paragraph">
+<p>Sessions are implemented with a <code>Session</code> class which resides inside <code>Model Manager</code>. It supports the logging in and logging out of a user as well as support restricted access for specific commands. For example read access (list command) vs write access (add command and edit command).</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/ModelClassDiagramwSession.jpg" alt="ModelClassDiagramwSession" width="800">
+<img src="images/ModelClassDiagramwSessionwCells.png" alt="ModelClassDiagramwSessionwCells" width="800">
 </div>
 </div>
 <div class="paragraph">
-<p>As can be seen from the diagram, a Session is initialised upon the creation of the ModelManager.</p>
+<p>As can be seen from the diagram, a Session is initialised upon the creation of the ModelManager. The session stores information such as the logged-in user&#8217;s username, as well as the security level of the user.</p>
 </div>
-</div>
-<div class="sect4">
-<h5 id="logic-aspect"><a class="link" href="#logic-aspect">Logic Aspect</a></h5>
 <div class="paragraph">
-<p>The implementation of the logging-in and the security levels is implemented in the <code>SessionManager</code> which is an additional step between the <code>LogicManager</code> and the <code>AddressBookParser</code>.</p>
+<p>The accessibility of each command by the user is implemented on the logic level. Each command has a static <code>minimumSecurityLevel</code>. The usage of a command goes through the sequence diagram as follows (the example command being used here is the Delete command).</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/LogicClassDiagramwSession.png" alt="LogicClassDiagramwSession" width="800">
+<img src="images/SecurityLevelSequenceDiagram.png" alt="SecurityLevelSequenceDiagram" width="800">
 </div>
 </div>
 <div class="paragraph">
-<p>Every user input will first go through the <code>SessionManager</code> which will check if the user is currently logged in, as well as retrieve the user&#8217;s security level. It will then pass the security level to the <code>AddressBookParser</code> which will then decide whether or not to create the Command based on the required security level of the entered command.</p>
+<p>The <code>LogicManager</code> checks the <code>minSecurityLevel</code> of the command against the <code>securityLevel</code> of the current <code>Session</code> in the Model. If <code>the securityLevel</code> greater than or equal to the <code>minSecurityLevel</code>, the LogicManager will then call the <code>execute()</code> method on the Command.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h5>
+<div class="sect5">
+<h6 id="aspect-implementation-for-checking-of-security-level-for-command-access"><a class="link" href="#aspect-implementation-for-checking-of-security-level-for-command-access">Aspect: Implementation for checking of security level for command access</a></h6>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Implemented by the <code>LogicManager</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Decreases coupling between <code>Command</code> and <code>Session</code>. This allows for flexibility in future implementation changes.</p>
+</li>
+<li>
+<p>Cons: Sequence during execution needs to go back and forth with the <code>LogicManager</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Implement at the <code>Command</code> level</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to understand, the sequence during execution keeps moving on to the next step instead of going back and forth with the LogicManager.</p>
+</li>
+<li>
+<p>Cons: Commands are also responsible for checking if they should be run. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="users"><a class="link" href="#users">Users</a></h5>
+<div class="paragraph">
+<p>Users are implemented with a <code>User</code> class, as well as a <code>UniqueUserMap</code> class which also reside in the <code>Model Manager</code>.<br>
+The <code>UniqueUserMap</code> is implemented using a Hashmap which maps <code>usernames</code> as Keys and <code>User</code> as Values. Additionally, there is an internal list implemented via an <code>ObservableList</code> of all the Users in the Hashmap.</p>
+</div>
+<div class="paragraph">
+<p>To save the database of the users, a new type is added to the storage so that it is able to store the Users in the storage file.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/StorageClassDiagramwUserwCells.png" alt="StorageClassDiagramwUserwCells" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Upon initialization of the AddressBook, the AddressBook will read the user data from the storage file and create the internal list of Users. The list is then iterated through and mapped to the HashMap.</p>
+</div>
+<div class="paragraph">
+<p>When adding and deleting users, both the Hashmap and the internal list are updated so as to reflect accurately in the model and stored correctly in the storage.</p>
+</div>
+<div class="paragraph">
+<p>Currently, the user data, including passwords are stored in plaintext, which may pose a security problem. For future implementations, we will include hashing of the passwords before storage to as to increase the security of the application.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h5>
+<div class="sect5">
+<h6 id="aspect-data-structures-for-uniqueusermap"><a class="link" href="#aspect-data-structures-for-uniqueusermap">Aspect: Data Structures for UniqueUserMap</a></h6>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Hashmap + ObservableList</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to access users, can immediately call up the correct <code>User</code> object by passing in the username key. Whereas the ObservableList is used to complement the storage of the user data, where it is necessary to iterate through all the Users in order to store in the storage .xml file.</p>
+</li>
+<li>
+<p>Cons: Duplicate information stored in two different data structures.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> ObservableList only</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: No duplication of Users. Storing is also easy as it uses the existing AddressBook storage framework which works with ObservableLists.</p>
+</li>
+<li>
+<p>Cons: Everytime we want to access a specific User, we have to iterate through the entire list of Users in order to do so.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> HashMap only</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Fast access of users in O(1) time</p>
+</li>
+<li>
+<p>Cons: Unable to be stored efficiently with the current method of storing which works with XML file.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="aspect-storage-location-of-user-data"><a class="link" href="#aspect-storage-location-of-user-data">Aspect: Storage location of User Data</a></h6>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Stored in the same XML File with the AddressBook data</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement with current method of saving, where the entire AddressBook is upon an Address Book Changed Event. There is no need to maintain an additional stack for a User Database for UndoRedo.</p>
+</li>
+<li>
+<p>Cons: User data should theoretically be separated from AddressBook data (persons, cells, tags).</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Store in a separate XML File</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Separation of storage for two different aspects. If User data file is corrupted, it does not affect the AddressBook data and vice versa.</p>
+</li>
+<li>
+<p>Cons: Very difficult to implement with the current method of saving. Furthermore, there needs to be addtional stacks implemented to keep track of the past states of User data for the UndoRedo functions.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -929,7 +1073,7 @@ At the bottom of the <code>Model</code> class diagram, it has been updated to sh
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/ModelClassDiagram.png" alt="ModelClassDiagram">
+<img src="images/ModelClassDiagramwSessionwCells.png" alt="ModelClassDiagramwSessionwCells">
 </div>
 </div>
 <div class="paragraph">
@@ -938,7 +1082,7 @@ Below is a class diagram of <code>Storage</code> to show how the cells are saved
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/StorageClassDiagram.png" alt="StorageClassDiagram">
+<img src="images/StorageClassDiagramwUserwCells.png" alt="StorageClassDiagramwUserwCells">
 </div>
 </div>
 <div class="paragraph">
@@ -988,7 +1132,7 @@ These values can be easily changed and we will customise it based on your needs.
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.3.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.3.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-data-structure-of-cells-in-cellmap"><a class="link" href="#aspect-data-structure-of-cells-in-cellmap">Aspect: Data Structure of Cells in CellMap</a></h5>
 <div class="ulist">
@@ -1199,7 +1343,7 @@ The arguments following each prefix will be made into a list. A mapping is then 
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.4.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.4.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-find-command"><a class="link" href="#aspect-find-command">Aspect: Find Command</a></h5>
 <div class="ulist">
@@ -2368,7 +2512,152 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="minor-feature-showing-prisoners-in-the-ui"><a class="link" href="#minor-feature-showing-prisoners-in-the-ui">F.2. Minor Feature: Showing prisoners in the UI</a></h3>
+<h3 id="major-feature-users-sessions-and-security-levels"><a class="link" href="#major-feature-users-sessions-and-security-levels">F.2. Major Feature: Users, Sessions and Security Levels</a></h3>
+<div class="sect3">
+<h4 id="logging-in-and-logging-out"><a class="link" href="#logging-in-and-logging-out">F.2.1. Logging in and Logging out</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>For security purposes, users of PrisonBook need to login with their user details in order to to view the information on the PrisonBook. They can also logout after finishing their session, so that the next person will need to login again.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: You must not be logged in. (By default, you are not logged in when you first open the application.)<br>
+Test case: Type <code>login user/prisonguard pw/password1</code><br>
+Expected: PrisonBook will display <code>Login Success</code></p>
+</li>
+<li>
+<p>Prerequisites: You are logged in.<br>
+Test case: Type <code>status</code> to show your current session&#8217;s details<br>
+Expected: <code>Username: prisonguard Security Level: 1</code></p>
+</li>
+<li>
+<p>Prerequisites: You are logged in.<br>
+Test case: Type <code>logout</code> to logout<br>
+Expected: PrisonBook will display <code>Successfully logged out</code>. Furthermore the person details in the left panel will be cleared, and the cell details in the right panel will reflect that you have insufficient authority to view the information.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="commands-have-restricted-access"><a class="link" href="#commands-have-restricted-access">F.2.2. Commands have restricted access</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>A minimum Security Level is required to use and access certain commands.<br>
+Refer to Section 5: Command Summary for the detailed list of commands and their respective minimum security level ranging from 0 to 3.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: Type <code>logout</code> to ensure that you are logged out. (By default you are not logged in when you first open the application)<br>
+Type <code>list</code><br>
+Expected: PrisonBook will show <code>Your security level is insufficient to access this command.</code><br></p>
+</li>
+<li>
+<p>Test case: Login using <code>login user/prisonleader pw/password2</code> (This user has Security Level of 2)<br>
+Type <code>list</code><br>
+Expected: PrisonBook will say <code>Listed all persons</code> and show the full list of persons on the left column of the UI.<br>
+You can test the other commands with the following user details:</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p><code>login user/prisonwarden pw/password3</code> Security Level 3.</p>
+</li>
+<li>
+<p><code>login user/prisonleader pw/password2</code> Security Level 2.</p>
+</li>
+<li>
+<p><code>login user/prisonguard pw/password1</code> Security Level 1.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="adding-a-new-user"><a class="link" href="#adding-a-new-user">F.2.3. Adding a new user</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>You can add new users to the PrisonBook when you want to give access to new people.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Have sufficient security level[3]<br>
+Test case: <code>adduser user/prisonguard99 pw/password2 sl/1</code><br>
+Expected: <code>New user prisonguard99 added to PrisonBook</code><br>
+You can then proceed to logout and attempt to login with the new user <code>prisonguard99</code>.</p>
+</li>
+<li>
+<p>Prerequisites: Have sufficient security level[3]<br>
+Test case: <code>adduser user/prisonwarden pw/password3 sl/3</code><br>
+Expected: <code>prisonwarden is already a user in PrisonBook</code><br></p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="deleting-a-user"><a class="link" href="#deleting-a-user">F.2.4. Deleting a user</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>You can delete users from the PrisonBook</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: You must be logged in with a higher security level than the user you want to delete. (Users with security level 3 can delete anyone, including other security level 3 users.)<br>
+Test case: Login with <code>login user/prisonleader pw/password2</code>, then type <code>deleteuser user/prisonguard99</code> (Which was added above in F.2.3)<br>
+Expected: <code>User has been successfully deleted</code>. You can logout and attempt to login to <code>prisonguard99</code> but you will not be able to successfully login as the user has been deleted.</p>
+</li>
+<li>
+<p>Prerequisites: You must be logged in with a minimum security level of 2.<br>
+Test case: <code>delete user/nonexistentuser</code>
+Expected: <code>The username does not exist</code></p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="minor-feature-role-attribute-added-to-persons"><a class="link" href="#minor-feature-role-attribute-added-to-persons">F.3. Minor Feature: Role Attribute added to Persons</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Allow user to indicate to the PrisonBook if added person is a Guard or a Prisoner.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Have sufficient security level[2]</p>
+</li>
+<li>
+<p>Test case: <code>add n/Sample Prisoner a/Chua Chu Kang p/91234567 e/sp@example.com r/p</code><br>
+Expected: New person to show up on the UI with the name Sample Prisoner and shown to be a Prisoner on the person card.</p>
+</li>
+<li>
+<p>Test case: <code>add n/Sample Guard a/Chua Chu Kang p/91234567 e/sg@example.com r/g</code><br>
+Expected: New person to show up on the UI with the name Sample Guard and shown to be a Guard on the person card.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="minor-feature-showing-prisoners-in-the-ui"><a class="link" href="#minor-feature-showing-prisoners-in-the-ui">F.4. Minor Feature: Showing prisoners in the UI</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2394,9 +2683,9 @@ Expected: UI matches what <code>map</code> command shows on the display.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="major-feature-managing-prisoners-in-a-prison"><a class="link" href="#major-feature-managing-prisoners-in-a-prison">F.3. Major Feature: Managing prisoners in a prison</a></h3>
+<h3 id="major-feature-managing-prisoners-in-a-prison"><a class="link" href="#major-feature-managing-prisoners-in-a-prison">F.5. Major Feature: Managing prisoners in a prison</a></h3>
 <div class="sect3">
-<h4 id="adding-a-prisoner-to-a-cell"><a class="link" href="#adding-a-prisoner-to-a-cell">F.3.1. Adding a prisoner to a cell</a></h4>
+<h4 id="adding-a-prisoner-to-a-cell"><a class="link" href="#adding-a-prisoner-to-a-cell">F.5.1. Adding a prisoner to a cell</a></h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2429,7 +2718,7 @@ Expected: No change to UI and displays error message.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="deleting-prisoner-from-a-cell"><a class="link" href="#deleting-prisoner-from-a-cell">F.3.2. Deleting prisoner from a cell</a></h4>
+<h4 id="deleting-prisoner-from-a-cell"><a class="link" href="#deleting-prisoner-from-a-cell">F.5.2. Deleting prisoner from a cell</a></h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2461,7 +2750,7 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="listing-prisoners-in-a-cell"><a class="link" href="#listing-prisoners-in-a-cell">F.3.3. Listing prisoners in a cell</a></h4>
+<h4 id="listing-prisoners-in-a-cell"><a class="link" href="#listing-prisoners-in-a-cell">F.5.3. Listing prisoners in a cell</a></h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2488,7 +2777,7 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">F.4. Saving data</a></h3>
+<h3 id="saving-data"><a class="link" href="#saving-data">F.6. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2510,7 +2799,7 @@ prisonwarden, prisonleader and prisonguard</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 11:28:22 UTC
+Last updated 2018-04-15 14:37:00 UTC
 </div>
 </div>
 </body>
