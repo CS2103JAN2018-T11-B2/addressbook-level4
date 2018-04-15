@@ -93,7 +93,9 @@
 <li><a href="#minor-feature-role-attribute-added-to-persons">F.3. Minor Feature: Role Attribute added to Persons</a></li>
 <li><a href="#minor-feature-showing-prisoners-in-the-ui">F.4. Minor Feature: Showing prisoners in the UI</a></li>
 <li><a href="#major-feature-managing-prisoners-in-a-prison">F.5. Major Feature: Managing prisoners in a prison</a></li>
-<li><a href="#saving-data">F.6. Saving data</a></li>
+<li><a href="#major-feature-scheduling-with-google-calendar">F.6. Major Feature: Scheduling with Google Calendar</a></li>
+<li><a href="#minor-feature-find-by-tags">F.7. Minor Feature: Find by Tags</a></li>
+<li><a href="#saving-data">F.8. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -1341,6 +1343,11 @@ The arguments following each prefix will be made into a list. A mapping is then 
  and the argument-lists as values. The name search portion will run like before, the tag search will follow a similar
  approach; creating a new predicate instance and return matching results if they exist.</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FindCommand_sequence.png" alt="FindCommand sequence">
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.4.2. Design Considerations</a></h4>
@@ -1418,7 +1425,9 @@ have to be grouped together after a single prefix</p>
 <div class="sect3">
 <h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The PrisonBook calendar commands will send HTTPS requests to the REST Calendar API, whether it is calling the listEvents, addEvents or delEvents API command.
+<p>The PrisonBook calendar commands will instantiate a calendar class to interact with the Google Calendar API.
+The initial step is to obtain valid credentials authorized from the API side to access its resources, then
+the calendar class will send HTTPS requests to the server, whether it is calling the listEvents, addEvents or delEvents API command.
 Upon receiving a success confirmation from the API, the change will be reflected next time any calendar commands are called.</p>
 </div>
 <div class="paragraph">
@@ -1426,6 +1435,11 @@ Upon receiving a success confirmation from the API, the change will be reflected
 * listing upcoming events
 * adding an event
 * removing an event</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/CalendarCommands_classDiagrams.PNG" alt="CalendarCommands classDiagrams">
+</div>
 </div>
 <div class="sect4">
 <h5 id="aspect-choosing-number-of-accounts-to-work-with"><a class="link" href="#aspect-choosing-number-of-accounts-to-work-with">Aspect: Choosing Number of Accounts to Work With</a></h5>
@@ -1572,6 +1586,11 @@ It allows guards/wardens to see upcoming events and their start times.</p>
 <p>The Add Event feature can be accessed via entering the command <code>calAdd event/EVENTNAME loc/LOCATION start/STARTDATETIME end/ENDDATETIME</code>.
 It allows guards/wardens to add an event, specifying the event name, location, starting and ending times.</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/CalendarAddCommand_sequence.png" alt="CalendarAddCommand sequence">
+</div>
+</div>
 <div class="sect4">
 <h5 id="aspect-relevancy-of-event-attendee-list"><a class="link" href="#aspect-relevancy-of-event-attendee-list">Aspect: Relevancy of Event Attendee List</a></h5>
 <div class="ulist">
@@ -1613,7 +1632,13 @@ It allows guards/wardens to add an event, specifying the event name, location, s
 <h4 id="current-implementation-8"><a class="link" href="#current-implementation-8">3.8.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The Delete Event feature can be accessed via entering the command <code>calDel EVENTNUMBER</code>.
-It allows guards/wardens to remove events from the upcoming events list.</p>
+It allows guards/wardens to remove events from the upcoming events list.
+Since each event has its own eventID which is a random alphanumeric String, they are mapped to Integers through an ArrayList for easier selection by the users.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/CalendarDeleteCommand_sequence.png" alt="CalendarDeleteCommand sequence">
+</div>
 </div>
 <div class="sect4">
 <h5 id="aspect-specification-of-which-event-to-delete"><a class="link" href="#aspect-specification-of-which-event-to-delete">Aspect: Specification of Which Event to Delete</a></h5>
@@ -2777,7 +2802,101 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">F.6. Saving data</a></h3>
+<h3 id="major-feature-scheduling-with-google-calendar"><a class="link" href="#major-feature-scheduling-with-google-calendar">F.6. Major Feature: Scheduling with Google Calendar</a></h3>
+<div class="sect3">
+<h4 id="listing-10-upcoming-events"><a class="link" href="#listing-10-upcoming-events">F.6.1. Listing 10 upcoming events</a></h4>
+<div class="paragraph">
+<p>Allows guards and prison warden to view the upcoming 10 events scheduled in Google Calendar.</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Have sufficient security level[1]<br>
+Test case: Type <code>cal</code> or <code>calendar</code>, if this is your first time connecting to Google Calendar, you will need to log into the PrisonBook Calendar account:
+A new browser window will open, do NOT close the window before you have logged in!
+Use email: <a href="mailto:prisonbooksystem@gmail.com">prisonbooksystem@gmail.com</a>
+Use password: prisonbook2018
+Expected: 10 upcoming events will be listed, each showing an assigned Event Number, Event Name, Time range and Location.<br></p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="adding-an-event"><a class="link" href="#adding-an-event">F.6.2. Adding an event</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>You can add new events to the PrisonBook Calendar.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Have sufficient security level[3]<br>
+Test case: <code>calA event/Showing this works loc/NUS start/2018-04-28 12:00:00 end/2018-04-28 13:00:00</code><br>
+Expected: <code>A new event will have been added to the calendar on April 28 at 12 o&#8217;clock.</code></p>
+</li>
+<li>
+<p>Prerequisites: Have sufficient security level[3]<br>
+Test case: <code>calA event/Showing this works loc/NUS start/2018-04-28 12:00:00 end/2017-04-28 13:00:00</code><br>
+Expected: <code>The API will throw an error because the end date is earlier than the start date. It will tell you the time range is empty.</code><br></p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="deleting-an-event"><a class="link" href="#deleting-an-event">F.6.3. Deleting an event</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>You can delete events from the listed Calendar events</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Have sufficient security level[3]<br>
+Test case: <code>calD 2</code><br>
+Expected: The second event (Event 2) will have been deleted next time you call the <code>cal</code> list event command.</p>
+</li>
+<li>
+<p>Prerequisites: Have sufficient security level[3]<br>
+Test case: <code>calD 11</code>
+Expected: Since only 10 events are listed, this command will not affect anything as there is no EventID linked to 11.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="minor-feature-find-by-tags"><a class="link" href="#minor-feature-find-by-tags">F.7. Minor Feature: Find by Tags</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Allow user to find persons by tags as well as names</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Have sufficient security level[1]</p>
+</li>
+<li>
+<p>Test case: <code>find n/Alex t/ChickenAllergy</code><br>
+Expected: 1 person listed: Alex Yeoh who is allergic to chickens.</p>
+</li>
+<li>
+<p>Test case: <code>find t/Vegetarian</code><br>
+Expected: 1 person listed: Bernice Yu who is a Vegetarian.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="saving-data"><a class="link" href="#saving-data">F.8. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2799,7 +2918,7 @@ prisonwarden, prisonleader and prisonguard</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-15 15:16:37 UTC
+Last updated 2018-04-15 17:14:35 UTC
 </div>
 </div>
 </body>
